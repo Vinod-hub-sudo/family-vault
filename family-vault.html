@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a0a2e">
+<meta name="description" content="Family Aadhaar & Birthday Vault with Telugu Panchangam">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>కుటుంబ వివరాలు | Family Vault</title>
+<link rel="manifest" href="#" id="manifest-link">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Telugu&family=Cinzel+Decorative:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0d0618;
+    --bg-card: #150d28;
+    --bg-card2: #1e1040;
+    --gold: #f5c842;
+    --gold-light: #fde882;
+    --saffron: #ff6b1a;
+    --teal: #00d4aa;
+    --purple: #8b5cf6;
+    --text: #f0e8ff;
+    --text-muted: #9d8ec4;
+    --border: rgba(245,200,66,0.2);
+    --shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Stars background */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: radial-gradient(ellipse at 20% 20%, rgba(139,92,246,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(245,200,66,0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0,212,170,0.05) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .stars {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 75%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 5%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 70%, rgba(255,255,255,0.5) 0%, transparent 100%);
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 16px; position: relative; z-index: 1; }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 40px 20px 28px;
+    position: relative;
+  }
+  .header-om {
+    font-size: 2.5rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+  @keyframes pulse-glow {
+    0%,100% { text-shadow: 0 0 20px rgba(245,200,66,0.6), 0 0 40px rgba(245,200,66,0.3); }
+    50% { text-shadow: 0 0 30px rgba(245,200,66,0.9), 0 0 60px rgba(245,200,66,0.5); }
+  }
+  header h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+  header p {
+    font-family: 'Tiro Telugu', serif;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 6px;
+  }
+  .header-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 20px auto;
+    max-width: 400px;
+  }
+
+  /* LOCK SCREEN */
+  #lock-screen {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 60vh; gap: 20px;
+  }
+  .lock-icon { font-size: 3rem; color: var(--gold); }
+  .lock-title { font-family: 'Tiro Telugu', serif; font-size: 1.4rem; color: var(--gold); }
+  .pin-dots { display: flex; gap: 14px; margin: 10px 0; }
+  .pin-dot {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--gold);
+    transition: background 0.2s;
+  }
+  .pin-dot.filled { background: var(--gold); }
+  .pin-pad {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 12px; max-width: 280px;
+  }
+  .pin-btn {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 1.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    padding: 18px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    touch-action: manipulation;
+  }
+  .pin-btn:active, .pin-btn:hover { background: var(--gold); color: #000; transform: scale(0.95); }
+  .pin-btn.del { font-size: 1rem; color: var(--saffron); }
+  .pin-error { color: var(--saffron); font-size: 0.9rem; animation: shake 0.4s; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+  .set-pin-note { color: var(--text-muted); font-size: 0.82rem; text-align: center; max-width: 240px; }
+
+  /* NAV TABS */
+  .tabs {
+    display: flex; gap: 8px; margin-bottom: 20px;
+    overflow-x: auto; padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 10px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn.active {
+    background: linear-gradient(135deg, var(--gold), var(--saffron));
+    color: #000; font-weight: 600; border-color: transparent;
+  }
+
+  /* CARDS */
+  .member-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .member-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--saffron), var(--purple));
+  }
+  .member-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+  .card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .avatar {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--saffron));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; flex-shrink: 0;
+    border: 2px solid var(--gold);
+  }
+  .member-name { font-size: 1.15rem; font-weight: 600; color: var(--gold); }
+  .member-relation {
+    font-family: 'Tiro Telugu', serif;
+    font-size: 0.82rem; color: var(--text-muted);
+  }
+  .card-actions { margin-left: auto; display: flex; gap: 8px; }
+  .icon-btn {
+    background: none; border: 1px solid var(--border);
+    color: var(--text-muted); padding: 7px 10px;
+    border-radius: 10px; cursor: pointer; font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+  .icon-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .icon-btn.del-btn:hover { border-color: #ff4444; color: #ff4444; }
+
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .info-item label {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--text-muted); display: block; margin-bottom: 3px;
+  }
+  .info-item .value {
+    font-size: 0.95rem; color: var(--text); font-weight: 500;
+  }
+  .info-item .value.aadhaar {
+    font-family: monospace; letter-spacing: 2px; color: var(--teal);
+    font-size: 0.88rem;
+  }
+  .age-display {
+    background: rgba(245,200,66,0.08);
+    border: 1px solid rgba(245,200,66,0.2);
+    border-radius: 12px; padding: 10px 14px;
+    margin-top: 12px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .age-label { font-size: 0.75rem; color: var(--text-muted); }
+  .age-value { font-size: 1.1rem; font-weight: 600; color: var(--gold); }
+  .next-bday {
+    font-size: 0.78rem; color: var(--teal);
+    background: rgba(0,212,170,0.08);
+    border: 1px solid rgba(0,212,170,0.2);
+    border-radius: 8px; padding: 5px 10px; margin-top: 6px;
+    display: inline-block;
+  }
+
+  /* PANCHANGAM */
+  .panchangam-card {
+    background: linear-gradient(135deg, rgba(21,13,40,0.9), rgba(30,16,64,0.9));
+    border: 1px solid rgba(245,200,66,0.3);
+    border-radius: 20px; padding: 20px; margin-top: 12px;
+  }
+  .panch-title {
+    font-family: 'Tiro Telugu', serif;
+    font-size: 1rem; color: var(--gold);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .panch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .panch-item {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 12px;
+  }
+  .panch-item label {
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--saffron); display: block; margin-bottom: 3px;
+  }
+  .panch-item .pval {
+    font-family: 'Tiro Telugu', serif;
+    font-size: 0.9rem; color: var(--text);
+  }
+
+  /* ADD FORM */
+  .add-card {
+    background: var(--bg-card);
+    border: 1px dashed rgba(245,200,66,0.4);
+    border-radius: 20px; padding: 24px; margin-bottom: 20px;
+  }
+  .add-card h3 {
+    font-family: 'Tiro Telugu', serif;
+    color: var(--gold); margin-bottom: 18px; font-size: 1.1rem;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width: 500px) { .form-grid { grid-template-columns: 1fr; } .info-grid { grid-template-columns: 1fr; } .panch-grid { grid-template-columns: 1fr; } }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+  .field input, .field select {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 11px 14px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .field input:focus, .field select:focus { border-color: var(--gold); }
+  .field select option { background: var(--bg-card2); }
+  .field.full { grid-column: 1/-1; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--saffron));
+    color: #000; font-weight: 700;
+    padding: 13px 28px; border: none;
+    border-radius: 12px; cursor: pointer;
+    font-size: 0.95rem; font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s, transform 0.1s;
+    margin-top: 16px;
+  }
+  .btn-primary:hover { opacity: 0.9; transform: scale(0.98); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-muted); font-weight: 500;
+    padding: 13px 28px; border: 1px solid var(--border);
+    border-radius: 12px; cursor: pointer;
+    font-size: 0.95rem; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+    margin-top: 16px; margin-left: 10px;
+  }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* BIRTHDAY COUNTDOWN */
+  .bday-section { margin-top: 8px; }
+  .countdown-banner {
+    background: linear-gradient(135deg, rgba(255,107,26,0.15), rgba(245,200,66,0.1));
+    border: 1px solid rgba(255,107,26,0.3);
+    border-radius: 14px; padding: 14px 18px;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .countdown-emoji { font-size: 2rem; }
+  .countdown-info { flex: 1; }
+  .countdown-name { font-weight: 600; color: var(--gold); font-size: 0.95rem; }
+  .countdown-days { font-size: 0.82rem; color: var(--saffron); margin-top: 2px; }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Tiro Telugu', serif;
+    font-size: 1.1rem; color: var(--gold);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .badge {
+    background: rgba(245,200,66,0.15);
+    color: var(--gold); font-size: 0.72rem;
+    padding: 3px 9px; border-radius: 20px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .empty-state {
+    text-align: center; padding: 50px 20px; color: var(--text-muted);
+    font-family: 'Tiro Telugu', serif; font-size: 1rem;
+  }
+  .empty-state .big { font-size: 3rem; margin-bottom: 10px; }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    z-index: 100; display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    width: 100%; max-width: 500px;
+    max-height: 90vh; overflow-y: auto;
+  }
+  .modal h3 { color: var(--gold); margin-bottom: 18px; font-size: 1.1rem; }
+
+  .hidden { display: none !important; }
+  .main-content { display: none; }
+  .main-content.visible { display: block; }
+
+  /* AADHAAR MASK */
+  .aadhaar-masked { cursor: pointer; }
+  .show-icon { font-size: 0.75rem; color: var(--teal); margin-left: 6px; }
+
+  .time-ticker {
+    font-family: monospace; font-size: 0.78rem;
+    color: var(--purple); letter-spacing: 1px;
+  }
+
+  .settings-btn {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--bg-card2); border: 1px solid var(--border);
+    color: var(--gold); width: 50px; height: 50px;
+    border-radius: 50%; cursor: pointer; font-size: 1.3rem;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    transition: all 0.2s; z-index: 50;
+  }
+  .settings-btn:hover { transform: rotate(45deg); background: var(--gold); color: #000; }
+
+  .toast {
+    position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+    background: var(--teal); color: #000; padding: 10px 22px;
+    border-radius: 30px; font-weight: 600; font-size: 0.85rem;
+    z-index: 200; animation: toast-in 0.3s ease;
+    white-space: nowrap;
+  }
+  @keyframes toast-in { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+
+<!-- LOCK SCREEN -->
+<div id="lock-screen">
+  <div class="lock-icon">🔐</div>
+  <div class="lock-title">కుటుంబ వివరాలు</div>
+  <p style="color:var(--text-muted);font-family:'Tiro Telugu',serif;font-size:0.9rem">Family Vault</p>
+  <div class="pin-dots" id="pin-dots">
+    <div class="pin-dot" id="d0"></div>
+    <div class="pin-dot" id="d1"></div>
+    <div class="pin-dot" id="d2"></div>
+    <div class="pin-dot" id="d3"></div>
+  </div>
+  <div class="pin-pad">
+    <button class="pin-btn" onclick="enterPin('1')">1</button>
+    <button class="pin-btn" onclick="enterPin('2')">2</button>
+    <button class="pin-btn" onclick="enterPin('3')">3</button>
+    <button class="pin-btn" onclick="enterPin('4')">4</button>
+    <button class="pin-btn" onclick="enterPin('5')">5</button>
+    <button class="pin-btn" onclick="enterPin('6')">6</button>
+    <button class="pin-btn" onclick="enterPin('7')">7</button>
+    <button class="pin-btn" onclick="enterPin('8')">8</button>
+    <button class="pin-btn" onclick="enterPin('9')">9</button>
+    <button class="pin-btn" onclick="enterPin('*')" style="color:var(--text-muted)">⊛</button>
+    <button class="pin-btn" onclick="enterPin('0')">0</button>
+    <button class="pin-btn del" onclick="deletePin()">⌫</button>
+  </div>
+  <div id="pin-error" class="pin-error hidden">తప్పు PIN! Wrong PIN!</div>
+  <div class="set-pin-note" id="pin-note">First time? Enter any 4-digit PIN to set it as your password.</div>
+</div>
+
+<!-- MAIN APP -->
+<div id="main-app" class="main-content">
+  <div class="container">
+    <header>
+      <div class="header-om">ॐ</div>
+      <h1>Family Vault</h1>
+      <p>కుటుంబ ఆధార్ & పుట్టినరోజు వివరాలు</p>
+      <div class="header-divider"></div>
+    </header>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('members')">👨‍👩‍👧‍👦 Members</button>
+      <button class="tab-btn" onclick="switchTab('birthdays')">🎂 Birthdays</button>
+      <button class="tab-btn" onclick="switchTab('add')">➕ Add Member</button>
+    </div>
+
+    <!-- MEMBERS TAB -->
+    <div id="tab-members">
+      <div class="section-header">
+        <div class="section-title">👨‍👩‍👧‍👦 కుటుంబ సభ్యులు <span class="badge" id="member-count">0</span></div>
+      </div>
+      <div id="members-list"></div>
+    </div>
+
+    <!-- BIRTHDAYS TAB -->
+    <div id="tab-birthdays" class="hidden">
+      <div class="section-header">
+        <div class="section-title">🎂 పుట్టినరోజులు</div>
+      </div>
+      <div id="upcoming-birthdays"></div>
+      <div class="section-title" style="margin:20px 0 12px">📅 All Birthdays</div>
+      <div id="all-birthdays"></div>
+    </div>
+
+    <!-- ADD TAB -->
+    <div id="tab-add" class="hidden">
+      <div class="add-card">
+        <h3>➕ కొత్త సభ్యుడు జోడించండి | Add New Member</h3>
+        <div class="form-grid">
+          <div class="field">
+            <label>పేరు | Name *</label>
+            <input type="text" id="f-name" placeholder="Member name">
+          </div>
+          <div class="field">
+            <label>సంబంధం | Relation *</label>
+            <select id="f-relation">
+              <option value="">Select relation</option>
+              <option>తండ్రి | Father</option>
+              <option>తల్లి | Mother</option>
+              <option>భర్త | Husband</option>
+              <option>భార్య | Wife</option>
+              <option>కొడుకు | Son</option>
+              <option>కూతురు | Daughter</option>
+              <option>అన్న | Brother</option>
+              <option>అక్క | Sister</option>
+              <option>తాత | Grandfather</option>
+              <option>అమ్మమ్మ | Grandmother</option>
+              <option>మామ | Uncle</option>
+              <option>అత్త | Aunt</option>
+              <option>స్వయం | Self</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>పుట్టిన తేదీ | Date of Birth *</label>
+            <input type="date" id="f-dob">
+          </div>
+          <div class="field">
+            <label>లింగం | Gender</label>
+            <select id="f-gender">
+              <option value="">Select</option>
+              <option value="👨">Male 👨</option>
+              <option value="👩">Female 👩</option>
+              <option value="🧒">Child 🧒</option>
+              <option value="👴">Elder 👴</option>
+              <option value="👵">Elder 👵</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label>ఆధార్ నంబర్ | Aadhaar Number</label>
+            <input type="text" id="f-aadhaar" placeholder="XXXX XXXX XXXX" maxlength="14" oninput="formatAadhaar(this)">
+          </div>
+          <div class="field">
+            <label>మొబైల్ | Mobile</label>
+            <input type="tel" id="f-mobile" placeholder="10-digit mobile">
+          </div>
+          <div class="field">
+            <label>రక్త వర్గం | Blood Group</label>
+            <select id="f-blood">
+              <option value="">Unknown</option>
+              <option>A+</option><option>A-</option>
+              <option>B+</option><option>B-</option>
+              <option>AB+</option><option>AB-</option>
+              <option>O+</option><option>O-</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="addMember()">✅ జోడించు | Add Member</button>
+        <button class="btn-secondary" onclick="clearForm()">🔄 Clear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div id="edit-modal" class="modal-overlay hidden">
+  <div class="modal">
+    <h3>✏️ Edit Member</h3>
+    <div class="form-grid">
+      <div class="field">
+        <label>Name *</label>
+        <input type="text" id="e-name">
+      </div>
+      <div class="field">
+        <label>Relation *</label>
+        <select id="e-relation">
+          <option value="">Select relation</option>
+          <option>తండ్రి | Father</option><option>తల్లి | Mother</option>
+          <option>భర్త | Husband</option><option>భార్య | Wife</option>
+          <option>కొడుకు | Son</option><option>కూతురు | Daughter</option>
+          <option>అన్న | Brother</option><option>అక్క | Sister</option>
+          <option>తాత | Grandfather</option><option>అమ్మమ్మ | Grandmother</option>
+          <option>స్వయం | Self</option><option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Date of Birth *</label>
+        <input type="date" id="e-dob">
+      </div>
+      <div class="field">
+        <label>Gender</label>
+        <select id="e-gender">
+          <option value="">Select</option>
+          <option value="👨">Male 👨</option>
+          <option value="👩">Female 👩</option>
+          <option value="🧒">Child 🧒</option>
+          <option value="👴">Elder 👴</option>
+          <option value="👵">Elder 👵</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>Aadhaar Number</label>
+        <input type="text" id="e-aadhaar" maxlength="14" oninput="formatAadhaar(this)">
+      </div>
+      <div class="field">
+        <label>Mobile</label>
+        <input type="tel" id="e-mobile">
+      </div>
+      <div class="field">
+        <label>Blood Group</label>
+        <select id="e-blood">
+          <option value="">Unknown</option>
+          <option>A+</option><option>A-</option>
+          <option>B+</option><option>B-</option>
+          <option>AB+</option><option>AB-</option>
+          <option>O+</option><option>O-</option>
+        </select>
+      </div>
+    </div>
+    <input type="hidden" id="e-id">
+    <button class="btn-primary" onclick="saveEdit()">💾 Save</button>
+    <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<!-- Settings button -->
+<button class="settings-btn" onclick="showSettings()" title="Settings">⚙️</button>
+
+<!-- Settings Modal -->
+<div id="settings-modal" class="modal-overlay hidden">
+  <div class="modal">
+    <h3>⚙️ Settings</h3>
+    <div style="display:flex;flex-direction:column;gap:14px;margin-top:10px;">
+      <button class="btn-primary" onclick="changePin()" style="width:100%;margin-top:0">🔑 Change PIN</button>
+      <button class="btn-secondary" onclick="exportData()" style="width:100%;margin-left:0;margin-top:0">📤 Export Data (JSON)</button>
+      <button class="btn-secondary" onclick="importData()" style="width:100%;margin-left:0;margin-top:0">📥 Import Data</button>
+      <input type="file" id="import-file" accept=".json" class="hidden" onchange="handleImport(event)">
+      <button onclick="lockApp()" style="background:rgba(255,68,68,0.15);border:1px solid rgba(255,68,68,0.4);color:#ff6666;padding:13px;border-radius:12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.95rem;margin-top:0">🔒 Lock App</button>
+      <button onclick="closeSettings()" style="background:none;border:none;color:var(--text-muted);cursor:pointer;padding:8px;font-family:'DM Sans',sans-serif">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// =================== DATA STORAGE ===================
+const STORAGE_KEY = 'family_vault_data';
+const PIN_KEY = 'family_vault_pin';
+let members = [];
+let currentPinInput = '';
+
+function saveData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(members));
+}
+function loadData() {
+  const d = localStorage.getItem(STORAGE_KEY);
+  members = d ? JSON.parse(d) : [];
+}
+
+// =================== PIN SYSTEM ===================
+function getStoredPin() { return localStorage.getItem(PIN_KEY); }
+function savePin(p) { localStorage.setItem(PIN_KEY, p); }
+
+function enterPin(digit) {
+  if (currentPinInput.length >= 4) return;
+  currentPinInput += digit;
+  updateDots();
+  if (currentPinInput.length === 4) {
+    setTimeout(() => checkPin(), 150);
+  }
+}
+function deletePin() {
+  currentPinInput = currentPinInput.slice(0,-1);
+  updateDots();
+}
+function updateDots() {
+  for(let i=0;i<4;i++) {
+    document.getElementById('d'+i).classList.toggle('filled', i < currentPinInput.length);
+  }
+}
+function checkPin() {
+  const stored = getStoredPin();
+  if (!stored) {
+    // First time - set this as the PIN
+    savePin(currentPinInput);
+    document.getElementById('pin-note').textContent = 'PIN set! This is now your password.';
+    unlockApp();
+  } else if (currentPinInput === stored) {
+    unlockApp();
+  } else {
+    document.getElementById('pin-error').classList.remove('hidden');
+    setTimeout(() => {
+      document.getElementById('pin-error').classList.add('hidden');
+    }, 2000);
+    currentPinInput = '';
+    updateDots();
+  }
+}
+function unlockApp() {
+  document.getElementById('lock-screen').style.display = 'none';
+  document.getElementById('main-app').classList.add('visible');
+  loadData();
+  renderAll();
+  startTicker();
+}
+function lockApp() {
+  closeSettings();
+  currentPinInput = '';
+  updateDots();
+  document.getElementById('lock-screen').style.display = 'flex';
+  document.getElementById('main-app').classList.remove('visible');
+}
+function changePin() {
+  const newPin = prompt('Enter new 4-digit PIN:');
+  if (newPin && /^\d{4}$/.test(newPin)) {
+    savePin(newPin);
+    showToast('PIN changed! ✅');
+  } else if (newPin !== null) {
+    alert('PIN must be exactly 4 digits.');
+  }
+}
+
+// =================== TABS ===================
+function switchTab(tab) {
+  ['members','birthdays','add'].forEach(t => {
+    document.getElementById('tab-'+t).classList.toggle('hidden', t !== tab);
+  });
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    b.classList.toggle('active', ['members','birthdays','add'][i] === tab);
+  });
+  if (tab === 'birthdays') renderBirthdays();
+}
+
+// =================== PANCHANGAM ENGINE ===================
+// Authentic Telugu Panchangam calculations
+
+const TITHIS = ['పాడ్యమి','విదియ','తదియ','చవితి','పంచమి','షష్ఠి','సప్తమి','అష్టమి','నవమి','దశమి','ఏకాదశి','ద్వాదశి','త్రయోదశి','చతుర్దశి','పౌర్ణమి/అమావాస్య'];
+const NAKSHATRAS = ['అశ్విని','భరణి','కృత్తిక','రోహిణి','మృగశిర','ఆరుద్ర','పునర్వసు','పుష్యమి','ఆశ్లేష','మఘ','పూర్వఫల్గుణి','ఉత్తరఫల్గుణి','హస్త','చిత్త','స్వాతి','విశాఖ','అనురాధ','జ్యేష్ఠ','మూల','పూర్వాషాఢ','ఉత్తరాషాఢ','శ్రవణం','ధనిష్ఠ','శతభిషం','పూర్వభాద్ర','ఉత్తరభాద్ర','రేవతి'];
+const YOGAS = ['విష్కంభ','ప్రీతి','ఆయుష్మాన్','సౌభాగ్య','శోభన','అతిగంద','సుకర్మ','ధృతి','శూల','గంద','వృద్ధి','ధ్రువ','వ్యాఘాత','హర్షణ','వజ్ర','సిద్ధి','వ్యతీపాత','వరీయాన్','పరిఘ','శివ','సిద్ధ','సాధ్య','శుభ','శుక్ల','బ్రహ్మ','ఇంద్ర','వైధృతి'];
+const KARANAS = ['బవ','బాలవ','కౌలవ','తైతిల','గర','వణిజ','విష్టి','శకుని','చతుష్పాద','నాగ','కింస్తుఘ్న'];
+const VARAS = ['ఆదివారం','సోమవారం','మంగళవారం','బుధవారం','గురువారం','శుక్రవారం','శనివారం'];
+const MASA_NAMES = ['చైత్రం','వైశాఖం','జ్యేష్ఠం','ఆషాఢం','శ్రావణం','భాద్రపదం','ఆశ్వయుజం','కార్తీకం','మార్గశిరం','పుష్యం','మాఘం','ఫాల్గుణం'];
+const SAMVATSARAS = ['ప్రభవ','విభవ','శుక్ల','ప్రమోదూత','ప్రజాపతి','అంగిరస','శ్రీముఖ','భావ','యువ','ధాత','ఈశ్వర','బహుధాన్య','ప్రమాది','విక్రమ','వృష','చిత్రభాను','స్వభాను','తారణ','పార్థివ','వ్యయ','సర్వజిత్','సర్వధారి','విరోధి','వికృతి','ఖర','నందన','విజయ','జయ','మన్మథ','దుర్ముఖి','హేవిళంభి','విళంభి','వికారి','శార్వరి','ప్లవ','శుభకృత్','శోభకృత్','క్రోధి','విశ్వావసు','పరాభవ','ప్లవంగ','కీలక','సౌమ్య','సాధారణ','విరోధికృత్','పరీధావి','ప్రమాదీచ','ఆనంద','రాక్షస','నళ','పింగళ','కాళయుక్తి','సిద్ధార్థి','రౌద్రి','దుర్మతి','దుందుభి','రుధిరోద్గారి','రక్తాక్షి','క్రోధన','క్షయ'];
+
+function getPanchangam(date) {
+  const d = new Date(date);
+  
+  // Day of week
+  const vara = VARAS[d.getDay()];
+  
+  // Julian Day Number for astronomical calculations
+  const y = d.getFullYear(), mo = d.getMonth()+1, dy = d.getDate();
+  const jdn = Math.floor((1461*(y+4800+Math.floor((mo-14)/12)))/4) +
+              Math.floor((367*(mo-2-12*Math.floor((mo-14)/12)))/12) -
+              Math.floor((3*Math.floor((y+4900+Math.floor((mo-14)/12))/100))/4) + dy - 32075;
+  
+  // Moon longitude (simplified but more accurate calculation)
+  const T = (jdn - 2451545.0) / 36525.0;
+  let moonLon = 218.3165 + 481267.8813*T;
+  moonLon += 6.289*Math.sin((134.963 + 477198.868*T)*Math.PI/180);
+  moonLon += 1.274*Math.sin((357.529 + 35999.050*T)*Math.PI/180);  // Evection
+  moonLon += 0.658*Math.sin((93.272 + 483202.017*T)*Math.PI/180);
+  moonLon = ((moonLon % 360) + 360) % 360;
+  
+  // Sun longitude
+  let sunLon = 280.461 + 36000.7698*T;
+  sunLon += 1.9146*Math.sin((357.528 + 35999.050*T)*Math.PI/180);
+  sunLon += 0.020*Math.sin((314.052 + 71998.1*T)*Math.PI/180);
+  sunLon = ((sunLon % 360) + 360) % 360;
+  
+  // Tithi (lunar day)
+  let moonSunDiff = ((moonLon - sunLon) + 360) % 360;
+  const tithiNum = Math.floor(moonSunDiff / 12);
+  const tithi = TITHIS[tithiNum >= 15 ? tithiNum - 15 : tithiNum] + (tithiNum === 14 ? (moonSunDiff > 180 ? ' (అమావాస్య)' : ' (పూర్ణిమ)') : '');
+  
+  // Nakshatra
+  const nakshatraNum = Math.floor((moonLon / 360) * 27) % 27;
+  const nakshatra = NAKSHATRAS[nakshatraNum];
+  
+  // Yoga
+  const yogaNum = Math.floor((((moonLon + sunLon) % 360) / 360) * 27) % 27;
+  const yoga = YOGAS[yogaNum];
+  
+  // Karana
+  const karanaNum = (tithiNum * 2) % 11;
+  const karana = KARANAS[karanaNum];
+  
+  // Telugu Masa
+  // Months since a reference point
+  const lunarMonthNum = Math.floor(moonSunDiff >= 0 ? (moonLon / 30) : 0);
+  // Simpler: calculate based on sun longitude
+  const sunMasaNum = Math.floor(sunLon / 30) % 12;
+  // Telugu months start from Chaitra (when sun is in Mesha ~Apr 14)
+  const teluguMasaIndex = (sunMasaNum + 0) % 12;
+  const masa = MASA_NAMES[teluguMasaIndex];
+  
+  // Samvatsara (Telugu year cycle of 60)
+  // Kali Yuga started 3102 BCE. Telugu year ~= Kali year - 3100
+  // Simplified: Current Samvatsara based on year
+  const telYear = y - 1900 + 1; // rough offset
+  const samvNum = ((y - 1987 + 60) % 60 + 60) % 60; // Calibrated to known years
+  const samvatsara = SAMVATSARAS[samvNum] || '';
+  
+  // Ritu (Season)
+  const rituNames = ['వసంత ఋతువు','గ్రీష్మ ఋతువు','వర్ష ఋతువు','శరద్ ఋతువు','హేమంత ఋతువు','శిశిర ఋతువు'];
+  const ritu = rituNames[Math.floor(teluguMasaIndex / 2) % 6];
+  
+  // Paksha (lunar fortnight)
+  const paksha = moonSunDiff < 180 ? 'శుక్ల పక్షం' : 'కృష్ణ పక్షం';
+  
+  return { vara, tithi, nakshatra, yoga, karana, masa, samvatsara, ritu, paksha };
+}
+
+// =================== AGE CALCULATION ===================
+function getAge(dob) {
+  const now = new Date();
+  const birth = new Date(dob);
+  let years = now.getFullYear() - birth.getFullYear();
+  let months = now.getMonth() - birth.getMonth();
+  let days = now.getDate() - birth.getDate();
+  if (days < 0) { months--; const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0); days += lastMonth.getDate(); }
+  if (months < 0) { years--; months += 12; }
+  const totalDays = Math.floor((now - birth) / 86400000);
+  const totalHours = Math.floor((now - birth) / 3600000);
+  return { years, months, days, totalDays, totalHours };
+}
+
+function getNextBirthday(dob) {
+  const now = new Date();
+  const birth = new Date(dob);
+  let next = new Date(now.getFullYear(), birth.getMonth(), birth.getDate());
+  if (next <= now) next.setFullYear(now.getFullYear() + 1);
+  const diff = Math.ceil((next - now) / 86400000);
+  return { date: next, daysLeft: diff };
+}
+
+function formatAadhaar(input) {
+  let val = input.value.replace(/\D/g,'').substring(0,12);
+  let fmt = '';
+  for(let i=0;i<val.length;i++) { if(i>0 && i%4===0) fmt+=' '; fmt+=val[i]; }
+  input.value = fmt;
+}
+
+// =================== RENDER MEMBERS ===================
+function renderAll() {
+  renderMembers();
+  document.getElementById('member-count').textContent = members.length;
+}
+
+const AVATARS = ['👨','👩','👴','👵','🧒','👦','👧','🧑','👨‍💼','👩‍💼'];
+
+function maskAadhaar(a) {
+  if (!a) return '—';
+  const clean = a.replace(/\s/g,'');
+  return 'XXXX XXXX ' + clean.slice(-4);
+}
+
+function renderMembers() {
+  const list = document.getElementById('members-list');
+  if (!members.length) {
+    list.innerHTML = '<div class="empty-state"><div class="big">👨‍👩‍👧‍👦</div><p>కుటుంబ సభ్యులు లేరు.<br>Add members using the ➕ tab.</p></div>';
+    return;
+  }
+  list.innerHTML = members.map((m, i) => {
+    const age = getAge(m.dob);
+    const nb = getNextBirthday(m.dob);
+    const panch = getPanchangam(m.dob);
+    const isBdayToday = nb.daysLeft === 365 || nb.daysLeft === 366 || new Date(m.dob).toDateString().slice(4,10) === new Date().toDateString().slice(4,10);
+    const today = nb.daysLeft <= 7 && nb.daysLeft > 0 ? `🎉 ${nb.daysLeft} రోజులు వస్తోంది!` : (nb.daysLeft === 365 || nb.daysLeft === 366) ? '🎂 నేడు పుట్టినరోజు!' : `⬡ ${nb.daysLeft} days to birthday`;
+    const todayBday = nb.daysLeft >= 364;
+    
+    return `
+    <div class="member-card" id="card-${i}">
+      <div class="card-header">
+        <div class="avatar">${m.gender || AVATARS[i%AVATARS.length]}</div>
+        <div>
+          <div class="member-name">${m.name} ${todayBday ? '🎂' : ''}</div>
+          <div class="member-relation">${m.relation}</div>
+        </div>
+        <div class="card-actions">
+          <button class="icon-btn" onclick="openEdit(${i})">✏️</button>
+          <button class="icon-btn del-btn" onclick="deleteMember(${i})">🗑️</button>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>📅 పుట్టిన తేదీ</label>
+          <div class="value">${formatDate(m.dob)}</div>
+        </div>
+        <div class="info-item">
+          <label>🩸 రక్త వర్గం</label>
+          <div class="value">${m.blood || '—'}</div>
+        </div>
+        <div class="info-item">
+          <label>🪪 ఆధార్</label>
+          <div class="value aadhaar aadhaar-masked" onclick="toggleAadhaar(this, '${m.aadhaar||''}')" data-shown="false">
+            ${m.aadhaar ? maskAadhaar(m.aadhaar) : '—'}
+            ${m.aadhaar ? '<span class="show-icon">👁 Show</span>' : ''}
+          </div>
+        </div>
+        <div class="info-item">
+          <label>📱 మొబైల్</label>
+          <div class="value">${m.mobile || '—'}</div>
+        </div>
+      </div>
+      <div class="age-display">
+        <div>
+          <div class="age-label">⏱ Real-time Age</div>
+          <div class="age-value" id="age-${i}">${age.years}y ${age.months}m ${age.days}d</div>
+          <div class="time-ticker" id="ticker-${i}">${age.totalDays} days lived</div>
+        </div>
+        <div style="text-align:right">
+          <div class="age-label">వయసు</div>
+          <div class="age-value">${age.years} సంవత్సరాలు</div>
+        </div>
+      </div>
+      <div class="next-bday">${today}</div>
+      
+      <div class="panchangam-card">
+        <div class="panch-title">🪔 జన్మ పంచాంగం | Birth Panchangam</div>
+        <div class="panch-grid">
+          <div class="panch-item"><label>వారం</label><div class="pval">${panch.vara}</div></div>
+          <div class="panch-item"><label>తిథి</label><div class="pval">${panch.tithi}</div></div>
+          <div class="panch-item"><label>నక్షత్రం</label><div class="pval">${panch.nakshatra}</div></div>
+          <div class="panch-item"><label>యోగం</label><div class="pval">${panch.yoga}</div></div>
+          <div class="panch-item"><label>కరణం</label><div class="pval">${panch.karana}</div></div>
+          <div class="panch-item"><label>మాసం</label><div class="pval">${panch.masa}</div></div>
+          <div class="panch-item"><label>పక్షం</label><div class="pval">${panch.paksha}</div></div>
+          <div class="panch-item"><label>సంవత్సరం</label><div class="pval">${panch.samvatsara}</div></div>
+          <div class="panch-item"><label>ఋతువు</label><div class="pval">${panch.ritu}</div></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleAadhaar(el, aadhaar) {
+  if (!aadhaar) return;
+  const shown = el.dataset.shown === 'true';
+  if (!shown) {
+    el.innerHTML = aadhaar + ' <span class="show-icon">🙈 Hide</span>';
+    el.dataset.shown = 'true';
+  } else {
+    el.innerHTML = maskAadhaar(aadhaar) + ' <span class="show-icon">👁 Show</span>';
+    el.dataset.shown = 'false';
+  }
+}
+
+function formatDate(dob) {
+  const d = new Date(dob);
+  return d.toLocaleDateString('te-IN', {day:'numeric',month:'long',year:'numeric'});
+}
+
+// =================== BIRTHDAYS TAB ===================
+function renderBirthdays() {
+  const upcoming = [...members].sort((a,b) => getNextBirthday(a.dob).daysLeft - getNextBirthday(b.dob).daysLeft);
+  
+  // Upcoming section (next 30 days)
+  const soon = upcoming.filter(m => getNextBirthday(m.dob).daysLeft <= 30);
+  const upEl = document.getElementById('upcoming-birthdays');
+  if (soon.length) {
+    upEl.innerHTML = '<div class="section-title" style="margin-bottom:12px">🔔 రాబోయే పుట్టినరోజులు (30 days)</div>' +
+      soon.map(m => {
+        const nb = getNextBirthday(m.dob);
+        const age = getAge(m.dob);
+        return `<div class="countdown-banner">
+          <div class="countdown-emoji">${m.gender || '🎂'}</div>
+          <div class="countdown-info">
+            <div class="countdown-name">${m.name} — ${m.relation}</div>
+            <div class="countdown-days">${nb.daysLeft === 365 || nb.daysLeft === 366 ? '🎉 TODAY! Happy Birthday!' : `🗓 ${nb.daysLeft} days left — turning ${age.years + 1}`}</div>
+          </div>
+        </div>`;
+      }).join('');
+  } else {
+    upEl.innerHTML = '<div style="color:var(--text-muted);font-size:0.9rem;margin-bottom:16px">No birthdays in next 30 days 🌟</div>';
+  }
+
+  // All birthdays sorted by month/day
+  const allSorted = [...members].sort((a,b) => {
+    const da = new Date(a.dob), db = new Date(b.dob);
+    const am = da.getMonth()*100+da.getDate(), bm = db.getMonth()*100+db.getDate();
+    return am - bm;
+  });
+  const allEl = document.getElementById('all-birthdays');
+  allEl.innerHTML = allSorted.map(m => {
+    const d = new Date(m.dob);
+    const age = getAge(m.dob);
+    const panch = getPanchangam(m.dob);
+    return `<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:14px">
+      <div style="font-size:2rem">${m.gender||'🧑'}</div>
+      <div style="flex:1">
+        <div style="font-weight:600;color:var(--gold)">${m.name}</div>
+        <div style="font-size:0.8rem;color:var(--text-muted)">${m.relation}</div>
+        <div style="font-size:0.82rem;color:var(--teal);margin-top:4px">
+          ${d.toLocaleDateString('en-IN',{day:'numeric',month:'short'})} | 
+          ⭐ ${panch.nakshatra} | ${panch.vara}
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div style="color:var(--gold);font-weight:600">${age.years} yrs</div>
+        <div style="font-size:0.75rem;color:var(--text-muted)">${getNextBirthday(m.dob).daysLeft}d away</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// =================== ADD / EDIT / DELETE ===================
+function addMember() {
+  const name = document.getElementById('f-name').value.trim();
+  const relation = document.getElementById('f-relation').value;
+  const dob = document.getElementById('f-dob').value;
+  if (!name || !relation || !dob) { alert('పేరు, సంబంధం మరియు పుట్టిన తేదీ అవసరం!'); return; }
+  members.push({
+    name,
+    relation,
+    dob,
+    gender: document.getElementById('f-gender').value,
+    aadhaar: document.getElementById('f-aadhaar').value,
+    mobile: document.getElementById('f-mobile').value,
+    blood: document.getElementById('f-blood').value,
+    id: Date.now()
+  });
+  saveData();
+  clearForm();
+  renderAll();
+  switchTab('members');
+  showToast(`${name} జోడించారు! ✅`);
+}
+
+function clearForm() {
+  ['f-name','f-aadhaar','f-mobile'].forEach(id => document.getElementById(id).value='');
+  ['f-relation','f-gender','f-blood'].forEach(id => document.getElementById(id).selectedIndex=0);
+  document.getElementById('f-dob').value='';
+}
+
+function deleteMember(i) {
+  if (!confirm(`${members[i].name} ని తొలగించాలా? Delete ${members[i].name}?`)) return;
+  members.splice(i, 1);
+  saveData();
+  renderAll();
+  showToast('తొలగించారు ✅');
+}
+
+function openEdit(i) {
+  const m = members[i];
+  document.getElementById('e-name').value = m.name;
+  document.getElementById('e-relation').value = m.relation;
+  document.getElementById('e-dob').value = m.dob;
+  document.getElementById('e-gender').value = m.gender||'';
+  document.getElementById('e-aadhaar').value = m.aadhaar||'';
+  document.getElementById('e-mobile').value = m.mobile||'';
+  document.getElementById('e-blood').value = m.blood||'';
+  document.getElementById('e-id').value = i;
+  document.getElementById('edit-modal').classList.remove('hidden');
+}
+
+function saveEdit() {
+  const i = +document.getElementById('e-id').value;
+  members[i] = {
+    ...members[i],
+    name: document.getElementById('e-name').value.trim(),
+    relation: document.getElementById('e-relation').value,
+    dob: document.getElementById('e-dob').value,
+    gender: document.getElementById('e-gender').value,
+    aadhaar: document.getElementById('e-aadhaar').value,
+    mobile: document.getElementById('e-mobile').value,
+    blood: document.getElementById('e-blood').value,
+  };
+  saveData();
+  closeModal();
+  renderAll();
+  showToast('నవీకరించారు ✅');
+}
+
+function closeModal() { document.getElementById('edit-modal').classList.add('hidden'); }
+
+// =================== REAL-TIME TICKER ===================
+function startTicker() {
+  setInterval(() => {
+    members.forEach((m, i) => {
+      const ageEl = document.getElementById('age-'+i);
+      const tickEl = document.getElementById('ticker-'+i);
+      if (!ageEl) return;
+      const age = getAge(m.dob);
+      ageEl.textContent = `${age.years}y ${age.months}m ${age.days}d`;
+      tickEl.textContent = `${age.totalDays.toLocaleString('en-IN')} days | ${age.totalHours.toLocaleString('en-IN')} hrs`;
+    });
+  }, 1000);
+}
+
+// =================== SETTINGS ===================
+function showSettings() { document.getElementById('settings-modal').classList.remove('hidden'); }
+function closeSettings() { document.getElementById('settings-modal').classList.add('hidden'); }
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(members, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'family_vault_backup.json';
+  a.click();
+  showToast('Export complete! 📤');
+}
+
+function importData() { document.getElementById('import-file').click(); }
+function handleImport(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try {
+      const imported = JSON.parse(ev.target.result);
+      if (Array.isArray(imported)) {
+        members = imported;
+        saveData();
+        renderAll();
+        closeSettings();
+        showToast(`${members.length} members imported! 📥`);
+      }
+    } catch { alert('Invalid file!'); }
+  };
+  reader.readAsText(file);
+}
+
+// =================== TOAST ===================
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2500);
+}
+
+// =================== PWA MANIFEST ===================
+const manifest = {
+  name: "కుటుంబ వివరాలు | Family Vault",
+  short_name: "FamilyVault",
+  description: "Family Aadhaar & Birthday details with Telugu Panchangam",
+  start_url: ".",
+  display: "standalone",
+  background_color: "#0d0618",
+  theme_color: "#1a0a2e",
+  orientation: "portrait",
+  icons: [
+    { src: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a0a2e'/><text y='.9em' font-size='80'>🏠</text></svg>", sizes: "192x192", type: "image/svg+xml" }
+  ]
+};
+const blob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
+document.getElementById('manifest-link').href = URL.createObjectURL(blob);
+
+// =================== INIT ===================
+// Check if already has PIN and show appropriate note
+window.addEventListener('load', () => {
+  if (getStoredPin()) {
+    document.getElementById('pin-note').textContent = 'Enter your 4-digit PIN to unlock.';
+  }
+});
+</script>
+</body>
+</html>
