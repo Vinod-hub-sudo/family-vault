@@ -11,438 +11,353 @@
 <link rel="manifest" id="pwa-manifest">
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Telugu&family=Cinzel+Decorative:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#050010;--bg2:#0c0020;--bg3:#130030;
-  --g1:#f5c518;--g2:#ff8c00;--g3:#ff4d6d;
-  --teal:#00f5c4;--purple:#b388ff;--blue:#64b5f6;
-  --text:#f0eaff;--muted:#7c6fa0;--subtle:#3d3360;
-  --card:rgba(255,255,255,0.03);--cb:rgba(255,255,255,0.07);
-  --danger:#ff5252;--success:#00e676;
-  --glass:rgba(255,255,255,0.05);--glass-b:rgba(255,255,255,0.1);
-}
+:root{--bg:#050010;--bg2:#0c0020;--bg3:#130030;--g1:#f5c518;--g2:#ff8c00;--g3:#ff4d6d;--teal:#00f5c4;--purple:#b388ff;--blue:#64b5f6;--text:#f0eaff;--muted:#7c6fa0;--subtle:#3d3360;--card:rgba(255,255,255,0.03);--cb:rgba(255,255,255,0.07);--danger:#ff5252;--success:#00e676;--glass:rgba(255,255,255,0.05);--glb:rgba(255,255,255,0.1)}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden}
-body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;position:relative}
-
-/* ANIMATED BG */
-.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none}
-.bg-mesh::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(179,136,255,0.12) 0%,transparent 60%),
-             radial-gradient(ellipse 60% 50% at 80% 90%,rgba(245,197,24,0.08) 0%,transparent 60%),
-             radial-gradient(ellipse 50% 40% at 50% 50%,rgba(0,245,196,0.05) 0%,transparent 60%);}
-.grid-lines{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
-  background-size:60px 60px;}
-
-/* SCROLLABLE LAYERS */
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif}
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(179,136,255,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 80% 90%,rgba(245,197,24,.08) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 50% 50%,rgba(0,245,196,.05) 0%,transparent 60%)}
+.grid-lines{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:60px 60px}
 #root{position:fixed;inset:0;z-index:1;display:flex;flex-direction:column}
-
-/* LOADING */
 #loading{position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px}
-.load-logo{text-align:center}
-.load-om{font-size:5rem;display:block;filter:drop-shadow(0 0 30px rgba(245,197,24,0.8));animation:omglow 2s ease-in-out infinite}
-@keyframes omglow{0%,100%{filter:drop-shadow(0 0 20px rgba(245,197,24,0.6))}50%{filter:drop-shadow(0 0 50px rgba(245,197,24,1)) drop-shadow(0 0 80px rgba(245,197,24,0.4))}}
-.load-title{font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:var(--g1);margin-top:10px;letter-spacing:3px}
-.load-sub{font-family:'Tiro Telugu',serif;color:var(--muted);font-size:.85rem;margin-top:4px}
-.loader-ring{width:48px;height:48px;border-radius:50%;border:2px solid rgba(245,197,24,0.15);border-top:2px solid var(--g1);border-right:2px solid var(--g2);animation:spin .9s linear infinite;box-shadow:0 0 20px rgba(245,197,24,0.2)}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* INSTALL BANNER */
-#ibanner{position:fixed;bottom:0;left:0;right:0;z-index:800;padding:16px 20px;display:flex;align-items:center;gap:14px;transform:translateY(100%);transition:transform .5s cubic-bezier(.34,1.56,.64,1);backdrop-filter:blur(40px);background:linear-gradient(135deg,rgba(13,0,32,0.97),rgba(19,0,48,0.97));border-top:1px solid rgba(245,197,24,0.2)}
+.load-om{font-size:5rem;display:block;filter:drop-shadow(0 0 30px rgba(245,197,24,.8));animation:oglow 2s ease-in-out infinite}
+@keyframes oglow{0%,100%{filter:drop-shadow(0 0 20px rgba(245,197,24,.6))}50%{filter:drop-shadow(0 0 50px rgba(245,197,24,1)) drop-shadow(0 0 80px rgba(245,197,24,.4))}}
+.load-title{font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:var(--g1);letter-spacing:3px}
+.load-sub{font-family:'Tiro Telugu',serif;color:var(--muted);font-size:.85rem}
+.loader-ring{width:48px;height:48px;border-radius:50%;border:2px solid rgba(245,197,24,.15);border-top:2px solid var(--g1);border-right:2px solid var(--g2);animation:sp .9s linear infinite;box-shadow:0 0 20px rgba(245,197,24,.2)}
+@keyframes sp{to{transform:rotate(360deg)}}
+#ibanner{position:fixed;bottom:0;left:0;right:0;z-index:800;padding:14px 18px;display:flex;align-items:center;gap:12px;transform:translateY(100%);transition:transform .5s cubic-bezier(.34,1.56,.64,1);backdrop-filter:blur(40px);background:linear-gradient(135deg,rgba(13,0,32,.97),rgba(19,0,48,.97));border-top:1px solid rgba(245,197,24,.2)}
 #ibanner.show{transform:translateY(0)}
-.ib-i{font-size:2.2rem;flex-shrink:0;filter:drop-shadow(0 0 10px rgba(245,197,24,0.5))}
-.ib-t{flex:1}.ib-t strong{display:block;color:var(--g1);font-size:.92rem;font-weight:700}.ib-t span{font-size:.75rem;color:var(--muted)}
-.ib-btn{background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;font-weight:800;padding:10px 20px;border:none;border-radius:14px;cursor:pointer;font-size:.82rem;font-family:'Plus Jakarta Sans',sans-serif;box-shadow:0 4px 20px rgba(245,197,24,0.3)}
-.ib-x{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.3rem;padding:4px;line-height:1}
-
-/* SYNC BAR */
-#sbar{height:28px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:.7rem;font-weight:600;letter-spacing:.5px;transition:all .3s;flex-shrink:0}
-#sbar.synced{background:rgba(0,245,196,0.07);color:var(--teal);border-bottom:1px solid rgba(0,245,196,0.1)}
-#sbar.syncing{background:rgba(245,197,24,0.07);color:var(--g1);border-bottom:1px solid rgba(245,197,24,0.1)}
-#sbar.error{background:rgba(255,82,82,0.07);color:var(--danger);border-bottom:1px solid rgba(255,82,82,0.1)}
+.ib-btn{background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;font-weight:800;padding:9px 18px;border:none;border-radius:12px;cursor:pointer;font-size:.8rem;font-family:'Plus Jakarta Sans',sans-serif}
+.ib-x{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem;padding:4px;line-height:1}
+.ib-t strong{display:block;color:var(--g1);font-size:.88rem}.ib-t span{font-size:.72rem;color:var(--muted)}
+#sbar{height:26px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:.68rem;font-weight:600;letter-spacing:.5px;transition:all .3s;flex-shrink:0}
+#sbar.synced{background:rgba(0,245,196,.07);color:var(--teal);border-bottom:1px solid rgba(0,245,196,.1)}
+#sbar.syncing{background:rgba(245,197,24,.07);color:var(--g1);border-bottom:1px solid rgba(245,197,24,.1)}
+#sbar.error{background:rgba(255,82,82,.07);color:var(--danger);border-bottom:1px solid rgba(255,82,82,.1)}
 .sdot{width:5px;height:5px;border-radius:50%;background:currentColor}
 .sdot.pulse{animation:sdp 1.5s infinite}
-@keyframes sdp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.2;transform:scale(.7)}}
-
-/* LOCK SCREEN */
-#lock{position:fixed;inset:0;z-index:600;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;overflow-y:auto}
+@keyframes sdp{0%,100%{opacity:1}50%{opacity:.2}}
+#lock{position:fixed;inset:0;z-index:600;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;overflow-y:auto}
 #lock.show{display:flex}
-.lock-top{text-align:center}
-.lock-om{font-size:3.5rem;display:block;filter:drop-shadow(0 0 25px rgba(245,197,24,0.7));animation:omglow 3s ease-in-out infinite}
-.lock-title{font-family:'Cinzel Decorative',serif;font-size:1.4rem;color:var(--g1);margin-top:8px;letter-spacing:2px}
-.lock-sub{font-family:'Tiro Telugu',serif;color:var(--muted);font-size:.82rem;margin-top:3px}
-.lock-line{width:160px;height:1px;background:linear-gradient(90deg,transparent,var(--g1),transparent);margin:6px auto}
-.lock-label{font-size:.8rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-weight:600}
-.pdots{display:flex;gap:14px}
+.lock-om{font-size:3.5rem;display:block;filter:drop-shadow(0 0 25px rgba(245,197,24,.7));animation:oglow 3s ease-in-out infinite}
+.lock-title{font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:var(--g1);letter-spacing:2px}
+.lock-sub{font-family:'Tiro Telugu',serif;color:var(--muted);font-size:.8rem}
+.lock-line{width:160px;height:1px;background:linear-gradient(90deg,transparent,var(--g1),transparent)}
+.llabel{font-size:.78rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-weight:600}
+.pdots{display:flex;gap:13px}
 .pd{width:13px;height:13px;border-radius:50%;border:2px solid var(--subtle);transition:all .25s}
-.pd.on{background:linear-gradient(135deg,var(--g1),var(--g2));border-color:var(--g1);box-shadow:0 0 15px rgba(245,197,24,0.5)}
-.ppad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:240px}
-.pk{background:var(--glass);border:1px solid var(--glass-b);color:var(--text);font-size:1.35rem;font-weight:600;padding:16px;border-radius:16px;cursor:pointer;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif;touch-action:manipulation;backdrop-filter:blur(10px)}
-.pk:active,.pk:hover{background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;border-color:transparent;transform:scale(.94);box-shadow:0 4px 20px rgba(245,197,24,0.4)}
-.pk.del{font-size:.9rem;color:var(--g3)}
-.perr{color:var(--g3);font-size:.82rem;min-height:18px;animation:shk .4s}
+.pd.on{background:linear-gradient(135deg,var(--g1),var(--g2));border-color:var(--g1);box-shadow:0 0 14px rgba(245,197,24,.5)}
+.ppad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;width:240px}
+.pk{background:var(--glass);border:1px solid var(--glb);color:var(--text);font-size:1.3rem;font-weight:600;padding:15px;border-radius:16px;cursor:pointer;transition:background .12s,transform .12s,color .12s;font-family:'Plus Jakarta Sans',sans-serif;touch-action:manipulation;backdrop-filter:blur(10px);-webkit-user-select:none;user-select:none}
+.pk:active{background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;border-color:transparent;transform:scale(.94);transition:none}
+.pk:hover{background:rgba(255,255,255,0.08)}
+.pk.del{font-size:.88rem;color:var(--g3)}
+.perr{color:var(--g3);font-size:.8rem;min-height:18px;animation:shk .4s}
 @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-.pnote{color:var(--muted);font-size:.74rem;text-align:center;max-width:220px;line-height:1.6}
-.atog{background:transparent;border:1px solid var(--subtle);color:var(--muted);padding:8px 18px;border-radius:20px;cursor:pointer;font-size:.75rem;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s;letter-spacing:.5px}
+.pnote{color:var(--muted);font-size:.72rem;text-align:center;max-width:220px;line-height:1.6}
+.atog{background:transparent;border:1px solid var(--subtle);color:var(--muted);padding:7px 16px;border-radius:20px;cursor:pointer;font-size:.73rem;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s}
 .atog:hover{border-color:var(--g1);color:var(--g1)}
-
-/* MAIN APP */
 #app{display:none;flex-direction:column;height:100%}
 #app.show{display:flex}
 .app-scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
 .app-scroll::-webkit-scrollbar{display:none}
-
-/* HEADER */
-.app-hdr{padding:16px 18px 12px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.hdr-logo{display:flex;align-items:center;gap:10px}
-.hdr-om{font-size:1.6rem;filter:drop-shadow(0 0 12px rgba(245,197,24,0.6));animation:omglow 4s ease-in-out infinite}
-.hdr-text h1{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--g1);letter-spacing:1.5px}
-.hdr-text p{font-family:'Tiro Telugu',serif;font-size:.7rem;color:var(--muted);margin-top:1px}
-.hdr-right{display:flex;align-items:center;gap:8px}
-.role-chip{display:flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:.68rem;font-weight:700;letter-spacing:.5px;border:1px solid;backdrop-filter:blur(10px)}
-.role-chip.admin{background:rgba(245,197,24,0.1);border-color:rgba(245,197,24,0.3);color:var(--g1)}
-.role-chip.member{background:rgba(179,136,255,0.1);border-color:rgba(179,136,255,0.3);color:var(--purple)}
-.logout-btn{background:rgba(255,82,82,0.1);border:1px solid rgba(255,82,82,0.25);color:var(--danger);padding:5px 11px;border-radius:14px;cursor:pointer;font-size:.7rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s;display:flex;align-items:center;gap:4px}
-.logout-btn:hover{background:rgba(255,82,82,0.2)}
-
-/* TODAY STRIP */
-.today-strip{margin:0 14px 12px;padding:14px 16px;border-radius:18px;background:linear-gradient(135deg,rgba(179,136,255,0.08),rgba(245,197,24,0.05));border:1px solid rgba(179,136,255,0.15);display:flex;align-items:center;gap:12px}
-.today-cal{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--g1),var(--g2));display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 16px rgba(245,197,24,0.3)}
-.today-cal .tcday{font-size:1.2rem;font-weight:800;color:#000;line-height:1}
-.today-cal .tcmon{font-size:.5rem;color:#000;opacity:.7;text-transform:uppercase;font-weight:700;letter-spacing:.5px}
+.app-hdr{padding:14px 16px 10px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.hdr-logo{display:flex;align-items:center;gap:9px}
+.hdr-om{font-size:1.5rem;filter:drop-shadow(0 0 10px rgba(245,197,24,.6));animation:oglow 4s ease-in-out infinite}
+.hdr-text h1{font-family:'Cinzel Decorative',serif;font-size:.95rem;color:var(--g1);letter-spacing:1.5px}
+.hdr-text p{font-family:'Tiro Telugu',serif;font-size:.68rem;color:var(--muted);margin-top:1px}
+.hdr-right{display:flex;align-items:center;gap:7px}
+.role-chip{padding:4px 11px;border-radius:20px;font-size:.65rem;font-weight:700;letter-spacing:.5px;border:1px solid;backdrop-filter:blur(10px)}
+.role-chip.admin{background:rgba(245,197,24,.1);border-color:rgba(245,197,24,.3);color:var(--g1)}
+.role-chip.member{background:rgba(179,136,255,.1);border-color:rgba(179,136,255,.3);color:var(--purple)}
+.logout-btn{background:rgba(255,82,82,.1);border:1px solid rgba(255,82,82,.25);color:var(--danger);padding:5px 10px;border-radius:12px;cursor:pointer;font-size:.68rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s}
+.today-strip{margin:0 12px 10px;padding:12px 14px;border-radius:16px;background:linear-gradient(135deg,rgba(179,136,255,.08),rgba(245,197,24,.05));border:1px solid rgba(179,136,255,.15);display:flex;align-items:center;gap:11px}
+.today-cal{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--g1),var(--g2));display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(245,197,24,.3)}
+.tcday{font-size:1.15rem;font-weight:800;color:#000;line-height:1}
+.tcmon{font-size:.48rem;color:#000;opacity:.7;text-transform:uppercase;font-weight:700;letter-spacing:.5px}
 .today-info{flex:1;min-width:0}
-.today-info .tdate{font-size:.82rem;font-weight:600;color:var(--text)}
-.today-info .tpanch{font-family:'Tiro Telugu',serif;font-size:.72rem;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.today-btn{background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.2);color:var(--g1);padding:6px 11px;border-radius:10px;cursor:pointer;font-size:.68rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap;flex-shrink:0}
-
-/* ALERTS */
-.alerts-wrap{margin:0 14px 10px;display:flex;flex-direction:column;gap:7px}
-.alert-pill{padding:12px 16px;border-radius:16px;display:flex;align-items:center;gap:12px;border:1px solid;backdrop-filter:blur(10px)}
-.alert-pill.bday{background:rgba(255,77,109,0.1);border-color:rgba(255,77,109,0.25)}
-.alert-pill.anniv{background:rgba(245,197,24,0.1);border-color:rgba(245,197,24,0.25)}
-.alert-pill .api{font-size:1.6rem;flex-shrink:0}
-.alert-pill .apt{flex:1}
-.alert-pill .apt strong{display:block;font-size:.85rem;font-weight:700}
+.tdate{font-size:.8rem;font-weight:600;color:var(--text)}
+.tpanch-mini{font-family:'Tiro Telugu',serif;font-size:.7rem;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.today-btn{background:rgba(245,197,24,.1);border:1px solid rgba(245,197,24,.2);color:var(--g1);padding:6px 10px;border-radius:10px;cursor:pointer;font-size:.66rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap;flex-shrink:0}
+.alerts-wrap{margin:0 12px 9px;display:flex;flex-direction:column;gap:7px}
+.alert-pill{padding:11px 14px;border-radius:14px;display:flex;align-items:center;gap:11px;border:1px solid}
+.alert-pill.bday{background:rgba(255,77,109,.1);border-color:rgba(255,77,109,.25)}
+.alert-pill.anniv{background:rgba(245,197,24,.1);border-color:rgba(245,197,24,.25)}
+.alert-pill .api{font-size:1.5rem;flex-shrink:0}
+.alert-pill .apt strong{display:block;font-size:.83rem;font-weight:700}
 .alert-pill.bday .apt strong{color:var(--g3)}
 .alert-pill.anniv .apt strong{color:var(--g1)}
-.alert-pill .apt span{font-size:.72rem;color:var(--muted)}
-
-/* PENDING */
-.pending-bar{margin:0 14px 10px;padding:12px 16px;border-radius:16px;background:linear-gradient(135deg,rgba(255,140,0,0.12),rgba(255,77,109,0.08));border:1px solid rgba(255,140,0,0.25);display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s}
-.pending-bar:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(255,140,0,0.2)}
-.pb-cnt{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--g2),var(--g3));color:#000;font-weight:800;font-size:.82rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 10px rgba(255,140,0,0.4)}
-.pb-t strong{display:block;color:var(--g2);font-size:.84rem;font-weight:700}
-.pb-t span{font-size:.72rem;color:var(--muted)}
-
-/* NAV */
-.nav{display:flex;flex-shrink:0;padding:6px 10px calc(6px + env(safe-area-inset-bottom));border-top:1px solid rgba(255,255,255,0.05);backdrop-filter:blur(30px);background:rgba(5,0,16,0.9)}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 4px;cursor:pointer;background:none;border:none;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:.59rem;font-weight:600;transition:all .2s;letter-spacing:.3px;position:relative;border-radius:12px}
-.nb .ni{font-size:1.15rem;transition:all .2s;display:block}
-.nb.active{color:var(--g1);background:rgba(245,197,24,0.08)}
-.nb.active .ni{transform:scale(1.15);filter:drop-shadow(0 0 6px rgba(245,197,24,0.6))}
-.nbbadge{position:absolute;top:4px;right:50%;margin-right:-18px;background:linear-gradient(135deg,var(--g2),var(--g3));color:#000;font-size:.55rem;font-weight:800;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(255,140,0,0.5)}
-
-/* PAGES */
-.page{display:none;padding:4px 14px 16px;animation:pgIn .3s ease}
+.alert-pill .apt span{font-size:.7rem;color:var(--muted)}
+.pending-bar{margin:0 12px 9px;padding:11px 14px;border-radius:14px;background:linear-gradient(135deg,rgba(255,140,0,.12),rgba(255,77,109,.08));border:1px solid rgba(255,140,0,.25);display:flex;align-items:center;gap:11px;cursor:pointer;transition:all .2s}
+.pending-bar:hover{transform:translateY(-1px)}
+.pb-cnt{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--g2),var(--g3));color:#000;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pb-t strong{display:block;color:var(--g2);font-size:.82rem;font-weight:700}
+.pb-t span{font-size:.7rem;color:var(--muted)}
+.nav{display:flex;flex-shrink:0;padding:5px 6px calc(5px + env(safe-area-inset-bottom));border-top:1px solid rgba(255,255,255,.05);backdrop-filter:blur(30px);background:rgba(5,0,16,.92);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{display:none}
+.nb{flex:1;min-width:52px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 3px;cursor:pointer;background:none;border:none;color:var(--muted);font-family:'Plus Jakarta Sans',sans-serif;font-size:.56rem;font-weight:600;transition:all .2s;letter-spacing:.3px;position:relative;border-radius:11px;white-space:nowrap}
+.nb .ni{font-size:1.1rem;transition:all .2s;display:block}
+.nb.active{color:var(--g1);background:rgba(245,197,24,.08)}
+.nb.active .ni{transform:scale(1.12);filter:drop-shadow(0 0 5px rgba(245,197,24,.6))}
+.nbbdg{position:absolute;top:3px;right:50%;margin-right:-16px;background:linear-gradient(135deg,var(--g2),var(--g3));color:#000;font-size:.52rem;font-weight:800;width:13px;height:13px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.page{display:none;padding:4px 12px 16px;animation:pgIn .28s ease}
 .page.active{display:block}
-@keyframes pgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.pg-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding:4px 0}
-.pg-title{font-size:1.05rem;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px}
-.pg-cnt{background:rgba(245,197,24,0.12);border:1px solid rgba(245,197,24,0.2);color:var(--g1);font-size:.65rem;padding:3px 9px;border-radius:12px;font-weight:700}
-
-/* MEMBER CARDS */
-.mi{background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));border:1px solid var(--cb);border-radius:20px;padding:14px 16px;margin-bottom:9px;display:flex;align-items:center;gap:13px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;backdrop-filter:blur(10px)}
-.mi::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,197,24,0.4),transparent);opacity:0;transition:opacity .3s}
-.mi:hover,.mi:active{background:linear-gradient(135deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03));border-color:rgba(245,197,24,0.2);transform:translateX(3px)}
+@keyframes pgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.pg-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:3px 0}
+.pg-title{font-size:1rem;font-weight:800;color:var(--text);display:flex;align-items:center;gap:7px}
+.pg-cnt{background:rgba(245,197,24,.12);border:1px solid rgba(245,197,24,.2);color:var(--g1);font-size:.62rem;padding:2px 8px;border-radius:11px;font-weight:700}
+.mi{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid var(--cb);border-radius:18px;padding:13px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;backdrop-filter:blur(10px)}
+.mi::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,197,24,.4),transparent);opacity:0;transition:opacity .3s}
+.mi:hover,.mi:active{background:linear-gradient(135deg,rgba(255,255,255,.07),rgba(255,255,255,.03));border-color:rgba(245,197,24,.2);transform:translateX(3px)}
 .mi:hover::after{opacity:1}
-.mav{width:48px;height:48px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;position:relative}
-.mav::before{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg,var(--purple),var(--g2));opacity:.2}
+.mav{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex-shrink:0;background:linear-gradient(135deg,rgba(179,136,255,.15),rgba(245,197,24,.1));border:1px solid rgba(245,197,24,.15)}
 .minfo{flex:1;min-width:0}
-.mname{font-weight:700;font-size:.95rem;color:var(--text);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.mrel-chip{font-family:'Tiro Telugu',serif;font-size:.68rem;color:var(--muted);margin-top:2px}
-.mmeta{font-size:.68rem;color:var(--teal);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap}
-.mmeta span{display:flex;align-items:center;gap:3px}
-.marr{color:var(--subtle);font-size:1.1rem;flex-shrink:0}
-.bbadge{background:linear-gradient(135deg,var(--g3),var(--g2));color:#000;font-size:.58rem;font-weight:800;padding:2px 7px;border-radius:8px;white-space:nowrap}
-
-/* ADD BTN */
-.add-fab{width:100%;padding:13px;border-radius:16px;background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;font-weight:800;font-size:.88rem;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px;box-shadow:0 4px 24px rgba(245,197,24,0.3);transition:all .2s}
-.add-fab:hover{transform:translateY(-1px);box-shadow:0 6px 30px rgba(245,197,24,0.4)}
-
-/* DETAIL PANEL */
+.mname{font-weight:700;font-size:.92rem;color:var(--text);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.mrel-chip{font-family:'Tiro Telugu',serif;font-size:.67rem;color:var(--muted);margin-top:2px}
+.mmeta{font-size:.67rem;color:var(--teal);margin-top:2px;display:flex;gap:7px;flex-wrap:wrap}
+.marr{color:var(--subtle);font-size:1rem;flex-shrink:0}
+.bbadge{background:linear-gradient(135deg,var(--g3),var(--g2));color:#000;font-size:.56rem;font-weight:800;padding:2px 7px;border-radius:8px;white-space:nowrap}
+.add-fab{width:100%;padding:12px;border-radius:15px;background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;font-weight:800;font-size:.85rem;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:11px;box-shadow:0 4px 22px rgba(245,197,24,.3);transition:all .2s}
+.add-fab:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(245,197,24,.4)}
 #detail{position:fixed;inset:0;z-index:500;background:var(--bg);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.25,.46,.45,.94)}
 #detail.show{transform:translateX(0)}
-.detail-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.detail-scroll::-webkit-scrollbar{display:none}
-.det-head{padding:50px 18px 20px;position:relative;background:linear-gradient(180deg,rgba(19,0,48,0.8),transparent)}
-.det-back{position:absolute;top:14px;left:14px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:var(--text);padding:8px 14px;border-radius:12px;cursor:pointer;font-size:.8rem;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;gap:5px;transition:all .2s;backdrop-filter:blur(10px)}
-.det-back:hover{background:rgba(255,255,255,0.1)}
-.det-av{width:80px;height:80px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;margin:0 auto 12px;background:linear-gradient(135deg,rgba(179,136,255,0.2),rgba(245,197,24,0.1));border:1px solid rgba(245,197,24,0.2);box-shadow:0 8px 32px rgba(245,197,24,0.15);position:relative}
-.det-av::after{content:'';position:absolute;inset:-2px;border-radius:26px;background:linear-gradient(135deg,var(--g1),var(--purple),var(--teal));opacity:.3;z-index:-1}
-.det-name{font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:var(--g1);text-align:center;letter-spacing:1px}
-.det-rel{font-family:'Tiro Telugu',serif;color:var(--muted);text-align:center;margin-top:4px;font-size:.85rem}
-.det-vinod{color:var(--purple);font-size:.78rem;text-align:center;margin-top:3px;font-weight:600}
-.det-acts{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}
-.dact{padding:9px 18px;border-radius:13px;cursor:pointer;font-size:.78rem;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;border:none;transition:all .2s;letter-spacing:.3px}
-.dact.edit{background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;box-shadow:0 4px 16px rgba(245,197,24,0.3)}
-.dact.del{background:rgba(255,82,82,0.1);border:1px solid rgba(255,82,82,0.25);color:var(--danger)}
-.dact.req{background:rgba(179,136,255,0.1);border:1px solid rgba(179,136,255,0.25);color:var(--purple)}
-.det-body{padding:0 14px 20px}
-.det-sec{margin-bottom:16px}
-.sec-label{font-size:.65rem;text-transform:uppercase;letter-spacing:2px;color:var(--g2);margin-bottom:9px;display:flex;align-items:center;gap:6px;font-weight:700}
+.det-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.det-scroll::-webkit-scrollbar{display:none}
+.det-head{padding:48px 16px 18px;position:relative;background:linear-gradient(180deg,rgba(19,0,48,.8),transparent)}
+.det-back{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--text);padding:7px 13px;border-radius:11px;cursor:pointer;font-size:.78rem;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;gap:5px;transition:all .2s;backdrop-filter:blur(10px)}
+.det-av{width:76px;height:76px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:2.3rem;margin:0 auto 11px;background:linear-gradient(135deg,rgba(179,136,255,.2),rgba(245,197,24,.1));border:1px solid rgba(245,197,24,.2);box-shadow:0 8px 30px rgba(245,197,24,.15);position:relative}
+.det-av::after{content:'';position:absolute;inset:-2px;border-radius:24px;background:linear-gradient(135deg,var(--g1),var(--purple),var(--teal));opacity:.25;z-index:-1}
+.det-name{font-family:'Cinzel Decorative',serif;font-size:1.25rem;color:var(--g1);text-align:center;letter-spacing:1px}
+.det-rel{font-family:'Tiro Telugu',serif;color:var(--muted);text-align:center;margin-top:4px;font-size:.83rem}
+.det-vinod{color:var(--purple);font-size:.76rem;text-align:center;margin-top:2px;font-weight:600}
+.det-acts{display:flex;gap:8px;justify-content:center;margin-top:13px;flex-wrap:wrap}
+.dact{padding:8px 16px;border-radius:12px;cursor:pointer;font-size:.76rem;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;border:none;transition:all .2s}
+.dact.edit{background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;box-shadow:0 4px 14px rgba(245,197,24,.3)}
+.dact.del{background:rgba(255,82,82,.1);border:1px solid rgba(255,82,82,.25);color:var(--danger)}
+.dact.req{background:rgba(179,136,255,.1);border:1px solid rgba(179,136,255,.25);color:var(--purple)}
+.det-body{padding:0 12px 20px}
+.det-sec{margin-bottom:14px}
+.sec-label{font-size:.62rem;text-transform:uppercase;letter-spacing:2px;color:var(--g2);margin-bottom:8px;display:flex;align-items:center;gap:5px;font-weight:700}
 .igrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-@media(max-width:360px){.igrid,.fg,.pg-grid{grid-template-columns:1fr}}
-.itile{background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:1px solid var(--cb);border-radius:14px;padding:12px 14px;transition:border-color .2s}
-.itile:hover{border-color:rgba(245,197,24,0.2)}
-.itile label{font-size:.62rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);display:block;margin-bottom:4px;font-weight:600}
-.itile .iv{font-size:.88rem;color:var(--text);font-weight:600;word-break:break-all;line-height:1.4}
-.itile .iv.aadh{font-family:monospace;color:var(--teal);letter-spacing:2px;cursor:pointer;font-size:.78rem}
+@media(max-width:360px){.igrid,.fg,.panch-grid,.muh-grid{grid-template-columns:1fr}}
+.itile{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--cb);border-radius:13px;padding:11px 13px}
+.itile label{font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);display:block;margin-bottom:3px;font-weight:600}
+.itile .iv{font-size:.86rem;color:var(--text);font-weight:600;word-break:break-all;line-height:1.4}
+.itile .iv.aadh{font-family:monospace;color:var(--teal);letter-spacing:2px;cursor:pointer;font-size:.76rem}
 .itile.full{grid-column:1/-1}
-.age-card{background:linear-gradient(135deg,rgba(245,197,24,0.06),rgba(255,140,0,0.04));border:1px solid rgba(245,197,24,0.15);border-radius:18px;padding:16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}
-.age-main{font-size:1.15rem;font-weight:800;color:var(--g1);letter-spacing-.5px}
-.age-sub{font-size:.68rem;color:var(--muted);margin-top:3px;font-family:monospace;letter-spacing:.5px}
-.bday-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(0,245,196,0.08);border:1px solid rgba(0,245,196,0.2);border-radius:10px;padding:7px 13px;font-size:.76rem;color:var(--teal);margin-bottom:9px;font-weight:600}
-
-/* PANCHANGAM CARD */
-.panch-wrap{background:linear-gradient(135deg,rgba(19,0,48,0.8),rgba(13,0,32,0.9));border:1px solid rgba(179,136,255,0.15);border-radius:20px;padding:16px;margin-bottom:14px;backdrop-filter:blur(20px)}
-.panch-hdr{display:flex;align-items:center;gap:8px;margin-bottom:14px}
-.panch-hdr .phi{font-size:1.3rem;filter:drop-shadow(0 0 8px rgba(179,136,255,0.6))}
-.panch-hdr .pht{font-family:'Tiro Telugu',serif;font-size:.9rem;color:var(--purple);font-weight:600}
+.age-card{background:linear-gradient(135deg,rgba(245,197,24,.06),rgba(255,140,0,.04));border:1px solid rgba(245,197,24,.15);border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.age-main{font-size:1.1rem;font-weight:800;color:var(--g1)}
+.age-sub{font-size:.67rem;color:var(--muted);margin-top:3px;font-family:monospace;letter-spacing:.5px}
+.bday-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(0,245,196,.08);border:1px solid rgba(0,245,196,.2);border-radius:10px;padding:6px 12px;font-size:.74rem;color:var(--teal);margin-bottom:8px;font-weight:600}
+.panch-wrap{background:linear-gradient(135deg,rgba(19,0,48,.8),rgba(13,0,32,.9));border:1px solid rgba(179,136,255,.15);border-radius:18px;padding:14px;margin-bottom:12px;backdrop-filter:blur(20px)}
+.panch-hdr{display:flex;align-items:center;gap:7px;margin-bottom:12px}
+.panch-hdr .phi{font-size:1.2rem;filter:drop-shadow(0 0 7px rgba(179,136,255,.6))}
+.panch-hdr .pht{font-family:'Tiro Telugu',serif;font-size:.88rem;color:var(--purple);font-weight:600}
 .panch-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.ptile{background:rgba(0,0,0,0.3);border:1px solid rgba(179,136,255,0.08);border-radius:12px;padding:10px 12px}
-.ptile label{font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--g2);display:block;margin-bottom:3px;font-weight:700}
-.ptile .pv{font-family:'Tiro Telugu',serif;font-size:.85rem;color:var(--text)}
-
-/* MUHURATAM CARD */
-.muh-wrap{background:linear-gradient(135deg,rgba(0,245,196,0.05),rgba(100,181,246,0.04));border:1px solid rgba(0,245,196,0.12);border-radius:20px;padding:16px;margin-bottom:14px}
-.muh-hdr{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.muh-hdr .mhi{font-size:1.2rem}
-.muh-hdr .mht{font-size:.9rem;font-weight:700;color:var(--teal)}
+.ptile{background:rgba(0,0,0,.3);border:1px solid rgba(179,136,255,.08);border-radius:11px;padding:9px 11px}
+.ptile label{font-size:.58rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--g2);display:block;margin-bottom:2px;font-weight:700}
+.ptile .pv{font-family:'Tiro Telugu',serif;font-size:.83rem;color:var(--text)}
+.weather-card{background:linear-gradient(135deg,rgba(100,181,246,.08),rgba(0,245,196,.05));border:1px solid rgba(100,181,246,.15);border-radius:18px;padding:14px;margin-bottom:12px}
+.wc-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.wc-title{font-size:.88rem;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:6px}
+.wc-loc{font-size:.68rem;color:var(--muted);margin-top:2px}
+.wc-refresh{background:rgba(100,181,246,.1);border:1px solid rgba(100,181,246,.2);color:var(--blue);padding:5px 10px;border-radius:9px;cursor:pointer;font-size:.66rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif}
+.weather-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.wtile{background:rgba(0,0,0,.25);border-radius:11px;padding:10px 12px;border:1px solid rgba(100,181,246,.07)}
+.wtile label{font-size:.58rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;display:block;margin-bottom:3px}
+.wtile .wv{font-size:.88rem;font-weight:700}
+.wtile.temp label{color:#ff8a65}.wtile.temp .wv{color:#ff8a65}
+.wtile.sun label{color:#ffcc02}.wtile.sun .wv{color:#ffcc02}
+.wtile.moon label{color:#b0bec5}.wtile.moon .wv{color:#b0bec5}
+.wtile.humid label{color:var(--teal)}.wtile.humid .wv{color:var(--teal)}
+.loc-input-row{display:flex;gap:7px;margin-bottom:10px}
+.loc-input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--text);padding:9px 12px;border-radius:11px;font-size:.82rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none}
+.loc-input:focus{border-color:rgba(100,181,246,.4)}
+.loc-btn{background:linear-gradient(135deg,var(--blue),var(--teal));color:#000;border:none;padding:9px 14px;border-radius:11px;cursor:pointer;font-size:.75rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap}
+.loc-gps{background:rgba(100,181,246,.1);border:1px solid rgba(100,181,246,.2);color:var(--blue);padding:9px 12px;border-radius:11px;cursor:pointer;font-size:.75rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;white-space:nowrap}
+.muh-wrap{background:linear-gradient(135deg,rgba(0,245,196,.05),rgba(100,181,246,.04));border:1px solid rgba(0,245,196,.12);border-radius:18px;padding:14px;margin-bottom:12px}
+.muh-hdr{display:flex;align-items:center;gap:7px;margin-bottom:11px}
 .muh-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.mtile{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px 12px;border:1px solid rgba(0,245,196,0.06)}
-.mtile label{font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;display:block;margin-bottom:3px}
-.mtile .mv{font-size:.82rem;font-weight:600}
-.mtile.good label{color:var(--success)}.mtile.good .mv{color:rgba(0,230,118,0.9)}
-.mtile.bad label{color:var(--danger)}.mtile.bad .mv{color:rgba(255,82,82,0.9)}
-.mtile.neutral label{color:var(--blue)}.mtile.neutral .mv{color:var(--blue)}
-
-/* TODAY PANCHANG PAGE */
-.tpanch-hero{background:linear-gradient(135deg,rgba(19,0,48,0.9),rgba(13,0,32,0.95));border:1px solid rgba(245,197,24,0.15);border-radius:22px;padding:20px;margin-bottom:14px;text-align:center;position:relative;overflow:hidden}
-.tpanch-hero::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(245,197,24,0.1),transparent);border-radius:50%}
-.tph-date{font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:var(--g1);letter-spacing:2px}
-.tph-day{font-family:'Tiro Telugu',serif;font-size:.85rem;color:var(--muted);margin-top:4px}
-.tph-samvat{font-family:'Tiro Telugu',serif;font-size:.78rem;color:var(--purple);margin-top:6px;padding:4px 12px;background:rgba(179,136,255,0.08);border-radius:20px;display:inline-block}
-.holiday-card{background:linear-gradient(135deg,rgba(255,77,109,0.1),rgba(255,140,0,0.08));border:1px solid rgba(255,77,109,0.2);border-radius:16px;padding:13px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px}
-.hol-icon{font-size:1.5rem;flex-shrink:0}
-.hol-info .hn{font-weight:700;font-size:.88rem;color:var(--g3)}
-.hol-info .hd{font-size:.72rem;color:var(--muted);margin-top:2px;font-family:'Tiro Telugu',serif}
-
-/* EVENTS */
-.ecard{background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:1px solid var(--cb);border-radius:18px;padding:14px 16px;margin-bottom:9px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden}
+.mtile{background:rgba(0,0,0,.25);border-radius:11px;padding:10px 12px;border:1px solid}
+.mtile.bad{border-color:rgba(255,82,82,.1)}.mtile.bad label{color:var(--danger)}.mtile.bad .mv{color:rgba(255,82,82,.9)}
+.mtile.good{border-color:rgba(0,230,118,.1)}.mtile.good label{color:var(--success)}.mtile.good .mv{color:rgba(0,230,118,.9)}
+.mtile.neutral{border-color:rgba(100,181,246,.1)}.mtile.neutral label{color:var(--blue)}.mtile.neutral .mv{color:var(--blue)}
+.mtile label{font-size:.58rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;display:block;margin-bottom:3px}
+.mtile .mv{font-size:.82rem;font-weight:700}
+.tpanch-hero{background:linear-gradient(135deg,rgba(19,0,48,.9),rgba(13,0,32,.95));border:1px solid rgba(245,197,24,.15);border-radius:20px;padding:18px;margin-bottom:12px;text-align:center;position:relative;overflow:hidden}
+.tpanch-hero::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(245,197,24,.1),transparent);border-radius:50%}
+.tph-date{font-family:'Cinzel Decorative',serif;font-size:1.05rem;color:var(--g1);letter-spacing:2px}
+.tph-day{font-family:'Tiro Telugu',serif;font-size:.82rem;color:var(--muted);margin-top:3px}
+.tph-samvat{font-family:'Tiro Telugu',serif;font-size:.76rem;color:var(--purple);margin-top:5px;padding:4px 12px;background:rgba(179,136,255,.08);border-radius:20px;display:inline-block}
+.hol-card{background:linear-gradient(135deg,rgba(255,77,109,.1),rgba(255,140,0,.08));border:1px solid rgba(255,77,109,.2);border-radius:14px;padding:12px 14px;margin-bottom:7px;display:flex;align-items:center;gap:11px}
+.hol-icon{font-size:1.4rem;flex-shrink:0}
+.hol-info .hn{font-weight:700;font-size:.85rem;color:var(--g3)}
+.hol-info .hd{font-size:.7rem;color:var(--muted);margin-top:1px;font-family:'Tiro Telugu',serif}
+.ecard{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--cb);border-radius:16px;padding:13px 15px;margin-bottom:8px;display:flex;align-items:center;gap:11px;position:relative;overflow:hidden}
 .ecard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
 .ecard.birthday::before{background:linear-gradient(to bottom,var(--g3),var(--g2))}
 .ecard.anniversary::before{background:linear-gradient(to bottom,var(--g1),var(--g2))}
 .ecard.marriage::before{background:linear-gradient(to bottom,var(--purple),var(--blue))}
 .ecard.other::before{background:linear-gradient(to bottom,var(--teal),var(--blue))}
-.eei{font-size:1.6rem;flex-shrink:0;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.3))}
-.einfo .en{font-weight:700;font-size:.88rem;color:var(--text)}
-.einfo .ed{font-size:.7rem;color:var(--muted);margin-top:2px;font-family:'Tiro Telugu',serif}
-.einfo .edl{font-size:.7rem;font-weight:700;margin-top:3px}
+.eei{font-size:1.5rem;flex-shrink:0}
+.einfo .en{font-weight:700;font-size:.86rem;color:var(--text)}
+.einfo .ed{font-size:.7rem;color:var(--muted);margin-top:1px;font-family:'Tiro Telugu',serif}
+.einfo .edl{font-size:.7rem;font-weight:700;margin-top:2px}
 .ecard.birthday .edl{color:var(--g3)}.ecard.anniversary .edl{color:var(--g1)}.ecard.marriage .edl{color:var(--purple)}.ecard.other .edl{color:var(--teal)}
-
-/* TREE */
-#treecon{overflow:auto;padding:10px 0 20px;min-height:300px;-webkit-overflow-scrolling:touch}
+.aadh-card{background:linear-gradient(135deg,rgba(0,245,196,.05),rgba(100,181,246,.04));border:1px solid rgba(0,245,196,.15);border-radius:18px;padding:14px 16px;margin-bottom:9px;display:flex;align-items:center;gap:13px}
+.aadh-av{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;background:linear-gradient(135deg,rgba(0,245,196,.15),rgba(100,181,246,.1));border:1px solid rgba(0,245,196,.2)}
+.aadh-info{flex:1;min-width:0}
+.aadh-name{font-weight:700;font-size:.9rem;color:var(--text)}
+.aadh-rel{font-size:.68rem;color:var(--muted);font-family:'Tiro Telugu',serif;margin-top:1px}
+.aadh-num{font-family:monospace;font-size:.85rem;color:var(--teal);margin-top:4px;letter-spacing:2px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.aadh-eye{font-size:.65rem;color:var(--muted);background:rgba(0,245,196,.08);border:1px solid rgba(0,245,196,.15);padding:3px 8px;border-radius:8px}
+.aadh-none{font-size:.78rem;color:var(--subtle);font-style:italic;margin-top:3px}
+.aadh-blood{font-size:.72rem;color:var(--g3);margin-top:2px;font-weight:600}
+.admin-view-all{width:100%;padding:11px;border-radius:13px;background:rgba(0,245,196,.08);border:1px solid rgba(0,245,196,.2);color:var(--teal);font-weight:700;font-size:.82rem;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:11px;transition:all .2s}
+.admin-view-all:hover{background:rgba(0,245,196,.15)}
+#treecon{overflow:auto;padding:8px 0 16px;min-height:280px;-webkit-overflow-scrolling:touch}
 .tree-svg{display:block}
-
-/* REQUESTS */
-.rqcard{background:linear-gradient(135deg,rgba(255,140,0,0.06),rgba(255,77,109,0.04));border:1px solid rgba(255,140,0,0.15);border-radius:18px;padding:14px;margin-bottom:10px}
-.rqh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.rqname{font-weight:700;font-size:.88rem;color:var(--text)}
-.rqtime{font-size:.68rem;color:var(--muted)}
-.rqdiff{background:rgba(0,0,0,0.3);border-radius:12px;padding:12px;margin-bottom:11px;font-size:.78rem;line-height:1.8}
-.rqacts{display:flex;gap:8px}
-.rqa{background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.25);color:var(--success);padding:9px 18px;border-radius:11px;cursor:pointer;font-size:.78rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s}
-.rqa:hover{background:rgba(0,230,118,0.2)}
-.rqr{background:rgba(255,82,82,0.1);border:1px solid rgba(255,82,82,0.25);color:var(--danger);padding:9px 18px;border-radius:11px;cursor:pointer;font-size:.78rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;transition:all .2s}
-.rqr:hover{background:rgba(255,82,82,0.2)}
-
-/* SETTINGS */
-.sgrp{margin-bottom:18px}
-.sgt{font-size:.62rem;text-transform:uppercase;letter-spacing:2px;color:var(--g2);margin-bottom:9px;font-weight:700}
-.sgi{background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:1px solid var(--cb);border-radius:14px;padding:14px 16px;margin-bottom:7px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .2s}
-.sgi:hover{background:rgba(255,255,255,0.06);border-color:rgba(245,197,24,0.2)}
-.sgl{font-size:.88rem;font-weight:600;color:var(--text)}
-.sgs{font-size:.72rem;color:var(--muted);margin-top:2px}
-.sgar{color:var(--subtle);font-size:.9rem}
-
-/* FORMS */
+.rqcard{background:linear-gradient(135deg,rgba(255,140,0,.06),rgba(255,77,109,.04));border:1px solid rgba(255,140,0,.15);border-radius:16px;padding:13px;margin-bottom:9px}
+.rqh{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.rqname{font-weight:700;font-size:.86rem;color:var(--text)}
+.rqtime{font-size:.67rem;color:var(--muted)}
+.rqdiff{background:rgba(0,0,0,.3);border-radius:11px;padding:11px;margin-bottom:10px;font-size:.76rem;line-height:1.8}
+.rqacts{display:flex;gap:7px}
+.rqa{background:rgba(0,230,118,.1);border:1px solid rgba(0,230,118,.25);color:var(--success);padding:8px 16px;border-radius:10px;cursor:pointer;font-size:.76rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif}
+.rqr{background:rgba(255,82,82,.1);border:1px solid rgba(255,82,82,.25);color:var(--danger);padding:8px 16px;border-radius:10px;cursor:pointer;font-size:.76rem;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif}
+.sgrp{margin-bottom:16px}
+.sgt{font-size:.6rem;text-transform:uppercase;letter-spacing:2px;color:var(--g2);margin-bottom:8px;font-weight:700}
+.sgi{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid var(--cb);border-radius:13px;padding:13px 15px;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .2s}
+.sgi:hover{background:rgba(255,255,255,.06);border-color:rgba(245,197,24,.2)}
+.sgl{font-size:.86rem;font-weight:600;color:var(--text)}
+.sgs{font-size:.7rem;color:var(--muted);margin-top:2px}
 .fg{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .f{display:flex;flex-direction:column;gap:5px}
-.f label{font-size:.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600}
-.f input,.f select,.f textarea{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);color:var(--text);padding:11px 14px;border-radius:13px;font-size:.88rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:all .2s;width:100%;backdrop-filter:blur(10px)}
-.f input:focus,.f select:focus,.f textarea:focus{border-color:rgba(245,197,24,0.4);background:rgba(255,255,255,0.07);box-shadow:0 0 0 3px rgba(245,197,24,0.08)}
+.f label{font-size:.67rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:600}
+.f input,.f select,.f textarea{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);color:var(--text);padding:10px 13px;border-radius:12px;font-size:.86rem;font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:all .2s;width:100%}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:rgba(245,197,24,.4);background:rgba(255,255,255,.07);box-shadow:0 0 0 3px rgba(245,197,24,.07)}
 .f select option{background:#0c0020}
 .f.full{grid-column:1/-1}
-.f textarea{min-height:70px;resize:vertical}
-
-/* MODAL */
-.mbg{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:700;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(8px)}
-.mbg.show{display:flex;animation:fdi .25s ease}
+.f textarea{min-height:65px;resize:vertical}
+.mbg{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:700;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(8px)}
+.mbg.show{display:flex;animation:fdi .22s ease}
 @keyframes fdi{from{opacity:0}to{opacity:1}}
-.modal{background:linear-gradient(180deg,rgba(19,0,48,0.99),rgba(13,0,32,0.99));border:1px solid rgba(255,255,255,0.08);border-radius:26px 26px 0 0;padding:24px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;animation:mslide .3s cubic-bezier(.34,1.1,.64,1)}
+.modal{background:linear-gradient(180deg,rgba(19,0,48,.99),rgba(13,0,32,.99));border:1px solid rgba(255,255,255,.08);border-radius:24px 24px 0 0;padding:22px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;animation:msl .3s cubic-bezier(.34,1.1,.64,1)}
 .modal::-webkit-scrollbar{display:none}
-@keyframes mslide{from{transform:translateY(40px)}to{transform:translateY(0)}}
-.mtitle{font-size:1rem;font-weight:800;color:var(--g1);margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
-.mclose{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);color:var(--muted);cursor:pointer;font-size:1rem;padding:5px 9px;border-radius:9px;transition:all .2s;line-height:1}
-.mclose:hover{background:rgba(255,82,82,0.15);color:var(--danger)}
-.btn-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
-.btn{padding:12px 22px;border-radius:14px;cursor:pointer;font-size:.85rem;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;border:none;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
-.btn-gold{background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;box-shadow:0 4px 20px rgba(245,197,24,0.3)}
-.btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(245,197,24,0.4)}
-.btn-ghost{background:rgba(255,255,255,0.05);border:1px solid var(--cb);color:var(--muted)}
-.btn-ghost:hover{border-color:rgba(245,197,24,0.3);color:var(--g1)}
-
-/* EMPTY */
-.empty{text-align:center;padding:50px 20px;color:var(--muted)}
-.empty .ei{font-size:3rem;display:block;margin-bottom:10px;opacity:.5}
-.empty p{font-size:.88rem;font-family:'Tiro Telugu',serif}
-
-/* TOAST */
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:10px 22px;border-radius:30px;font-weight:700;font-size:.8rem;z-index:900;pointer-events:none;animation:tin .3s ease;white-space:nowrap;backdrop-filter:blur(20px);letter-spacing:.3px}
-.toast.success{background:rgba(0,230,118,0.15);border:1px solid rgba(0,230,118,0.3);color:var(--success)}
-.toast.error{background:rgba(255,82,82,0.15);border:1px solid rgba(255,82,82,0.3);color:var(--danger)}
-.toast.info{background:rgba(179,136,255,0.15);border:1px solid rgba(179,136,255,0.3);color:var(--purple)}
-@keyframes tin{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes msl{from{transform:translateY(40px)}to{transform:translateY(0)}}
+.mtitle{font-size:.98rem;font-weight:800;color:var(--g1);margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.mclose{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:var(--muted);cursor:pointer;font-size:.95rem;padding:5px 8px;border-radius:8px;transition:all .2s;line-height:1}
+.mclose:hover{background:rgba(255,82,82,.15);color:var(--danger)}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.btn{padding:11px 20px;border-radius:13px;cursor:pointer;font-size:.83rem;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;border:none;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-gold{background:linear-gradient(135deg,var(--g1),var(--g2));color:#000;box-shadow:0 4px 18px rgba(245,197,24,.3)}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(245,197,24,.4)}
+.btn-ghost{background:rgba(255,255,255,.05);border:1px solid var(--cb);color:var(--muted)}
+.btn-ghost:hover{border-color:rgba(245,197,24,.3);color:var(--g1)}
+.toast{position:fixed;bottom:75px;left:50%;transform:translateX(-50%);padding:9px 20px;border-radius:28px;font-weight:700;font-size:.78rem;z-index:900;pointer-events:none;animation:tin .3s ease;white-space:nowrap;backdrop-filter:blur(20px)}
+.toast.success{background:rgba(0,230,118,.12);border:1px solid rgba(0,230,118,.28);color:var(--success)}
+.toast.error{background:rgba(255,82,82,.12);border:1px solid rgba(255,82,82,.28);color:var(--danger)}
+.toast.info{background:rgba(179,136,255,.12);border:1px solid rgba(179,136,255,.28);color:var(--purple)}
+@keyframes tin{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
 .hidden{display:none!important}
-.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.05),transparent);margin:14px 0}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);margin:12px 0}
+.empty{text-align:center;padding:46px 18px;color:var(--muted)}
+.empty .ei{font-size:2.8rem;display:block;margin-bottom:9px;opacity:.45}
+.empty p{font-size:.85rem;font-family:'Tiro Telugu',serif}
 </style>
 </head>
 <body>
-<div class="bg-mesh"></div>
-<div class="grid-lines"></div>
-
-<!-- LOADING -->
-<div id="loading">
-  <div class="load-logo">
-    <span class="load-om">ॐ</span>
-    <div class="load-title">Family Vault</div>
-    <div class="load-sub">కుటుంబ వివరాలు</div>
-  </div>
-  <div class="loader-ring"></div>
-</div>
-
-<!-- INSTALL BANNER -->
+<div class="bg-mesh"></div><div class="grid-lines"></div>
+<div id="loading"><div class="load-om">ॐ</div><div class="load-title">Family Vault</div><div class="load-sub">కుటుంబ వివరాలు</div><div class="loader-ring"></div></div>
 <div id="ibanner">
-  <div class="ib-i">📲</div>
+  <div style="font-size:2rem;flex-shrink:0">📲</div>
   <div class="ib-t"><strong>Install Family Vault</strong><span>Add to home screen for quick access</span></div>
   <button class="ib-btn" onclick="doInstall()">Install</button>
   <button class="ib-x" onclick="dismissIB()">✕</button>
 </div>
-
-<!-- SYNC BAR (embedded in app layout) -->
 <div id="root">
-  <div id="sbar" class="syncing"><div class="sdot pulse" id="sdot"></div><span id="stxt">Connecting to Family Vault...</span></div>
-
-  <!-- LOCK -->
+  <div id="sbar" class="syncing"><div class="sdot pulse" id="sdot"></div><span id="stxt">Connecting...</span></div>
   <div id="lock">
-    <div class="lock-top">
-      <span class="lock-om">ॐ</span>
-      <div class="lock-title">Family Vault</div>
-      <div class="lock-sub">కుటుంబ వివరాలు</div>
-    </div>
+    <span class="lock-om">ॐ</span>
+    <div class="lock-title">Family Vault</div>
+    <div class="lock-sub">కుటుంబ వివరాలు</div>
     <div class="lock-line"></div>
-    <div class="lock-label" id="llabel">Enter Family PIN</div>
-    <div class="pdots">
-      <div class="pd" id="pd0"></div><div class="pd" id="pd1"></div><div class="pd" id="pd2"></div>
-      <div class="pd" id="pd3"></div><div class="pd" id="pd4"></div><div class="pd" id="pd5"></div>
-    </div>
+    <div class="llabel" id="llabel">Enter Family PIN</div>
+    <div class="pdots"><div class="pd" id="pd0"></div><div class="pd" id="pd1"></div><div class="pd" id="pd2"></div><div class="pd" id="pd3"></div><div class="pd" id="pd4"></div><div class="pd" id="pd5"></div></div>
     <div class="ppad">
-      <button class="pk" onclick="pe('1')">1</button><button class="pk" onclick="pe('2')">2</button><button class="pk" onclick="pe('3')">3</button>
-      <button class="pk" onclick="pe('4')">4</button><button class="pk" onclick="pe('5')">5</button><button class="pk" onclick="pe('6')">6</button>
-      <button class="pk" onclick="pe('7')">7</button><button class="pk" onclick="pe('8')">8</button><button class="pk" onclick="pe('9')">9</button>
-      <button class="pk" style="opacity:.15" disabled></button><button class="pk" onclick="pe('0')">0</button><button class="pk del" onclick="pd_()">⌫</button>
+      <button class="pk" onclick="pe('1',this)">1</button><button class="pk" onclick="pe('2',this)">2</button><button class="pk" onclick="pe('3',this)">3</button>
+      <button class="pk" onclick="pe('4',this)">4</button><button class="pk" onclick="pe('5',this)">5</button><button class="pk" onclick="pe('6',this)">6</button>
+      <button class="pk" onclick="pe('7',this)">7</button><button class="pk" onclick="pe('8',this)">8</button><button class="pk" onclick="pe('9',this)">9</button>
+      <button class="pk" style="opacity:.15" disabled></button><button class="pk" onclick="pe('0',this)">0</button><button class="pk del" onclick="pd_()">⌫</button>
     </div>
     <div class="perr" id="perr"></div>
-    <div class="pnote" id="pnote">Enter your 6-digit PIN to access the family vault</div>
+    <div class="pnote" id="pnote">Enter 6-digit PIN to access family vault</div>
     <button class="atog" id="atog" onclick="toggleAdmin()">👑 Admin Login</button>
   </div>
-
-  <!-- APP -->
   <div id="app">
-    <div class="app-hdr" id="app-hdr">
-      <div class="hdr-logo">
-        <span class="hdr-om">ॐ</span>
-        <div class="hdr-text"><h1>Family Vault</h1><p>కుటుంబ వివరాలు</p></div>
-      </div>
+    <div class="app-hdr">
+      <div class="hdr-logo"><span class="hdr-om">ॐ</span><div class="hdr-text"><h1>Family Vault</h1><p>కుటుంబ వివరాలు</p></div></div>
       <div class="hdr-right">
         <div class="role-chip" id="rchip">👨‍👩‍👧‍👦 Member</div>
         <button class="logout-btn" onclick="doLogout()">🔒 Logout</button>
       </div>
     </div>
-
     <div class="app-scroll">
-      <!-- TODAY STRIP -->
-      <div class="today-strip" id="today-strip">
+      <div class="today-strip">
         <div class="today-cal"><div class="tcday" id="tcd">1</div><div class="tcmon" id="tcm">Jan</div></div>
-        <div class="today-info"><div class="tdate" id="tdate"></div><div class="tpanch" id="tpanch-mini"></div></div>
+        <div class="today-info"><div class="tdate" id="tdate"></div><div class="tpanch-mini" id="tpanch-mini"></div></div>
         <button class="today-btn" onclick="gp('panchang')">పంచాంగం</button>
       </div>
-
-      <!-- ALERTS -->
       <div class="alerts-wrap" id="alerts-wrap"></div>
       <div class="pending-bar hidden" id="pbar" onclick="gp('requests')">
         <div class="pb-cnt" id="pbcnt">0</div>
-        <div class="pb-t"><strong>Pending Approval Requests</strong><span>Tap to review and approve changes</span></div>
+        <div class="pb-t"><strong>Pending Approval Requests</strong><span>Tap to review and approve</span></div>
       </div>
-
-      <!-- PAGES -->
       <div class="page active" id="page-home">
         <div class="pg-hdr"><div class="pg-title">👨‍👩‍👧‍👦 Family Members <span class="pg-cnt" id="mcnt">0</span></div></div>
         <div id="admin-add" class="hidden"><button class="add-fab" onclick="openAdd()">➕ Add New Member</button></div>
         <div id="mlist"></div>
       </div>
-
       <div class="page" id="page-events">
         <div class="pg-hdr"><div class="pg-title">🗓 Events & Celebrations</div></div>
         <div id="admin-addev" class="hidden"><button class="add-fab" onclick="openAddEv()">➕ Add Event</button></div>
         <div id="elist"></div>
       </div>
-
       <div class="page" id="page-panchang">
         <div class="pg-hdr"><div class="pg-title">🪔 Telugu Panchangam</div></div>
         <div id="panchang-content"></div>
       </div>
-
       <div class="page" id="page-tree">
         <div class="pg-hdr"><div class="pg-title">🌳 Family Tree</div></div>
         <div id="treecon"><svg id="tsvg" class="tree-svg"></svg></div>
       </div>
-
+      <div class="page" id="page-aadhaar">
+        <div class="pg-hdr"><div class="pg-title">🪪 Aadhaar Details <span class="pg-cnt" id="acnt">0</span></div></div>
+        <div id="admin-showall" class="hidden"><button class="admin-view-all" onclick="toggleShowAll()">👁 Admin: Show All Aadhaar Numbers</button></div>
+        <div id="aadh-list"></div>
+      </div>
       <div class="page" id="page-requests">
         <div class="pg-hdr"><div class="pg-title">📋 Pending Requests</div></div>
         <div id="rqlist"></div>
       </div>
-
       <div class="page" id="page-settings">
         <div class="pg-hdr"><div class="pg-title">⚙️ Settings</div></div>
         <div id="scontent"></div>
       </div>
-    </div><!-- end app-scroll -->
-
+    </div>
     <nav class="nav" id="mainnav">
       <button class="nb active" onclick="gp('home')" id="nav-home"><span class="ni">🏠</span><span>Home</span></button>
       <button class="nb" onclick="gp('events')" id="nav-events"><span class="ni">🗓</span><span>Events</span></button>
       <button class="nb" onclick="gp('panchang')" id="nav-panchang"><span class="ni">🪔</span><span>పంచాంగం</span></button>
       <button class="nb" onclick="gp('tree')" id="nav-tree"><span class="ni">🌳</span><span>Tree</span></button>
-      <button class="nb" onclick="gp('requests')" id="nav-requests"><span class="ni">📋</span><span>Requests</span><div class="nbbadge hidden" id="rbdg">0</div></button>
+      <button class="nb" onclick="gp('aadhaar')" id="nav-aadhaar"><span class="ni">🪪</span><span>Aadhaar</span></button>
+      <button class="nb" onclick="gp('requests')" id="nav-requests"><span class="ni">📋</span><span>Requests</span><div class="nbbdg hidden" id="rbdg">0</div></button>
       <button class="nb" onclick="gp('settings')" id="nav-settings"><span class="ni">⚙️</span><span>Settings</span></button>
     </nav>
-  </div><!-- end #app -->
-</div><!-- end #root -->
-
-<!-- DETAIL PANEL -->
+  </div>
+</div>
 <div id="detail">
-  <div class="detail-scroll">
+  <div class="det-scroll">
     <div class="det-head">
       <button class="det-back" onclick="closeDetail()">← Back</button>
       <div class="det-av" id="dav">🧑</div>
@@ -454,8 +369,6 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
     <div class="det-body" id="dbody"></div>
   </div>
 </div>
-
-<!-- ADD MEMBER MODAL -->
 <div class="mbg" id="modal-add">
   <div class="modal">
     <div class="mtitle">➕ Add Family Member <button class="mclose" onclick="cm('modal-add')">✕</button></div>
@@ -463,41 +376,33 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
       <div class="f"><label>Name *</label><input type="text" id="an" placeholder="Full name"></div>
       <div class="f"><label>Relation to Vinod *</label>
         <select id="ar"><option value="">Select</option>
-        <option>తండ్రి | Father</option><option>తల్లి | Mother</option>
-        <option>భర్త | Husband</option><option>భార్య | Wife</option>
-        <option>కొడుకు | Son</option><option>కూతురు | Daughter</option>
-        <option>అన్న | Brother</option><option>అక్క | Sister</option>
-        <option>తాత | Grandfather</option><option>నానమ్మ | Grandmother</option>
-        <option>అమ్మమ్మ | Mat.GM</option><option>తాత | Mat.GF</option>
-        <option>మావయ్య | Uncle</option><option>అత్త | Aunt</option>
-        <option>మరిది | Brother-in-law</option><option>వదిన | Sister-in-law</option>
-        <option>స్వయం | Self</option><option>Other</option>
-        </select>
+        <option>తండ్రి | Father</option><option>తల్లి | Mother</option><option>భర్త | Husband</option><option>భార్య | Wife</option>
+        <option>కొడుకు | Son</option><option>కూతురు | Daughter</option><option>అన్న | Brother</option><option>అక్క | Sister</option>
+        <option>తాత | Grandfather</option><option>నానమ్మ | Grandmother</option><option>అమ్మమ్మ | Mat.GM</option><option>తాత | Mat.GF</option>
+        <option>మావయ్య | Uncle</option><option>అత్త | Aunt</option><option>మరిది | Brother-in-law</option><option>వదిన | Sister-in-law</option>
+        <option>మనవడు | Grandson</option><option>మనవరాలు | Granddaughter</option><option>స్వయం | Self</option><option>Other</option></select>
       </div>
       <div class="f"><label>Date of Birth *</label><input type="date" id="ad"></div>
+      <div class="f"><label>Time of Birth (for Nakshatra)</label><input type="time" id="at"></div>
       <div class="f"><label>Gender</label>
-        <select id="ag"><option value="">Select</option>
-        <option value="👨">Male 👨</option><option value="👩">Female 👩</option>
-        <option value="👦">Boy 👦</option><option value="👧">Girl 👧</option>
-        <option value="👴">Elder M 👴</option><option value="👵">Elder F 👵</option></select>
+        <select id="ag"><option value="">Select</option><option value="👨">Male 👨</option><option value="👩">Female 👩</option>
+        <option value="👦">Boy 👦</option><option value="👧">Girl 👧</option><option value="👴">Elder M 👴</option><option value="👵">Elder F 👵</option></select>
+      </div>
+      <div class="f"><label>Blood Group</label>
+        <select id="ab"><option value="">Unknown</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+        <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select>
       </div>
       <div class="f full"><label>Aadhaar Number</label><input type="text" id="aa" placeholder="XXXX XXXX XXXX" maxlength="14" oninput="fmtA(this)"></div>
       <div class="f"><label>Mobile</label><input type="tel" id="amob" placeholder="10 digits"></div>
-      <div class="f"><label>Blood Group</label>
-        <select id="ab"><option value="">Unknown</option>
-        <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
-        <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select>
-      </div>
-      <div class="f"><label>Parent Member (for tree)</label><select id="ap"><option value="">None (Root)</option></select></div>
+      <div class="f"><label>Father (for tree)</label><select id="afath"><option value="">None</option></select></div>
+      <div class="f"><label>Mother (for tree)</label><select id="amoth"><option value="">None</option></select></div>
       <div class="f full"><label>Marriage Date</label><input type="date" id="amd"></div>
       <div class="f full"><label>Spouse Name</label><input type="text" id="asp" placeholder="Spouse name"></div>
-      <div class="f full"><label>Notes</label><textarea id="ano" placeholder="Any additional information..."></textarea></div>
+      <div class="f full"><label>Notes</label><textarea id="ano" placeholder="Any additional info..."></textarea></div>
     </div>
     <div class="btn-row"><button class="btn btn-gold" onclick="saveMember()">✅ Save Member</button><button class="btn btn-ghost" onclick="cm('modal-add')">Cancel</button></div>
   </div>
 </div>
-
-<!-- EDIT MODAL -->
 <div class="mbg" id="modal-edit">
   <div class="modal">
     <div class="mtitle"><span id="etitle">✏️ Edit</span><button class="mclose" onclick="cm('modal-edit')">✕</button></div>
@@ -505,27 +410,24 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
       <div class="f"><label>Name *</label><input type="text" id="en"></div>
       <div class="f"><label>Relation *</label>
         <select id="er"><option value="">Select</option>
-        <option>తండ్రి | Father</option><option>తల్లి | Mother</option>
-        <option>భర్త | Husband</option><option>భార్య | Wife</option>
-        <option>కొడుకు | Son</option><option>కూతురు | Daughter</option>
-        <option>అన్న | Brother</option><option>అక్క | Sister</option>
-        <option>తాత | Grandfather</option><option>నానమ్మ | Grandmother</option>
-        <option>స్వయం | Self</option><option>Other</option></select>
+        <option>తండ్రి | Father</option><option>తల్లి | Mother</option><option>భర్త | Husband</option><option>భార్య | Wife</option>
+        <option>కొడుకు | Son</option><option>కూతురు | Daughter</option><option>అన్న | Brother</option><option>అక్క | Sister</option>
+        <option>తాత | Grandfather</option><option>నానమ్మ | Grandmother</option><option>స్వయం | Self</option><option>Other</option></select>
       </div>
       <div class="f"><label>Date of Birth *</label><input type="date" id="ed"></div>
+      <div class="f"><label>Time of Birth</label><input type="time" id="et"></div>
       <div class="f"><label>Gender</label>
-        <select id="eg"><option value="">Select</option>
-        <option value="👨">Male 👨</option><option value="👩">Female 👩</option>
-        <option value="👦">Boy 👦</option><option value="👧">Girl 👧</option>
-        <option value="👴">Elder M 👴</option><option value="👵">Elder F 👵</option></select>
+        <select id="eg"><option value="">Select</option><option value="👨">Male 👨</option><option value="👩">Female 👩</option>
+        <option value="👦">Boy 👦</option><option value="👧">Girl 👧</option><option value="👴">Elder M 👴</option><option value="👵">Elder F 👵</option></select>
+      </div>
+      <div class="f"><label>Blood Group</label>
+        <select id="eb"><option value="">Unknown</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+        <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select>
       </div>
       <div class="f full"><label>Aadhaar</label><input type="text" id="ea" maxlength="14" oninput="fmtA(this)"></div>
       <div class="f"><label>Mobile</label><input type="tel" id="em"></div>
-      <div class="f"><label>Blood Group</label>
-        <select id="eb"><option value="">Unknown</option>
-        <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
-        <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select>
-      </div>
+      <div class="f"><label>Father (for tree)</label><select id="efath"><option value="">None</option></select></div>
+      <div class="f"><label>Mother (for tree)</label><select id="emoth"><option value="">None</option></select></div>
       <div class="f full"><label>Marriage Date</label><input type="date" id="emd"></div>
       <div class="f full"><label>Spouse Name</label><input type="text" id="esp"></div>
       <div class="f full"><label>Notes</label><textarea id="eno"></textarea></div>
@@ -534,18 +436,14 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
     <div class="btn-row"><button class="btn btn-gold" id="esavebtn">💾 Save</button><button class="btn btn-ghost" onclick="cm('modal-edit')">Cancel</button></div>
   </div>
 </div>
-
-<!-- ADD EVENT MODAL -->
 <div class="mbg" id="modal-ev">
   <div class="modal">
     <div class="mtitle">➕ Add Event <button class="mclose" onclick="cm('modal-ev')">✕</button></div>
     <div class="fg">
       <div class="f full"><label>Event Name *</label><input type="text" id="evn" placeholder="e.g. Parents Anniversary"></div>
       <div class="f"><label>Type *</label>
-        <select id="evt"><option value="anniversary">💑 Anniversary</option>
-        <option value="marriage">💒 Marriage</option>
-        <option value="birthday">🎂 Birthday</option>
-        <option value="other">🎉 Other</option></select>
+        <select id="evt"><option value="anniversary">💑 Anniversary</option><option value="marriage">💒 Marriage</option>
+        <option value="birthday">🎂 Birthday</option><option value="other">🎉 Other</option></select>
       </div>
       <div class="f"><label>Date *</label><input type="date" id="evd"></div>
       <div class="f full"><label>Members Involved</label><input type="text" id="evm" placeholder="Names of people"></div>
@@ -554,152 +452,62 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
     <div class="btn-row"><button class="btn btn-gold" onclick="saveEvent()">✅ Save Event</button><button class="btn btn-ghost" onclick="cm('modal-ev')">Cancel</button></div>
   </div>
 </div>
-
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import{getDatabase,ref,onValue,set,push,remove,update}from"https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
-
 const FC={apiKey:"AIzaSyCnXDPn_SHnT0mxe8IkjQwn1Ztlr_nZ0iY",authDomain:"family-vault-8a51b.firebaseapp.com",databaseURL:"https://family-vault-8a51b-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"family-vault-8a51b",storageBucket:"family-vault-8a51b.firebasestorage.app",messagingSenderId:"501073876977",appId:"1:501073876977:web:85efcad6937e0e7f499650"};
 const fb=initializeApp(FC);const db=getDatabase(fb);
-
-// PWA MANIFEST
-const mf={name:"కుటుంబ వివరాలు | Family Vault",short_name:"FamilyVault",start_url:"./",display:"standalone",background_color:"#050010",theme_color:"#050010",orientation:"portrait-primary",icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23050010'/%3E%3Ctext y='130' font-size='110' text-anchor='middle' x='96'%3E🏠%3C/text%3E%3C/svg%3E",sizes:"192x192",type:"image/svg+xml"},{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%23050010'/%3E%3Ctext y='360' font-size='300' text-anchor='middle' x='256'%3E🏠%3C/text%3E%3C/svg%3E",sizes:"512x512",type:"image/svg+xml"}]};
-const mb=new Blob([JSON.stringify(mf)],{type:'application/json'});
-document.getElementById('pwa-manifest').href=URL.createObjectURL(mb);
-
-// STATE
+const mf={name:"కుటుంబ వివరాలు | Family Vault",short_name:"FamilyVault",start_url:"./",display:"standalone",background_color:"#050010",theme_color:"#050010",orientation:"portrait-primary",icons:[{src:"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23050010'/%3E%3Ctext y='130' font-size='110' text-anchor='middle' x='96'%3E🏠%3C/text%3E%3C/svg%3E",sizes:"192x192",type:"image/svg+xml"}]};
+document.getElementById('pwa-manifest').href=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:'application/json'}));
 let members=[],events=[],requests=[],familyPin=null,tickInt=null,deferredPrompt=null;
-let isAdmin=false,isUnlocked=false,pinInput='',isAdminMode=false;
+let isAdmin=false,isUnlocked=false,pinInput='',isAdminMode=false,showAllAadhaar=false;
+let weatherData=null,userLat=17.385,userLon=78.487,locationName='Hyderabad';
 const ADMIN_PIN='590151';
-
-// PWA INSTALL
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;setTimeout(()=>document.getElementById('ibanner').classList.add('show'),5000);});
-window.addEventListener('appinstalled',()=>{document.getElementById('ibanner').classList.remove('show');});
+window.addEventListener('appinstalled',()=>document.getElementById('ibanner').classList.remove('show'));
 window.doInstall=()=>{if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;dismissIB();}};
 window.dismissIB=()=>document.getElementById('ibanner').classList.remove('show');
-
-// ANDROID BACK BUTTON
-window.addEventListener('popstate',e=>{
+window.addEventListener('popstate',()=>{
   if(document.getElementById('detail').classList.contains('show')){closeDetail();history.pushState(null,'',location.href);}
-  else if(document.querySelector('.mbg.show')){document.querySelectorAll('.mbg.show').forEach(m=>m.classList.remove('show'));history.pushState(null,'',location.href);}
+  else{const open=document.querySelector('.mbg.show');if(open){open.classList.remove('show');history.pushState(null,'',location.href);}}
 });
 history.pushState(null,'',location.href);
-
-// SYNC STATUS
-function ss(s,t){const b=document.getElementById('sbar'),d=document.getElementById('sdot'),tx=document.getElementById('stxt');b.className=''+s;d.className='sdot'+(s==='syncing'?' pulse':'');tx.textContent=t;}
-
-// FIREBASE
-onValue(ref(db,'settings'),snap=>{
-  const s=snap.val()||{};familyPin=s.familyPin||null;
-  document.getElementById('loading').style.display='none';
-  if(!isUnlocked)showLock();
-  ss('synced','✅ Family Vault Connected');
-});
-onValue(ref(db,'members'),snap=>{
-  members=[];const d=snap.val();
-  if(d)Object.keys(d).forEach(k=>members.push({...d[k],key:k}));
-  if(isUnlocked){renderMembers();renderTree();checkAlerts();updateTodayStrip();}
-});
-onValue(ref(db,'events'),snap=>{
-  events=[];const d=snap.val();
-  if(d)Object.keys(d).forEach(k=>events.push({...d[k],key:k}));
-  if(isUnlocked)renderEvents();
-});
-onValue(ref(db,'requests'),snap=>{
-  requests=[];const d=snap.val();
-  if(d)Object.keys(d).forEach(k=>{if(d[k].status==='pending')requests.push({...d[k],key:k});});
-  updateRqBadge();if(isUnlocked&&isAdmin)renderRequests();
-});
-
-// LOCK
-function showLock(){
-  document.getElementById('lock').classList.add('show');
-  if(!familyPin){document.getElementById('pnote').textContent='First time! Enter any 6-digit PIN to set as Family PIN.';document.getElementById('llabel').textContent='Set Family PIN';}
-}
-window.pe=d=>{if(pinInput.length>=6)return;pinInput+=d;updDots();if(pinInput.length===6)setTimeout(checkPin,180);};
+function ss(s,t){const b=document.getElementById('sbar'),d=document.getElementById('sdot'),tx=document.getElementById('stxt');b.className=s;d.className='sdot'+(s==='syncing'?' pulse':'');tx.textContent=t;}
+onValue(ref(db,'settings'),snap=>{const s=snap.val()||{};familyPin=s.familyPin||null;document.getElementById('loading').style.display='none';if(!isUnlocked)showLock();ss('synced','✅ Family Vault Connected');});
+onValue(ref(db,'members'),snap=>{members=[];const d=snap.val();if(d)Object.keys(d).forEach(k=>members.push({...d[k],key:k}));if(isUnlocked){renderMembers();renderTree();renderAadhaar();checkAlerts();updateTodayStrip();}});
+onValue(ref(db,'events'),snap=>{events=[];const d=snap.val();if(d)Object.keys(d).forEach(k=>events.push({...d[k],key:k}));if(isUnlocked)renderEvents();});
+onValue(ref(db,'requests'),snap=>{requests=[];const d=snap.val();if(d)Object.keys(d).forEach(k=>{if(d[k].status==='pending')requests.push({...d[k],key:k});});updateRqBadge();if(isUnlocked&&isAdmin)renderRequests();});
+function showLock(){document.getElementById('lock').classList.add('show');if(!familyPin){document.getElementById('pnote').textContent='First time! Enter any 6-digit PIN to set as Family PIN.';document.getElementById('llabel').textContent='Set Family PIN';}}
+window.pe=function(d,btn){
+  if(pinInput.length>=6)return;
+  pinInput+=d;updDots();
+  if(btn){btn.style.background='linear-gradient(135deg,#f5c518,#ff8c00)';btn.style.color='#000';btn.style.transform='scale(0.92)';setTimeout(()=>{btn.style.background='';btn.style.color='';btn.style.transform='';},130);}
+  if(pinInput.length===6)setTimeout(checkPin,180);
+};
 window.pd_=()=>{pinInput=pinInput.slice(0,-1);updDots();};
 function updDots(){for(let i=0;i<6;i++)document.getElementById('pd'+i).classList.toggle('on',i<pinInput.length);}
 function checkPin(){
-  if(isAdminMode){if(pinInput===ADMIN_PIN){isAdmin=true;unlock();}else showPE('Wrong Admin PIN! Try again.');}
-  else{if(!familyPin){set(ref(db,'settings/familyPin'),pinInput);unlock();}
-  else if(pinInput===familyPin){isAdmin=false;unlock();}else showPE('తప్పు PIN! Wrong PIN!');}
+  if(isAdminMode){if(pinInput===ADMIN_PIN){isAdmin=true;unlock();}else showPE('Wrong Admin PIN!');}
+  else{if(!familyPin){set(ref(db,'settings/familyPin'),pinInput);unlock();}else if(pinInput===familyPin){isAdmin=false;unlock();}else showPE('తప్పు PIN! Wrong PIN!');}
 }
 function showPE(m){const e=document.getElementById('perr');e.textContent=m;setTimeout(()=>e.textContent='',2200);pinInput='';updDots();}
-
 function unlock(){
-  isUnlocked=true;
-  document.getElementById('lock').classList.remove('show');
-  document.getElementById('app').classList.add('show');
+  isUnlocked=true;document.getElementById('lock').classList.remove('show');document.getElementById('app').classList.add('show');
   document.getElementById('rchip').className='role-chip '+(isAdmin?'admin':'member');
   document.getElementById('rchip').textContent=isAdmin?'👑 Admin':'👨‍👩‍👧‍👦 Member';
   document.getElementById('admin-add').classList.toggle('hidden',!isAdmin);
   document.getElementById('admin-addev').classList.toggle('hidden',!isAdmin);
-  renderMembers();renderEvents();renderTree();renderSettings();checkAlerts();updateTodayStrip();renderPanchang();updateRqBadge();
+  document.getElementById('admin-showall').classList.toggle('hidden',!isAdmin);
+  renderMembers();renderEvents();renderTree();renderAadhaar();renderSettings();checkAlerts();updateTodayStrip();renderPanchang();updateRqBadge();
+  fetchWeather(userLat,userLon,locationName);
 }
-
-window.toggleAdmin=()=>{
-  isAdminMode=!isAdminMode;pinInput='';updDots();
-  document.getElementById('llabel').textContent=isAdminMode?'Enter Admin PIN (6 digits)':'Enter Family PIN';
-  document.getElementById('atog').textContent=isAdminMode?'👨‍👩‍👧‍👦 Member Login':'👑 Admin Login';
-  document.getElementById('pnote').textContent=isAdminMode?'Admin has full control over all data':'Enter your 6-digit PIN to access the family vault';
-};
-
-window.doLogout=()=>{
-  isUnlocked=false;isAdmin=false;pinInput='';updDots();isAdminMode=false;
-  document.getElementById('app').classList.remove('show');
-  document.getElementById('lock').classList.add('show');
-  document.getElementById('llabel').textContent='Enter Family PIN';
-  document.getElementById('atog').textContent='👑 Admin Login';
-  document.getElementById('pnote').textContent='Enter your 6-digit PIN to access the family vault';
-  gp('home');
-};
-
-// NAV
-window.gp=p=>{
-  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.nb').forEach(x=>x.classList.remove('active'));
-  document.getElementById('page-'+p).classList.add('active');
-  document.getElementById('nav-'+p).classList.add('active');
-  if(p==='tree')renderTree();
-  if(p==='requests')renderRequests();
-  if(p==='settings')renderSettings();
-  if(p==='panchang')renderPanchang();
-  document.querySelector('.app-scroll').scrollTop=0;
-};
-
-// RELATION TO VINOD
-function vinodRelation(rel){
-  const map={'తండ్రి | Father':"Vinod's Father",'తల్లి | Mother':"Vinod's Mother",'భర్త | Husband':"Vinod's Husband",'భార్య | Wife':"Vinod's Wife",'కొడుకు | Son':"Vinod's Son",'కూతురు | Daughter':"Vinod's Daughter",'అన్న | Brother':"Vinod's Brother",'అక్క | Sister':"Vinod's Sister",'తాత | Grandfather':"Vinod's Grandfather",'నానమ్మ | Grandmother':"Vinod's Grandmother",'అమ్మమ్మ | Mat.GM':"Vinod's Maternal Grandmother",'తాత | Mat.GF':"Vinod's Maternal Grandfather",'మావయ్య | Uncle':"Vinod's Uncle",'అత్త | Aunt':"Vinod's Aunt",'మరిది | Brother-in-law':"Vinod's Brother-in-law",'వదిన | Sister-in-law':"Vinod's Sister-in-law",'స్వయం | Self':'Vinod (Self)'};
-  return map[rel]||rel||'Family Member';
-}
-function relShort(rel){
-  if(!rel)return'';const p=rel.split(' | ');return p[p.length-1]||rel;
-}
-
-// ALERTS
-function checkAlerts(){
-  const now=new Date(),w=document.getElementById('alerts-wrap');let html='';
-  members.forEach(m=>{
-    if(m.dob){const b=new Date(m.dob);if(b.getMonth()===now.getMonth()&&b.getDate()===now.getDate()){const age=now.getFullYear()-b.getFullYear();html+=`<div class="alert-pill bday"><div class="api">🎂</div><div class="apt"><strong>Happy Birthday ${m.name}!</strong><span>Turning ${age} today — ${vinodRelation(m.relation)} 🎊</span></div></div>`;}}
-    if(m.marriage){const md=new Date(m.marriage);if(md.getMonth()===now.getMonth()&&md.getDate()===now.getDate()){const y=now.getFullYear()-md.getFullYear();html+=`<div class="alert-pill anniv"><div class="api">💑</div><div class="apt"><strong>Happy Anniversary ${m.name}!</strong><span>${y} wonderful years of togetherness! 💕</span></div></div>`;}}
-  });
-  events.forEach(ev=>{if(!ev.date)return;const ed=new Date(ev.date);if(ed.getMonth()===now.getMonth()&&ed.getDate()===now.getDate()){const em={birthday:'🎂',anniversary:'💑',marriage:'💒',other:'🎉'};html+=`<div class="alert-pill anniv"><div class="api">${em[ev.type]||'🎉'}</div><div class="apt"><strong>${ev.name}</strong><span>Today is the special day! 🎊</span></div></div>`;}});
-  w.innerHTML=html;
-}
-
-// TODAY STRIP
-function updateTodayStrip(){
-  const now=new Date();
-  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  document.getElementById('tcd').textContent=now.getDate();
-  document.getElementById('tcm').textContent=months[now.getMonth()];
-  document.getElementById('tdate').textContent=`${days[now.getDay()]}, ${now.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}`;
-  const p=getPanchangam(now.toISOString().split('T')[0]);
-  document.getElementById('tpanch-mini').textContent=`${p.tithi} • ${p.nakshatra} • ${p.vara}`;
-}
-
-// ===== PANCHANGAM ENGINE =====
+window.toggleAdmin=()=>{isAdminMode=!isAdminMode;pinInput='';updDots();document.getElementById('llabel').textContent=isAdminMode?'Enter Admin PIN':'Enter Family PIN';document.getElementById('atog').textContent=isAdminMode?'👨‍👩‍👧‍👦 Member Login':'👑 Admin Login';document.getElementById('pnote').textContent=isAdminMode?'Admin has full control':'Enter 6-digit PIN to access family vault';};
+window.doLogout=()=>{isUnlocked=false;isAdmin=false;pinInput='';updDots();isAdminMode=false;showAllAadhaar=false;document.getElementById('app').classList.remove('show');document.getElementById('lock').classList.add('show');document.getElementById('llabel').textContent='Enter Family PIN';document.getElementById('atog').textContent='👑 Admin Login';gp('home');};
+window.gp=p=>{document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.nb').forEach(x=>x.classList.remove('active'));document.getElementById('page-'+p).classList.add('active');document.getElementById('nav-'+p).classList.add('active');if(p==='tree')renderTree();if(p==='requests')renderRequests();if(p==='settings')renderSettings();if(p==='panchang')renderPanchang();if(p==='aadhaar')renderAadhaar();document.querySelector('.app-scroll').scrollTop=0;};
+function vinodRel(rel){const map={'తండ్రి | Father':"Vinod's Father",'తల్లి | Mother':"Vinod's Mother",'భర్త | Husband':"Vinod's Husband",'భార్య | Wife':"Vinod's Wife",'కొడుకు | Son':"Vinod's Son",'కూతురు | Daughter':"Vinod's Daughter",'అన్న | Brother':"Vinod's Brother",'అక్క | Sister':"Vinod's Sister",'తాత | Grandfather':"Vinod's Grandfather",'నానమ్మ | Grandmother':"Vinod's Grandmother",'అమ్మమ్మ | Mat.GM':"Vinod's Maternal Grandmother",'తాత | Mat.GF':"Vinod's Maternal Grandfather",'మావయ్య | Uncle':"Vinod's Uncle",'అత్త | Aunt':"Vinod's Aunt",'మరిది | Brother-in-law':"Vinod's Brother-in-law",'వదిన | Sister-in-law':"Vinod's Sister-in-law",'మనవడు | Grandson':"Vinod's Grandson",'మనవరాలు | Granddaughter':"Vinod's Granddaughter",'స్వయం | Self':'Vinod (Self)'};return map[rel]||rel||'Family Member';}
+function relShort(rel){if(!rel)return'';const p=rel.split(' | ');return p[p.length-1]||rel;}
+function checkAlerts(){const now=new Date(),w=document.getElementById('alerts-wrap');let html='';members.forEach(m=>{if(m.dob){const b=new Date(m.dob);if(b.getMonth()===now.getMonth()&&b.getDate()===now.getDate()){html+=`<div class="alert-pill bday"><div class="api">🎂</div><div class="apt"><strong>Happy Birthday ${m.name}!</strong><span>Turning ${now.getFullYear()-b.getFullYear()} today — ${vinodRel(m.relation)} 🎊</span></div></div>`;}}if(m.marriage){const md=new Date(m.marriage);if(md.getMonth()===now.getMonth()&&md.getDate()===now.getDate()){html+=`<div class="alert-pill anniv"><div class="api">💑</div><div class="apt"><strong>Happy Anniversary ${m.name}!</strong><span>${now.getFullYear()-md.getFullYear()} years of togetherness! 💕</span></div></div>`;}}});events.forEach(ev=>{if(!ev.date)return;const ed=new Date(ev.date);if(ed.getMonth()===now.getMonth()&&ed.getDate()===now.getDate()){const em={birthday:'🎂',anniversary:'💑',marriage:'💒',other:'🎉'};html+=`<div class="alert-pill anniv"><div class="api">${em[ev.type]||'🎉'}</div><div class="apt"><strong>${ev.name}</strong><span>Today is the special day! 🎊</span></div></div>`;}});w.innerHTML=html;}
+function updateTodayStrip(){const now=new Date();const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];document.getElementById('tcd').textContent=now.getDate();document.getElementById('tcm').textContent=months[now.getMonth()];document.getElementById('tdate').textContent=`${days[now.getDay()]}, ${now.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}`;const p=getPanchangam(now.toISOString().split('T')[0],'12:00');document.getElementById('tpanch-mini').textContent=`${p.tithi} • ${p.nakshatra} • ${p.vara}`;}
 const VARAS=['ఆదివారం','సోమవారం','మంగళవారం','బుధవారం','గురువారం','శుక్రవారం','శనివారం'];
 const TITHIS=['పాడ్యమి','విదియ','తదియ','చవితి','పంచమి','షష్ఠి','సప్తమి','అష్టమి','నవమి','దశమి','ఏకాదశి','ద్వాదశి','త్రయోదశి','చతుర్దశి','పౌర్ణమి','పాడ్యమి','విదియ','తదియ','చవితి','పంచమి','షష్ఠి','సప్తమి','అష్టమి','నవమి','దశమి','ఏకాదశి','ద్వాదశి','త్రయోదశి','చతుర్దశి','అమావాస్య'];
 const NAKS=['అశ్విని','భరణి','కృత్తిక','రోహిణి','మృగశిర','ఆరుద్ర','పునర్వసు','పుష్యమి','ఆశ్లేష','మఘ','పూర్వఫల్గుణి','ఉత్తరఫల్గుణి','హస్త','చిత్త','స్వాతి','విశాఖ','అనురాధ','జ్యేష్ఠ','మూల','పూర్వాషాఢ','ఉత్తరాషాఢ','శ్రవణం','ధనిష్ఠ','శతభిషం','పూర్వభాద్ర','ఉత్తరభాద్ర','రేవతి'];
@@ -707,440 +515,54 @@ const YOGAS=['విష్కంభ','ప్రీతి','ఆయుష్మా
 const KARS=['బవ','బాలవ','కౌలవ','తైతిల','గర','వణిజ','విష్టి','శకుని','చతుష్పాద','నాగ','కింస్తుఘ్న'];
 const MASAS=['చైత్రం','వైశాఖం','జ్యేష్ఠం','ఆషాఢం','శ్రావణం','భాద్రపదం','ఆశ్వయుజం','కార్తీకం','మార్గశిరం','పుష్యం','మాఘం','ఫాల్గుణం'];
 const SAMVAT=['ప్రభవ','విభవ','శుక్ల','ప్రమోదూత','ప్రజాపతి','అంగిరస','శ్రీముఖ','భావ','యువ','ధాత','ఈశ్వర','బహుధాన్య','ప్రమాది','విక్రమ','వృష','చిత్రభాను','స్వభాను','తారణ','పార్థివ','వ్యయ','సర్వజిత్','సర్వధారి','విరోధి','వికృతి','ఖర','నందన','విజయ','జయ','మన్మథ','దుర్ముఖి','హేవిళంభి','విళంభి','వికారి','శార్వరి','ప్లవ','శుభకృత్','శోభకృత్','క్రోధి','విశ్వావసు','పరాభవ','ప్లవంగ','కీలక','సౌమ్య','సాధారణ','విరోధికృత్','పరీధావి','ప్రమాదీచ','ఆనంద','రాక్షస','నళ','పింగళ','కాళయుక్తి','సిద్ధార్థి','రౌద్రి','దుర్మతి','దుందుభి','రుధిరోద్గారి','రక్తాక్షి','క్రోధన','క్షయ'];
-
-// Rahu Kalam times by weekday (Hyderabad IST, approximate)
-const RAHU=[{s:'09:00',e:'10:30'},{s:'07:30',e:'09:00'},{s:'15:00',e:'16:30'},{s:'12:00',e:'13:30'},{s:'10:30',e:'12:00'},{s:'10:30',e:'12:00'},{s:'09:00',e:'10:30'}];
-// Actually correct Rahu kalam sequence: Sun=4:30h,Mon=1st,Tue=7th etc — using standard table
-const RAHU_K=['04:30-06:00','12:00-13:30','07:30-09:00','13:30-15:00','10:30-12:00','10:30-12:00','09:00-10:30'];
-const YAMAG_K=['10:30-12:00','10:30-12:00','09:00-10:30','07:30-09:00','07:30-09:00','15:00-16:30','13:30-15:00'];
-// Correct Rahu Kalam (IST, Hyderabad, 6am-6pm day)
 const RAHU_T=['04:30–06:00','13:30–15:00','07:30–09:00','12:00–13:30','10:30–12:00','10:30–12:00','09:00–10:30'];
 const YAMAG_T=['10:30–12:00','10:30–12:00','09:00–10:30','07:30–09:00','07:30–09:00','15:00–16:30','13:30–15:00'];
 const GULIKA_T=['06:00–07:30','07:30–09:00','06:00–07:30','06:00–07:30','07:30–09:00','09:00–10:30','06:00–07:30'];
-const ABHIJIT='11:48–12:36';
-
-function getPanchangam(date){
-  if(!date)return{vara:'—',tithi:'—',nakshatra:'—',paksha:'—',yoga:'—',karana:'—',masa:'—',samvat:'—',ritu:'—'};
-  const d=new Date(date);
-  const vara=VARAS[d.getDay()];
-  const y=d.getFullYear(),mo=d.getMonth()+1,dy=d.getDate();
-  const jdn=Math.floor((1461*(y+4800+Math.floor((mo-14)/12)))/4)+Math.floor((367*(mo-2-12*Math.floor((mo-14)/12)))/12)-Math.floor((3*Math.floor((y+4900+Math.floor((mo-14)/12))/100))/4)+dy-32075;
-  const T=(jdn-2451545.0)/36525.0;
-  // High precision Moon
-  let ml=218.3165+481267.8813*T;
-  ml+=6.2888*Math.sin((134.9634+477198.8676*T)*Math.PI/180);
-  ml+=1.2740*Math.sin((357.5291+35999.0503*T)*Math.PI/180);
-  ml+=0.6583*Math.sin((93.2721+483202.0175*T)*Math.PI/180);
-  ml+=0.2136*Math.sin((269.9268+954397.7353*T)*Math.PI/180);
-  ml+=0.1851*Math.sin((235.7004+890534.2230*T)*Math.PI/180);
-  ml+=0.1144*Math.sin((176.4942+966404.0351*T)*Math.PI/180);
-  ml=((ml%360)+360)%360;
-  // Sun
-  let sl=280.46646+36000.76983*T+1.9146*Math.sin((357.52911+35999.05029*T)*Math.PI/180)+0.020*Math.sin((314.052+71998.1*T)*Math.PI/180);
-  sl=((sl%360)+360)%360;
-  const diff=((ml-sl)+360)%360;
-  const tNum=Math.floor(diff/12);
-  const tithi=TITHIS[Math.min(tNum,29)];
-  const paksha=diff<180?'శుక్ల పక్షం':'కృష్ణ పక్షం';
-  const nakIdx=Math.floor((ml/360)*27)%27;
-  const nakshatra=NAKS[nakIdx];
-  const yoga=YOGAS[Math.floor((((ml+sl)%360)/360)*27)%27];
-  const karana=KARS[(tNum*2)%11];
-  const masa=MASAS[Math.floor(sl/30)%12];
-  const samvat=SAMVAT[((y-1987+60)%60+60)%60]||'';
-  const RITUS=['వసంత','గ్రీష్మ','వర్ష','శరద్','హేమంత','శిశిర'];
-  const ritu=RITUS[Math.floor(Math.floor(sl/30)%12/2)%6]+' ఋతువు';
-  const wd=d.getDay();
-  return{vara,tithi,paksha,nakshatra,yoga,karana,masa,samvat,ritu,rahu:RAHU_T[wd],yamag:YAMAG_T[wd],gulika:GULIKA_T[wd],abhijit:ABHIJIT};
-}
-
-// HYDERABAD PUBLIC HOLIDAYS 2025-2026
-const HOLIDAYS=[
-  {date:'01-01',name:'New Year\'s Day',tel:'నూతన సంవత్సరం',type:'national'},
-  {date:'01-14',name:'Makara Sankranti',tel:'మకర సంక్రాంతి',type:'telugu'},
-  {date:'01-15',name:'Kanuma',tel:'కనుమ',type:'telugu'},
-  {date:'01-26',name:'Republic Day',tel:'గణతంత్ర దినోత్సవం',type:'national'},
-  {date:'03-31',name:'Ugadi',tel:'ఉగాది',type:'telugu'},
-  {date:'04-01',name:'Good Friday',tel:'గుడ్ ఫ్రైడే',type:'national'},
-  {date:'04-06',name:'Telugu New Year',tel:'తెలుగు నూతన సంవత్సరం',type:'telugu'},
-  {date:'04-14',name:'Ambedkar Jayanti',tel:'అంబేద్కర్ జయంతి',type:'national'},
-  {date:'05-01',name:'May Day / Labour Day',tel:'కార్మిక దినం',type:'national'},
-  {date:'06-07',name:'Eid ul-Adha',tel:'బక్రీద్',type:'national'},
-  {date:'08-15',name:'Independence Day',tel:'స్వాతంత్ర్య దినోత్సవం',type:'national'},
-  {date:'08-16',name:'Krishna Janmashtami',tel:'శ్రీ కృష్ణ జన్మాష్టమి',type:'telugu'},
-  {date:'09-07',name:'Vinayaka Chaturthi',tel:'వినాయక చవితి',type:'telugu'},
-  {date:'10-02',name:'Gandhi Jayanti',tel:'గాంధీ జయంతి',type:'national'},
-  {date:'10-02',name:'Dussehra',tel:'దసరా',type:'telugu'},
-  {date:'10-20',name:'Diwali',tel:'దీపావళి',type:'telugu'},
-  {date:'11-01',name:'Telangana Formation Day',tel:'తెలంగాణ ఆవిర్భావ దినం',type:'telugu'},
-  {date:'11-05',name:'Kartika Pournami',tel:'కార్తీక పౌర్ణమి',type:'telugu'},
-  {date:'12-25',name:'Christmas',tel:'క్రిస్మస్',type:'national'},
-  // 2026
-  {date:'01-01',name:'New Year\'s Day 2026',tel:'నూతన సంవత్సరం',type:'national'},
-  {date:'01-14',name:'Makara Sankranti 2026',tel:'మకర సంక్రాంతి',type:'telugu'},
-  {date:'01-26',name:'Republic Day 2026',tel:'గణతంత్ర దినోత్సవం',type:'national'},
-];
-
-function getTodayHoliday(date){
-  const d=new Date(date);
-  const key=String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-  return HOLIDAYS.filter(h=>h.date===key);
-}
-
-// PANCHANG PAGE
-function renderPanchang(){
-  const now=new Date();
-  const todayStr=now.toISOString().split('T')[0];
-  const p=getPanchangam(todayStr);
-  const holidays=getTodayHoliday(todayStr);
-  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-
-  let html=`<div class="tpanch-hero">
-    <div class="tph-date">${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}</div>
-    <div class="tph-day">${days[now.getDay()]} — హైదరాబాద్</div>
-    <div class="tph-samvat">శ్రీ ${p.samvat} సంవత్సరం • ${p.masa}</div>
-  </div>`;
-
-  if(holidays.length){
-    html+=`<div class="sec-label" style="margin:0 0 9px;color:var(--g2)">🎊 Today's Holidays</div>`;
-    holidays.forEach(h=>{
-      html+=`<div class="holiday-card"><div class="hol-icon">${h.type==='national'?'🇮🇳':'🙏'}</div><div class="hol-info"><div class="hn">${h.name}</div><div class="hd">${h.tel}</div></div></div>`;
-    });
-    html+='<div class="divider"></div>';
-  }
-
-  html+=`<div class="panch-wrap">
-    <div class="panch-hdr"><span class="phi">🪔</span><span class="pht">నేటి పంచాంగం | Today's Panchangam</span></div>
-    <div class="panch-grid">
-      <div class="ptile"><label>వారం | Vara</label><div class="pv">${p.vara}</div></div>
-      <div class="ptile"><label>తిథి | Tithi</label><div class="pv">${p.tithi}</div></div>
-      <div class="ptile"><label>పక్షం | Paksha</label><div class="pv">${p.paksha}</div></div>
-      <div class="ptile"><label>నక్షత్రం | Nakshatra</label><div class="pv">${p.nakshatra}</div></div>
-      <div class="ptile"><label>యోగం | Yoga</label><div class="pv">${p.yoga}</div></div>
-      <div class="ptile"><label>కరణం | Karana</label><div class="pv">${p.karana}</div></div>
-      <div class="ptile"><label>మాసం | Masa</label><div class="pv">${p.masa}</div></div>
-      <div class="ptile"><label>ఋతువు | Season</label><div class="pv">${p.ritu}</div></div>
-    </div>
-  </div>`;
-
-  html+=`<div class="muh-wrap">
-    <div class="muh-hdr"><span class="mhi">⏰</span><span class="mht">మంచి & చెడు సమయాలు | Muhurtham Times</span></div>
-    <div class="muh-grid">
-      <div class="mtile bad"><label>🚫 రాహుకాలం | Rahu Kalam</label><div class="mv">${p.rahu}</div></div>
-      <div class="mtile bad"><label>🚫 యమగండం | Yamagandam</label><div class="mv">${p.yamag}</div></div>
-      <div class="mtile bad"><label>⚠️ గులిక కాలం | Gulika</label><div class="mv">${p.gulika}</div></div>
-      <div class="mtile good"><label>✅ అభిజిత్ | Abhijit (Best)</label><div class="mv">${p.abhijit}</div></div>
-    </div>
-    <div style="margin-top:10px;padding:10px 12px;background:rgba(0,0,0,.2);border-radius:11px;font-size:.72rem;color:var(--muted);line-height:1.6">
-      ℹ️ రాహుకాలం & యమగండం లో ముఖ్యమైన కార్యక్రమాలు చేయకూడదు. అభిజిత్ ముహూర్తం అన్నింటికీ శుభప్రదం.
-    </div>
-  </div>`;
-
-  // Upcoming holidays
-  html+=`<div class="sec-label" style="margin:4px 0 9px;color:var(--g2)">📅 Upcoming Holidays — Hyderabad</div>`;
-  const upcoming=getUpcomingHolidays(now,10);
-  upcoming.forEach(h=>{
-    html+=`<div class="holiday-card"><div class="hol-icon">${h.type==='national'?'🇮🇳':'🙏'}</div><div class="hol-info"><div class="hn">${h.name} <span style="font-size:.65rem;color:var(--muted)">${h.daysLeft===0?'Today':h.daysLeft===1?'Tomorrow':'in '+h.daysLeft+' days'}</span></div><div class="hd">${h.tel} • ${h.fullDate}</div></div></div>`;
-  });
-
-  document.getElementById('panchang-content').innerHTML=html;
-}
-
-function getUpcomingHolidays(from,count){
-  const now=from||new Date();
-  const year=now.getFullYear();
-  const result=[];
-  HOLIDAYS.forEach(h=>{
-    [year,year+1].forEach(y=>{
-      const parts=h.date.split('-');
-      const d=new Date(y,parseInt(parts[0])-1,parseInt(parts[1]));
-      const diff=Math.ceil((d-now)/86400000);
-      if(diff>=0&&diff<=180)result.push({...h,fullDate:d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}),daysLeft:diff});
-    });
-  });
-  return result.sort((a,b)=>a.daysLeft-b.daysLeft).slice(0,count);
-}
-
-// MEMBERS
-function renderMembers(){
-  const list=document.getElementById('mlist');
-  document.getElementById('mcnt').textContent=members.length;
-  if(!members.length){list.innerHTML='<div class="empty"><span class="ei">👨‍👩‍👧‍👦</span><p>కుటుంబ సభ్యులు లేరు<br><small style="font-family:Plus Jakarta Sans,sans-serif">No members added yet</small></p></div>';return;}
-  const sorted=[...members].sort((a,b)=>a.name.localeCompare(b.name));
-  list.innerHTML=sorted.map(m=>{
-    const age=getAge(m.dob);const nb=getNB(m.dob);
-    const isBday=nb.dl>=364,isSoon=nb.dl<=7&&!isBday;
-    return`<div class="mi" onclick="openDetail('${m.key}')">
-      <div class="mav">${m.gender||'🧑'}</div>
-      <div class="minfo">
-        <div class="mname">${m.name}${isBday?'<span class="bbadge">🎂 Today!</span>':isSoon?`<span class="bbadge" style="background:linear-gradient(135deg,var(--purple),var(--blue))">${nb.dl}d</span>`:''}
-        </div>
-        <div class="mrel-chip">${vinodRelation(m.relation)}</div>
-        <div class="mmeta">
-          <span>🎂 ${age.y}y ${age.mo}m</span>
-          ${m.blood?`<span>🩸 ${m.blood}</span>`:''}
-          <span>📅 ${isBday?'Today!':nb.dl+'d'}</span>
-        </div>
-      </div>
-      <div class="marr">›</div>
-    </div>`;
-  }).join('');
-}
-
-// DETAIL
-window.openDetail=key=>{
-  const m=members.find(x=>x.key===key);if(!m)return;
-  document.getElementById('dav').textContent=m.gender||'🧑';
-  document.getElementById('dname').textContent=m.name;
-  document.getElementById('drel').textContent=m.relation?relShort(m.relation):'';
-  document.getElementById('dvinod').textContent=vinodRelation(m.relation);
-  document.getElementById('dacts').innerHTML=isAdmin
-    ?`<button class="dact edit" onclick="openEditAdmin('${key}')">✏️ Edit</button><button class="dact del" onclick="delMember('${key}')">🗑️ Delete</button>`
-    :`<button class="dact req" onclick="openEditReq('${key}')">📝 Request Edit</button>`;
-
-  const age=getAge(m.dob);const nb=getNB(m.dob);
-  const panch=getPanchangam(m.dob);
-  let body=`<div class="det-sec"><div class="sec-label">⏱ Real-time Age</div>
-    <div class="age-card">
-      <div><div class="age-main" id="da">${age.y}y ${age.mo}m ${age.d}d</div><div class="age-sub" id="dt">${age.td.toLocaleString()} days • ${age.th.toLocaleString()} hrs</div></div>
-      <div style="text-align:right"><div style="font-size:2rem;font-weight:800;color:var(--g1);line-height:1">${age.y}</div><div style="font-size:.65rem;color:var(--muted)">years old</div></div>
-    </div>
-    <div class="bday-pill">📅 ${nb.dl>=364?'🎂 Birthday is TODAY!':'Next birthday in '+nb.dl+' days'}</div>
-  </div>`;
-
-  body+=`<div class="det-sec"><div class="sec-label">📋 Personal Details</div>
-    <div class="igrid">
-      <div class="itile"><label>📅 Date of Birth</label><div class="iv">${fmtDate(m.dob)}</div></div>
-      <div class="itile"><label>🩸 Blood Group</label><div class="iv">${m.blood||'—'}</div></div>
-      <div class="itile"><label>🪪 Aadhaar</label><div class="iv aadh" onclick="toggleA(this,'${m.aadhaar||''}')" data-sh="false">${m.aadhaar?maskA(m.aadhaar):'—'}${m.aadhaar?'<span style="font-size:.6rem;color:var(--teal);margin-left:4px">👁 tap</span>':''}</div></div>
-      <div class="itile"><label>📱 Mobile</label><div class="iv">${m.mobile||'—'}</div></div>
-      ${m.marriage?`<div class="itile"><label>💑 Marriage Date</label><div class="iv">${fmtDate(m.marriage)}</div></div>`:''}
-      ${m.spouse?`<div class="itile"><label>💕 Spouse</label><div class="iv">${m.spouse}</div></div>`:''}
-      ${m.notes?`<div class="itile full"><label>📝 Notes</label><div class="iv">${m.notes}</div></div>`:''}
-    </div></div>`;
-
-  body+=`<div class="det-sec"><div class="panch-wrap">
-    <div class="panch-hdr"><span class="phi">🪔</span><span class="pht">జన్మ పంచాంగం | Birth Panchangam</span></div>
-    <div class="panch-grid">
-      <div class="ptile"><label>వారం | Vara</label><div class="pv">${panch.vara}</div></div>
-      <div class="ptile"><label>తిథి | Tithi</label><div class="pv">${panch.tithi}</div></div>
-      <div class="ptile"><label>నక్షత్రం | Nakshatra</label><div class="pv">${panch.nakshatra}</div></div>
-      <div class="ptile"><label>పక్షం | Paksha</label><div class="pv">${panch.paksha}</div></div>
-      <div class="ptile"><label>యోగం | Yoga</label><div class="pv">${panch.yoga}</div></div>
-      <div class="ptile"><label>కరణం | Karana</label><div class="pv">${panch.karana}</div></div>
-      <div class="ptile"><label>మాసం | Masa</label><div class="pv">${panch.masa}</div></div>
-      <div class="ptile"><label>సంవత్సరం</label><div class="pv">${panch.samvat}</div></div>
-      <div class="ptile"><label>ఋతువు | Season</label><div class="pv">${panch.ritu}</div></div>
-    </div></div></div>`;
-
-  document.getElementById('dbody').innerHTML=body;
-  document.getElementById('detail').classList.add('show');
-  history.pushState({detail:true},'',location.href);
-  startTick(m.dob);
-};
-
-window.closeDetail=()=>{
-  document.getElementById('detail').classList.remove('show');
-  if(tickInt){clearInterval(tickInt);tickInt=null;}
-};
-
-function startTick(dob){
-  if(tickInt)clearInterval(tickInt);
-  tickInt=setInterval(()=>{
-    const ae=document.getElementById('da'),te=document.getElementById('dt');
-    if(!ae){clearInterval(tickInt);return;}
-    const a=getAge(dob);
-    ae.textContent=`${a.y}y ${a.mo}m ${a.d}d`;
-    te.textContent=`${a.td.toLocaleString()} days • ${a.th.toLocaleString()} hrs`;
-  },1000);
-}
-
-window.toggleA=(el,a)=>{if(!a)return;const sh=el.dataset.sh==='true';el.innerHTML=sh?maskA(a)+'<span style="font-size:.6rem;color:var(--teal);margin-left:4px">👁 tap</span>':a+'<span style="font-size:.6rem;color:var(--teal);margin-left:4px">🙈 hide</span>';el.dataset.sh=sh?'false':'true';};
-
-// ADD MEMBER
-window.openAdd=()=>{
-  ['an','aa','amob','amd','asp','ano'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
-  ['ar','ag','ab'].forEach(id=>{const e=document.getElementById(id);if(e)e.selectedIndex=0;});
-  document.getElementById('ad').value='';
-  const sel=document.getElementById('ap');sel.innerHTML='<option value="">None (Root)</option>';
-  members.forEach(m=>sel.innerHTML+=`<option value="${m.key}">${m.name}</option>`);
-  document.getElementById('modal-add').classList.add('show');
-  history.pushState({modal:true},'',location.href);
-};
-window.saveMember=()=>{
-  const n=document.getElementById('an').value.trim(),r=document.getElementById('ar').value,d=document.getElementById('ad').value;
-  if(!n||!r||!d){toast('Name, Relation & DOB required!','error');return;}
-  push(ref(db,'members'),{name:n,relation:r,dob:d,gender:document.getElementById('ag').value,aadhaar:document.getElementById('aa').value,mobile:document.getElementById('amob').value,blood:document.getElementById('ab').value,parentKey:document.getElementById('ap').value,marriage:document.getElementById('amd').value,spouse:document.getElementById('asp').value,notes:document.getElementById('ano').value,addedAt:Date.now()});
-  cm('modal-add');toast(`${n} added successfully! ✅`,'success');
-};
-
-// EDIT ADMIN
-window.openEditAdmin=key=>{
-  const m=members.find(x=>x.key===key);if(!m)return;
-  document.getElementById('etitle').textContent=`✏️ Edit — ${m.name}`;
-  document.getElementById('en').value=m.name||'';document.getElementById('er').value=m.relation||'';
-  document.getElementById('ed').value=m.dob||'';document.getElementById('eg').value=m.gender||'';
-  document.getElementById('ea').value=m.aadhaar||'';document.getElementById('em').value=m.mobile||'';
-  document.getElementById('eb').value=m.blood||'';document.getElementById('emd').value=m.marriage||'';
-  document.getElementById('esp').value=m.spouse||'';document.getElementById('eno').value=m.notes||'';
-  document.getElementById('ekey').value=key;
-  const btn=document.getElementById('esavebtn');btn.textContent='💾 Save Changes';btn.onclick=saveEdit;
-  document.getElementById('modal-edit').classList.add('show');
-  history.pushState({modal:true},'',location.href);
-};
-window.saveEdit=()=>{
-  const key=document.getElementById('ekey').value;
-  update(ref(db,'members/'+key),{name:document.getElementById('en').value.trim(),relation:document.getElementById('er').value,dob:document.getElementById('ed').value,gender:document.getElementById('eg').value,aadhaar:document.getElementById('ea').value,mobile:document.getElementById('em').value,blood:document.getElementById('eb').value,marriage:document.getElementById('emd').value,spouse:document.getElementById('esp').value,notes:document.getElementById('eno').value});
-  cm('modal-edit');closeDetail();toast('Updated successfully! ✅','success');
-};
-window.delMember=key=>{
-  const m=members.find(x=>x.key===key);
-  if(!confirm(`Delete ${m?.name}? This cannot be undone.`))return;
-  remove(ref(db,'members/'+key));closeDetail();toast('Deleted','success');
-};
-
-// REQUEST EDIT
-window.openEditReq=key=>{
-  const m=members.find(x=>x.key===key);if(!m)return;
-  document.getElementById('etitle').textContent=`📝 Request Edit — ${m.name}`;
-  document.getElementById('en').value=m.name||'';document.getElementById('er').value=m.relation||'';
-  document.getElementById('ed').value=m.dob||'';document.getElementById('eg').value=m.gender||'';
-  document.getElementById('ea').value=m.aadhaar||'';document.getElementById('em').value=m.mobile||'';
-  document.getElementById('eb').value=m.blood||'';document.getElementById('emd').value=m.marriage||'';
-  document.getElementById('esp').value=m.spouse||'';document.getElementById('eno').value=m.notes||'';
-  document.getElementById('ekey').value=key;
-  const btn=document.getElementById('esavebtn');btn.textContent='📤 Submit for Approval';btn.onclick=submitReq;
-  document.getElementById('modal-edit').classList.add('show');
-  history.pushState({modal:true},'',location.href);
-};
-window.submitReq=()=>{
-  const key=document.getElementById('ekey').value;const m=members.find(x=>x.key===key);if(!m)return;
-  const nd={name:document.getElementById('en').value.trim(),relation:document.getElementById('er').value,dob:document.getElementById('ed').value,gender:document.getElementById('eg').value,aadhaar:document.getElementById('ea').value,mobile:document.getElementById('em').value,blood:document.getElementById('eb').value,marriage:document.getElementById('emd').value,spouse:document.getElementById('esp').value,notes:document.getElementById('eno').value};
-  push(ref(db,'requests'),{memberKey:key,memberName:m.name,oldData:{name:m.name,relation:m.relation,dob:m.dob,gender:m.gender,aadhaar:m.aadhaar,mobile:m.mobile,blood:m.blood,marriage:m.marriage,spouse:m.spouse,notes:m.notes},newData:nd,status:'pending',submittedAt:Date.now()});
-  cm('modal-edit');closeDetail();toast('Request submitted! Admin will review. 📤','info');
-};
-
-// REQUESTS
-function updateRqBadge(){
-  const n=requests.length;
-  document.getElementById('rbdg').textContent=n;document.getElementById('rbdg').classList.toggle('hidden',n===0);
-  document.getElementById('pbar').classList.toggle('hidden',n===0||!isAdmin);
-  document.getElementById('pbcnt').textContent=n;
-}
-function renderRequests(){
-  const list=document.getElementById('rqlist');
-  if(!isAdmin){list.innerHTML='<div class="empty"><span class="ei">🔐</span><p>Admin access required</p></div>';return;}
-  if(!requests.length){list.innerHTML='<div class="empty"><span class="ei">✅</span><p>No pending requests</p></div>';return;}
-  list.innerHTML=requests.map(r=>{
-    const old=r.oldData||{},nw=r.newData||{};
-    const changes=Object.keys(nw).filter(k=>nw[k]!==(old[k]||'')&&nw[k]);
-    const ch=changes.map(k=>`<div style="margin-bottom:5px"><span style="color:var(--muted);font-size:.65rem;text-transform:uppercase;letter-spacing:1px">${k}</span><br><span style="color:var(--danger);text-decoration:line-through;font-size:.76rem">${old[k]||'—'}</span> <span style="color:var(--muted)">→</span> <span style="color:var(--success);font-size:.76rem;font-weight:600">${nw[k]}</span></div>`).join('');
-    return`<div class="rqcard"><div class="rqh"><div class="rqname">📝 ${r.memberName}</div><div class="rqtime">${new Date(r.submittedAt).toLocaleDateString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</div></div>
-      <div class="rqdiff">${ch||'No changes detected'}</div>
-      <div class="rqacts"><button class="rqa" onclick="approveRq('${r.key}','${r.memberKey}')">✅ Approve</button><button class="rqr" onclick="rejectRq('${r.key}')">❌ Reject</button></div>
-    </div>`;
-  }).join('');
-}
-window.approveRq=(rk,mk)=>{const r=requests.find(x=>x.key===rk);if(!r)return;update(ref(db,'members/'+mk),r.newData);update(ref(db,'requests/'+rk),{status:'approved',resolvedAt:Date.now()});toast('Approved & saved! ✅','success');};
-window.rejectRq=rk=>{update(ref(db,'requests/'+rk),{status:'rejected',resolvedAt:Date.now()});toast('Request rejected','error');};
-
-// EVENTS
+function getPanchangam(date,time){if(!date)return{vara:'—',tithi:'—',nakshatra:'—',paksha:'—',yoga:'—',karana:'—',masa:'—',samvat:'—',ritu:'—',rahu:'—',yamag:'—',gulika:'—',abhijit:'11:48–12:36'};const d=new Date(date);let timeHours=12;if(time){const tp=time.split(':');timeHours=parseInt(tp[0])+(parseInt(tp[1]||0)/60);}const vara=VARAS[d.getDay()];const y=d.getFullYear(),mo=d.getMonth()+1,dy=d.getDate();const jdn=Math.floor((1461*(y+4800+Math.floor((mo-14)/12)))/4)+Math.floor((367*(mo-2-12*Math.floor((mo-14)/12)))/12)-Math.floor((3*Math.floor((y+4900+Math.floor((mo-14)/12))/100))/4)+dy-32075;const T=(jdn-2451545.0+(timeHours-5.5)/24)/36525.0;let ml=218.3165+481267.8813*T;ml+=6.2888*Math.sin((134.9634+477198.8676*T)*Math.PI/180);ml+=1.2740*Math.sin((357.5291+35999.0503*T)*Math.PI/180);ml+=0.6583*Math.sin((93.2721+483202.0175*T)*Math.PI/180);ml+=0.2136*Math.sin((269.9268+954397.7353*T)*Math.PI/180);ml+=0.1851*Math.sin((235.7004+890534.2230*T)*Math.PI/180);ml+=0.1144*Math.sin((176.4942+966404.0351*T)*Math.PI/180);ml=((ml%360)+360)%360;let sl=280.46646+36000.76983*T+1.9146*Math.sin((357.52911+35999.05029*T)*Math.PI/180)+0.020*Math.sin((314.052+71998.1*T)*Math.PI/180);sl=((sl%360)+360)%360;const diff=((ml-sl)+360)%360;const tNum=Math.floor(diff/12);const tithi=TITHIS[Math.min(tNum,29)];const paksha=diff<180?'శుక్ల పక్షం':'కృష్ణ పక్షం';const nakIdx=Math.floor((ml/360)*27)%27;const nakshatra=NAKS[nakIdx];const nakPada=Math.floor((ml/360*27-Math.floor(ml/360*27))*4)+1;const yoga=YOGAS[Math.floor((((ml+sl)%360)/360)*27)%27];const karana=KARS[(tNum*2)%11];const masa=MASAS[Math.floor(sl/30)%12];const samvat=SAMVAT[((y-1987+60)%60+60)%60]||'';const RITUS=['వసంత','గ్రీష్మ','వర్ష','శరద్','హేమంత','శిశిర'];const ritu=RITUS[Math.floor(Math.floor(sl/30)%12/2)%6]+' ఋతువు';const wd=d.getDay();const rashiIdx=Math.floor(ml/30)%12;const RASHIS=['మేషం ♈','వృషభం ♉','మిథునం ♊','కర్కాటకం ♋','సింహం ♌','కన్య ♍','తుల ♎','వృశ్చికం ♏','ధనుస్సు ♐','మకరం ♑','కుంభం ♒','మీనం ♓'];const rashi=RASHIS[rashiIdx];return{vara,tithi,paksha,nakshatra,nakPada,yoga,karana,masa,samvat,ritu,rashi,rahu:RAHU_T[wd],yamag:YAMAG_T[wd],gulika:GULIKA_T[wd],abhijit:'11:48–12:36'};}
+function getSunTimes(date,lat,lon){const d=new Date(date);const jdn=Math.floor((1461*(d.getFullYear()+4800+Math.floor((d.getMonth()+1-14)/12)))/4)+Math.floor((367*(d.getMonth()+1-2-12*Math.floor((d.getMonth()+1-14)/12)))/12)-Math.floor((3*Math.floor((d.getFullYear()+4900+Math.floor((d.getMonth()+1-14)/12))/100))/4)+d.getDate()-32075;const n=jdn-2451545.0;const L=(280.460+0.9856474*n)%360;const g=((357.528+0.9856003*n)%360)*Math.PI/180;const lam=(L+1.915*Math.sin(g)+0.02*Math.sin(2*g))*Math.PI/180;const eps=23.439*Math.PI/180;const dec=Math.asin(Math.sin(eps)*Math.sin(lam));const latR=lat*Math.PI/180;const ha=Math.acos((Math.sin(-0.8333*Math.PI/180)-Math.sin(latR)*Math.sin(dec))/(Math.cos(latR)*Math.cos(dec)));const haD=ha*180/Math.PI;const eot=(L-(-1.915*Math.sin(g)-0.02*Math.sin(2*g)+180+57.296*Math.atan2(Math.cos(lam),Math.cos(eps)*Math.sin(lam))))*4;const transit=12-lon/15-eot/60;const sunrise=transit-haD/15;const sunset=transit+haD/15;const toIST=h=>{const istH=((h+5.5)%24+24)%24;const hr=Math.floor(istH);const mn=Math.round((istH-hr)*60);const ampm=hr<12?'AM':'PM';const h12=hr===0?12:hr>12?hr-12:hr;return`${h12}:${mn.toString().padStart(2,'0')} ${ampm}`;};return{sunrise:toIST(sunrise),sunset:toIST(sunset)};}
+function getMoonTimes(date,lat,lon){const d=new Date(date);const jd=Math.floor((1461*(d.getFullYear()+4800+Math.floor((d.getMonth()+1-14)/12)))/4)+Math.floor((367*(d.getMonth()+1-2-12*Math.floor((d.getMonth()+1-14)/12)))/12)-Math.floor((3*Math.floor((d.getFullYear()+4900+Math.floor((d.getMonth()+1-14)/12))/100))/4)+d.getDate()-32075;const T=(jd-2451545)/36525;let ml=218.3165+481267.8813*T+6.2888*Math.sin((134.9634+477198.8676*T)*Math.PI/180);ml=((ml%360)+360)%360;const moonRiseH=((ml/15)+6+lon/15)%24;const moonSetH=(moonRiseH+12.4)%24;const toIST=h=>{h=((h+5.5)%24+24)%24;const hr=Math.floor(h);const mn=Math.round((h-hr)*60);const ampm=hr<12?'AM':'PM';const h12=hr===0?12:hr>12?hr-12:hr;return`${h12}:${mn.toString().padStart(2,'0')} ${ampm}`;};return{moonrise:toIST(moonRiseH),moonset:toIST(moonSetH)};}
+async function fetchWeather(lat,lon,locName){try{const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weathercode,windspeed_10m&timezone=Asia%2FKolkata`);const data=await r.json();const c=data.current;weatherData={temp:Math.round(c.temperature_2m),humidity:c.relative_humidity_2m,wind:Math.round(c.windspeed_10m),desc:getWeatherDesc(c.weathercode),icon:getWeatherIcon(c.weathercode),loc:locName};if(document.getElementById('page-panchang').classList.contains('active'))renderPanchang();}catch(e){console.log('Weather error:',e);}}
+function getWeatherDesc(code){const map={0:'Clear Sky',1:'Mainly Clear',2:'Partly Cloudy',3:'Overcast',45:'Foggy',51:'Light Drizzle',61:'Light Rain',63:'Rain',65:'Heavy Rain',80:'Rain Showers',95:'Thunderstorm'};return map[code]||'Unknown';}
+function getWeatherIcon(code){if(code===0)return'☀️';if(code<=2)return'🌤️';if(code===3)return'☁️';if(code<=48)return'🌫️';if(code<=65)return'🌧️';return'⛈️';}
+window.getLocationWeather=async()=>{toast('Getting location...','info');try{navigator.geolocation.getCurrentPosition(async pos=>{userLat=pos.coords.latitude;userLon=pos.coords.longitude;try{const r=await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${userLat}&lon=${userLon}&format=json`);const d=await r.json();locationName=d.address?.city||d.address?.town||'Your Location';}catch{locationName='Your Location';}fetchWeather(userLat,userLon,locationName);toast('Location updated! ✅','success');},()=>toast('Location denied','error'));}catch{toast('Not available','error');}};
+window.searchLocation=async()=>{const city=document.getElementById('loc-input-val').value.trim();if(!city){toast('Enter city name','error');return;}try{toast('Searching...','info');const r=await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(city)}&format=json&limit=1`);const d=await r.json();if(d&&d[0]){userLat=parseFloat(d[0].lat);userLon=parseFloat(d[0].lon);locationName=city;fetchWeather(userLat,userLon,locationName);toast(`Updated to ${city} ✅`,'success');}else toast('City not found','error');}catch{toast('Search failed','error');}};
+function renderPanchang(){const now=new Date();const todayStr=now.toISOString().split('T')[0];const p=getPanchangam(todayStr,'12:00');const sun=getSunTimes(todayStr,userLat,userLon);const moon=getMoonTimes(todayStr,userLat,userLon);const holidays=getTodayHoliday(todayStr);const months=['January','February','March','April','May','June','July','August','September','October','November','December'];const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];let html=`<div class="tpanch-hero"><div class="tph-date">${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}</div><div class="tph-day">${days[now.getDay()]} — ${locationName}</div><div class="tph-samvat">శ్రీ ${p.samvat} సంవత్సరం • ${p.masa}</div></div>`;const wd=weatherData;html+=`<div class="weather-card"><div class="wc-hdr"><div><div class="wc-title">${wd?wd.icon:'🌡️'} Weather & Sky</div><div class="wc-loc">📍 ${wd?wd.loc:locationName}</div></div><button class="wc-refresh" onclick="fetchWeather(${userLat},${userLon},'${locationName}').then(()=>renderPanchang())">↻</button></div><div class="loc-input-row"><input class="loc-input" id="loc-input-val" placeholder="Enter city..."><button class="loc-btn" onclick="searchLocation()">Search</button><button class="loc-gps" onclick="getLocationWeather()">📍 GPS</button></div><div class="weather-grid"><div class="wtile temp"><label>🌡️ Temperature</label><div class="wv">${wd?wd.temp+'°C':' Loading...'}</div></div><div class="wtile humid"><label>💧 Humidity</label><div class="wv">${wd?wd.humidity+'%':'—'}</div></div><div class="wtile sun"><label>🌅 Sunrise</label><div class="wv">${sun.sunrise}</div></div><div class="wtile sun"><label>🌇 Sunset</label><div class="wv">${sun.sunset}</div></div><div class="wtile moon"><label>🌕 Moonrise</label><div class="wv">${moon.moonrise}</div></div><div class="wtile moon"><label>🌑 Moonset</label><div class="wv">${moon.moonset}</div></div>${wd?`<div class="wtile neutral"><label>💨 Wind</label><div class="wv">${wd.wind} km/h</div></div><div class="wtile neutral"><label>🌤️ Sky</label><div class="wv" style="font-size:.74rem">${wd.desc}</div></div>`:''}</div></div>`;if(holidays.length){html+=`<div style="margin:0 0 9px"><div class="sec-label" style="color:var(--g2)">🎊 Today's Holidays</div>`;holidays.forEach(h=>{html+=`<div class="hol-card"><div class="hol-icon">${h.type==='national'?'🇮🇳':'🙏'}</div><div class="hol-info"><div class="hn">${h.name}</div><div class="hd">${h.tel}</div></div></div>`;});html+='<div class="divider"></div></div>';}html+=`<div class="panch-wrap"><div class="panch-hdr"><span class="phi">🪔</span><span class="pht">నేటి పంచాంగం | Today's Panchangam</span></div><div class="panch-grid"><div class="ptile"><label>వారం | Vara</label><div class="pv">${p.vara}</div></div><div class="ptile"><label>తిథి | Tithi</label><div class="pv">${p.tithi}</div></div><div class="ptile"><label>పక్షం | Paksha</label><div class="pv">${p.paksha}</div></div><div class="ptile"><label>నక్షత్రం | Nakshatra</label><div class="pv">${p.nakshatra}</div></div><div class="ptile"><label>యోగం | Yoga</label><div class="pv">${p.yoga}</div></div><div class="ptile"><label>కరణం | Karana</label><div class="pv">${p.karana}</div></div><div class="ptile"><label>మాసం | Masa</label><div class="pv">${p.masa}</div></div><div class="ptile"><label>ఋతువు | Season</label><div class="pv">${p.ritu}</div></div></div></div>`;html+=`<div class="muh-wrap"><div class="muh-hdr"><span style="font-size:1.1rem">⏰</span><span style="font-size:.86rem;font-weight:700;color:var(--teal)">మంచి & చెడు సమయాలు</span></div><div class="muh-grid"><div class="mtile bad"><label>🚫 రాహుకాలం</label><div class="mv">${p.rahu}</div></div><div class="mtile bad"><label>🚫 యమగండం</label><div class="mv">${p.yamag}</div></div><div class="mtile bad"><label>⚠️ గులిక కాలం</label><div class="mv">${p.gulika}</div></div><div class="mtile good"><label>✅ అభిజిత్ (Best)</label><div class="mv">${p.abhijit}</div></div></div><div style="margin-top:9px;padding:9px 11px;background:rgba(0,0,0,.2);border-radius:10px;font-size:.7rem;color:var(--muted);line-height:1.6">ℹ️ రాహుకాలం & యమగండం లో ముఖ్యమైన పనులు చేయకూడదు.</div></div>`;html+=`<div class="sec-label" style="color:var(--g2)">📅 Upcoming Holidays — Hyderabad</div>`;getUpcomingHolidays(now,10).forEach(h=>{html+=`<div class="hol-card"><div class="hol-icon">${h.type==='national'?'🇮🇳':'🙏'}</div><div class="hol-info"><div class="hn">${h.name} <span style="font-size:.63rem;color:var(--muted)">${h.dl===0?'Today':h.dl===1?'Tomorrow':'in '+h.dl+' days'}</span></div><div class="hd">${h.tel} • ${h.fd}</div></div></div>`;});document.getElementById('panchang-content').innerHTML=html;}
+const HOLIDAYS=[{date:'01-14',name:'Makara Sankranti',tel:'మకర సంక్రాంతి',type:'telugu'},{date:'01-15',name:'Kanuma',tel:'కనుమ',type:'telugu'},{date:'01-26',name:'Republic Day',tel:'గణతంత్ర దినోత్సవం',type:'national'},{date:'03-30',name:'Holi',tel:'హోలీ',type:'national'},{date:'03-31',name:'Ugadi',tel:'ఉగాది',type:'telugu'},{date:'04-10',name:'Ram Navami',tel:'శ్రీ రామ నవమి',type:'telugu'},{date:'04-14',name:'Ambedkar Jayanti',tel:'అంబేద్కర్ జయంతి',type:'national'},{date:'04-18',name:'Good Friday',tel:'గుడ్ ఫ్రైడే',type:'national'},{date:'05-01',name:'May Day',tel:'కార్మిక దినం',type:'national'},{date:'06-07',name:'Eid ul-Adha',tel:'బక్రీద్',type:'national'},{date:'08-09',name:'Muharram',tel:'మొహర్రం',type:'national'},{date:'08-15',name:'Independence Day',tel:'స్వాతంత్ర్య దినోత్సవం',type:'national'},{date:'08-16',name:'Krishna Janmashtami',tel:'శ్రీ కృష్ణ జన్మాష్టమి',type:'telugu'},{date:'08-27',name:'Vinayaka Chaturthi',tel:'వినాయక చవితి',type:'telugu'},{date:'10-02',name:'Gandhi Jayanti',tel:'గాంధీ జయంతి',type:'national'},{date:'10-02',name:'Dussehra',tel:'దసరా',type:'telugu'},{date:'10-20',name:'Diwali',tel:'దీపావళి',type:'telugu'},{date:'11-01',name:'Telangana Formation Day',tel:'తెలంగాణ ఆవిర్భావ దినం',type:'telugu'},{date:'11-05',name:'Kartika Pournami',tel:'కార్తీక పౌర్ణమి',type:'telugu'},{date:'12-25',name:'Christmas',tel:'క్రిస్మస్',type:'national'},{date:'01-01',name:"New Year's Day",tel:'నూతన సంవత్సరం',type:'national'}];
+function getTodayHoliday(date){const d=new Date(date);const k=String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');return HOLIDAYS.filter(h=>h.date===k);}
+function getUpcomingHolidays(from,count){const now=from||new Date();const y=now.getFullYear();const result=[];HOLIDAYS.forEach(h=>{[y,y+1].forEach(yr=>{const parts=h.date.split('-');const d=new Date(yr,parseInt(parts[0])-1,parseInt(parts[1]));const dl=Math.ceil((d-now)/86400000);if(dl>=0&&dl<=365)result.push({...h,fd:d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}),dl});});});return result.sort((a,b)=>a.dl-b.dl).slice(0,count);}
+function renderMembers(){const list=document.getElementById('mlist');document.getElementById('mcnt').textContent=members.length;if(!members.length){list.innerHTML='<div class="empty"><span class="ei">👨‍👩‍👧‍👦</span><p>కుటుంబ సభ్యులు లేరు<br><small>No members added yet</small></p></div>';return;}const sorted=[...members].sort((a,b)=>a.name.localeCompare(b.name));list.innerHTML=sorted.map(m=>{const age=getAge(m.dob);const nb=getNB(m.dob);const isBday=nb.dl>=364,isSoon=nb.dl<=7&&!isBday;return`<div class="mi" onclick="openDetail('${m.key}')"><div class="mav">${m.gender||'🧑'}</div><div class="minfo"><div class="mname">${m.name}${isBday?'<span class="bbadge">🎂 Today!</span>':isSoon?`<span class="bbadge" style="background:linear-gradient(135deg,var(--purple),var(--blue))">${nb.dl}d</span>`:''}</div><div class="mrel-chip">${vinodRel(m.relation)}</div><div class="mmeta"><span>🎂 ${age.y}y ${age.mo}m</span>${m.blood?`<span>🩸 ${m.blood}</span>`:''}<span>📅 ${isBday?'Today!':nb.dl+'d'}</span></div></div><div class="marr">›</div></div>`;}).join('');}
+window.openDetail=key=>{const m=members.find(x=>x.key===key);if(!m)return;document.getElementById('dav').textContent=m.gender||'🧑';document.getElementById('dname').textContent=m.name;document.getElementById('drel').textContent=m.relation?relShort(m.relation):'';document.getElementById('dvinod').textContent=vinodRel(m.relation);document.getElementById('dacts').innerHTML=isAdmin?`<button class="dact edit" onclick="openEditAdmin('${key}')">✏️ Edit</button><button class="dact del" onclick="delMember('${key}')">🗑️ Delete</button>`:`<button class="dact req" onclick="openEditReq('${key}')">📝 Request Edit</button>`;const age=getAge(m.dob);const nb=getNB(m.dob);const panch=getPanchangam(m.dob,m.birthTime||'12:00');const father=m.fatherKey?members.find(x=>x.key===m.fatherKey):null;const mother=m.motherKey?members.find(x=>x.key===m.motherKey):null;let body=`<div class="det-sec"><div class="sec-label">⏱ Real-time Age</div><div class="age-card"><div><div class="age-main" id="da">${age.y}y ${age.mo}m ${age.d}d</div><div class="age-sub" id="dt">${age.td.toLocaleString()} days • ${age.th.toLocaleString()} hrs</div></div><div style="text-align:right"><div style="font-size:2rem;font-weight:800;color:var(--g1);line-height:1">${age.y}</div><div style="font-size:.62rem;color:var(--muted)">years old</div></div></div><div class="bday-pill">📅 ${nb.dl>=364?'🎂 Birthday TODAY!':'Next birthday in '+nb.dl+' days'}</div></div>`;body+=`<div class="det-sec"><div class="sec-label">📋 Personal Details</div><div class="igrid"><div class="itile"><label>📅 Date of Birth</label><div class="iv">${fmtDate(m.dob)}</div></div><div class="itile"><label>🕐 Birth Time</label><div class="iv">${m.birthTime||'Not set'}</div></div><div class="itile"><label>🩸 Blood Group</label><div class="iv">${m.blood||'—'}</div></div><div class="itile"><label>📱 Mobile</label><div class="iv">${m.mobile||'—'}</div></div><div class="itile"><label>🪪 Aadhaar</label><div class="iv aadh" onclick="toggleA(this,'${m.aadhaar||''}')" data-sh="false">${m.aadhaar?maskA(m.aadhaar):'—'}${m.aadhaar?'<span style="font-size:.58rem;color:var(--teal);margin-left:4px">👁 tap</span>':''}</div></div>${father?`<div class="itile"><label>👨 Father</label><div class="iv">${father.name}</div></div>`:''}${mother?`<div class="itile"><label>👩 Mother</label><div class="iv">${mother.name}</div></div>`:''}${m.marriage?`<div class="itile"><label>💑 Marriage Date</label><div class="iv">${fmtDate(m.marriage)}</div></div>`:''}${m.spouse?`<div class="itile"><label>💕 Spouse</label><div class="iv">${m.spouse}</div></div>`:''}${m.notes?`<div class="itile full"><label>📝 Notes</label><div class="iv">${m.notes}</div></div>`:''}</div></div>`;body+=`<div class="det-sec"><div class="panch-wrap"><div class="panch-hdr"><span class="phi">🪔</span><span class="pht">జన్మ పంచాంగం${m.birthTime?' ('+m.birthTime+')':' (noon approx)'}</span></div><div class="panch-grid"><div class="ptile"><label>వారం | Vara</label><div class="pv">${panch.vara}</div></div><div class="ptile"><label>తిథి | Tithi</label><div class="pv">${panch.tithi}</div></div><div class="ptile"><label>నక్షత్రం</label><div class="pv">${panch.nakshatra} (పాదం ${panch.nakPada})</div></div><div class="ptile"><label>రాశి | Rashi</label><div class="pv">${panch.rashi}</div></div><div class="ptile"><label>పక్షం | Paksha</label><div class="pv">${panch.paksha}</div></div><div class="ptile"><label>యోగం | Yoga</label><div class="pv">${panch.yoga}</div></div><div class="ptile"><label>కరణం | Karana</label><div class="pv">${panch.karana}</div></div><div class="ptile"><label>మాసం | Masa</label><div class="pv">${panch.masa}</div></div><div class="ptile"><label>సంవత్సరం</label><div class="pv">${panch.samvat}</div></div><div class="ptile"><label>ఋతువు</label><div class="pv">${panch.ritu}</div></div></div>${!m.birthTime?'<div style="margin-top:9px;padding:8px 11px;background:rgba(245,197,24,.06);border-radius:10px;font-size:.7rem;color:var(--muted)">⚠️ Add birth time for accurate Nakshatra & Rashi.</div>':''}</div></div>`;document.getElementById('dbody').innerHTML=body;document.getElementById('detail').classList.add('show');history.pushState({detail:true},'',location.href);startTick(m.dob);};
+window.closeDetail=()=>{document.getElementById('detail').classList.remove('show');if(tickInt){clearInterval(tickInt);tickInt=null;}};
+function startTick(dob){if(tickInt)clearInterval(tickInt);tickInt=setInterval(()=>{const ae=document.getElementById('da'),te=document.getElementById('dt');if(!ae){clearInterval(tickInt);return;}const a=getAge(dob);ae.textContent=`${a.y}y ${a.mo}m ${a.d}d`;te.textContent=`${a.td.toLocaleString()} days • ${a.th.toLocaleString()} hrs`;},1000);}
+window.toggleA=(el,a)=>{if(!a)return;const sh=el.dataset.sh==='true';el.innerHTML=sh?maskA(a)+'<span style="font-size:.58rem;color:var(--teal);margin-left:4px">👁 tap</span>':a+'<span style="font-size:.58rem;color:var(--teal);margin-left:4px">🙈 hide</span>';el.dataset.sh=sh?'false':'true';};
+function populateParentDropdowns(fathEl,mothEl,excludeKey=''){const males=members.filter(m=>m.key!==excludeKey&&(m.gender==='👨'||m.gender==='👴'||m.gender==='👦'));const females=members.filter(m=>m.key!==excludeKey&&(m.gender==='👩'||m.gender==='👵'||m.gender==='👧'));fathEl.innerHTML='<option value="">None</option>'+males.map(m=>`<option value="${m.key}">${m.name}</option>`).join('');mothEl.innerHTML='<option value="">None</option>'+females.map(m=>`<option value="${m.key}">${m.name}</option>`).join('');}
+window.openAdd=()=>{['an','aa','amob','amd','asp','ano'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});['ar','ag','ab'].forEach(id=>{const e=document.getElementById(id);if(e)e.selectedIndex=0;});document.getElementById('ad').value='';document.getElementById('at').value='';populateParentDropdowns(document.getElementById('afath'),document.getElementById('amoth'));document.getElementById('modal-add').classList.add('show');history.pushState({modal:true},'',location.href);};
+window.saveMember=()=>{const n=document.getElementById('an').value.trim(),r=document.getElementById('ar').value,d=document.getElementById('ad').value;if(!n||!r||!d){toast('Name, Relation & DOB required!','error');return;}push(ref(db,'members'),{name:n,relation:r,dob:d,birthTime:document.getElementById('at').value,gender:document.getElementById('ag').value,aadhaar:document.getElementById('aa').value,mobile:document.getElementById('amob').value,blood:document.getElementById('ab').value,fatherKey:document.getElementById('afath').value,motherKey:document.getElementById('amoth').value,marriage:document.getElementById('amd').value,spouse:document.getElementById('asp').value,notes:document.getElementById('ano').value,addedAt:Date.now()});cm('modal-add');toast(`${n} added! ✅`,'success');};
+window.openEditAdmin=key=>{const m=members.find(x=>x.key===key);if(!m)return;document.getElementById('etitle').textContent=`✏️ Edit — ${m.name}`;document.getElementById('en').value=m.name||'';document.getElementById('er').value=m.relation||'';document.getElementById('ed').value=m.dob||'';document.getElementById('et').value=m.birthTime||'';document.getElementById('eg').value=m.gender||'';document.getElementById('eb').value=m.blood||'';document.getElementById('ea').value=m.aadhaar||'';document.getElementById('em').value=m.mobile||'';document.getElementById('emd').value=m.marriage||'';document.getElementById('esp').value=m.spouse||'';document.getElementById('eno').value=m.notes||'';document.getElementById('ekey').value=key;populateParentDropdowns(document.getElementById('efath'),document.getElementById('emoth'),key);document.getElementById('efath').value=m.fatherKey||'';document.getElementById('emoth').value=m.motherKey||'';const btn=document.getElementById('esavebtn');btn.textContent='💾 Save Changes';btn.onclick=saveEdit;document.getElementById('modal-edit').classList.add('show');history.pushState({modal:true},'',location.href);};
+window.saveEdit=()=>{const key=document.getElementById('ekey').value;update(ref(db,'members/'+key),{name:document.getElementById('en').value.trim(),relation:document.getElementById('er').value,dob:document.getElementById('ed').value,birthTime:document.getElementById('et').value,gender:document.getElementById('eg').value,blood:document.getElementById('eb').value,aadhaar:document.getElementById('ea').value,mobile:document.getElementById('em').value,fatherKey:document.getElementById('efath').value,motherKey:document.getElementById('emoth').value,marriage:document.getElementById('emd').value,spouse:document.getElementById('esp').value,notes:document.getElementById('eno').value});cm('modal-edit');closeDetail();toast('Updated! ✅','success');};
+window.delMember=key=>{const m=members.find(x=>x.key===key);if(!confirm(`Delete ${m?.name}? Cannot be undone.`))return;remove(ref(db,'members/'+key));closeDetail();toast('Deleted','success');};
+window.openEditReq=key=>{const m=members.find(x=>x.key===key);if(!m)return;document.getElementById('etitle').textContent=`📝 Request Edit — ${m.name}`;document.getElementById('en').value=m.name||'';document.getElementById('er').value=m.relation||'';document.getElementById('ed').value=m.dob||'';document.getElementById('et').value=m.birthTime||'';document.getElementById('eg').value=m.gender||'';document.getElementById('eb').value=m.blood||'';document.getElementById('ea').value=m.aadhaar||'';document.getElementById('em').value=m.mobile||'';document.getElementById('emd').value=m.marriage||'';document.getElementById('esp').value=m.spouse||'';document.getElementById('eno').value=m.notes||'';document.getElementById('ekey').value=key;populateParentDropdowns(document.getElementById('efath'),document.getElementById('emoth'),key);document.getElementById('efath').value=m.fatherKey||'';document.getElementById('emoth').value=m.motherKey||'';const btn=document.getElementById('esavebtn');btn.textContent='📤 Submit for Approval';btn.onclick=submitReq;document.getElementById('modal-edit').classList.add('show');history.pushState({modal:true},'',location.href);};
+window.submitReq=()=>{const key=document.getElementById('ekey').value;const m=members.find(x=>x.key===key);if(!m)return;const nd={name:document.getElementById('en').value.trim(),relation:document.getElementById('er').value,dob:document.getElementById('ed').value,birthTime:document.getElementById('et').value,gender:document.getElementById('eg').value,blood:document.getElementById('eb').value,aadhaar:document.getElementById('ea').value,mobile:document.getElementById('em').value,fatherKey:document.getElementById('efath').value,motherKey:document.getElementById('emoth').value,marriage:document.getElementById('emd').value,spouse:document.getElementById('esp').value,notes:document.getElementById('eno').value};push(ref(db,'requests'),{memberKey:key,memberName:m.name,oldData:{name:m.name,relation:m.relation,dob:m.dob,birthTime:m.birthTime,gender:m.gender,blood:m.blood,aadhaar:m.aadhaar,mobile:m.mobile,fatherKey:m.fatherKey,motherKey:m.motherKey,marriage:m.marriage,spouse:m.spouse,notes:m.notes},newData:nd,status:'pending',submittedAt:Date.now()});cm('modal-edit');closeDetail();toast('Request submitted! 📤','info');};
+function updateRqBadge(){const n=requests.length;document.getElementById('rbdg').textContent=n;document.getElementById('rbdg').classList.toggle('hidden',n===0);document.getElementById('pbar').classList.toggle('hidden',n===0||!isAdmin);document.getElementById('pbcnt').textContent=n;}
+function renderRequests(){const list=document.getElementById('rqlist');if(!isAdmin){list.innerHTML='<div class="empty"><span class="ei">🔐</span><p>Admin access required</p></div>';return;}if(!requests.length){list.innerHTML='<div class="empty"><span class="ei">✅</span><p>No pending requests</p></div>';return;}list.innerHTML=requests.map(r=>{const old=r.oldData||{},nw=r.newData||{};const changes=Object.keys(nw).filter(k=>nw[k]!==(old[k]||'')&&nw[k]);const ch=changes.map(k=>`<div style="margin-bottom:4px"><span style="color:var(--muted);font-size:.63rem;text-transform:uppercase">${k}</span><br><span style="color:var(--danger);text-decoration:line-through;font-size:.74rem">${old[k]||'—'}</span> → <span style="color:var(--success);font-size:.74rem;font-weight:600">${nw[k]}</span></div>`).join('');return`<div class="rqcard"><div class="rqh"><div class="rqname">📝 ${r.memberName}</div><div class="rqtime">${new Date(r.submittedAt).toLocaleDateString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</div></div><div class="rqdiff">${ch||'No changes'}</div><div class="rqacts"><button class="rqa" onclick="approveRq('${r.key}','${r.memberKey}')">✅ Approve</button><button class="rqr" onclick="rejectRq('${r.key}')">❌ Reject</button></div></div>`;}).join('');}
+window.approveRq=(rk,mk)=>{const r=requests.find(x=>x.key===rk);if(!r)return;update(ref(db,'members/'+mk),r.newData);update(ref(db,'requests/'+rk),{status:'approved',resolvedAt:Date.now()});toast('Approved! ✅','success');};
+window.rejectRq=rk=>{update(ref(db,'requests/'+rk),{status:'rejected',resolvedAt:Date.now()});toast('Rejected','error');};
 window.openAddEv=()=>{['evn','evm','evo'].forEach(id=>document.getElementById(id).value='');document.getElementById('evd').value='';document.getElementById('modal-ev').classList.add('show');history.pushState({modal:true},'',location.href);};
-window.saveEvent=()=>{
-  const n=document.getElementById('evn').value.trim(),d=document.getElementById('evd').value;
-  if(!n||!d){toast('Name & Date required!','error');return;}
-  push(ref(db,'events'),{name:n,date:d,type:document.getElementById('evt').value,members:document.getElementById('evm').value,notes:document.getElementById('evo').value,addedAt:Date.now()});
-  cm('modal-ev');toast('Event added! ✅','success');
-};
-function renderEvents(){
-  const list=document.getElementById('elist'),now=new Date();
-  const all=[];
-  members.forEach(m=>{
-    if(m.dob){const nb=getNB(m.dob);all.push({name:`${m.name}'s Birthday`,date:m.dob,type:'birthday',dl:nb.dl,sub:vinodRelation(m.relation)});}
-    if(m.marriage){const md=new Date(m.marriage),nx=new Date(now.getFullYear(),md.getMonth(),md.getDate());if(nx<=now)nx.setFullYear(now.getFullYear()+1);all.push({name:`${m.name}'s Anniversary`,date:m.marriage,type:'anniversary',dl:Math.ceil((nx-now)/86400000),sub:vinodRelation(m.relation)});}
-  });
-  events.forEach(ev=>{const ed=new Date(ev.date),nx=new Date(now.getFullYear(),ed.getMonth(),ed.getDate());if(nx<=now)nx.setFullYear(now.getFullYear()+1);all.push({...ev,dl:Math.ceil((nx-now)/86400000)});});
-  all.sort((a,b)=>a.dl-b.dl);
-  if(!all.length){list.innerHTML='<div class="empty"><span class="ei">🗓</span><p>No events yet</p></div>';return;}
-  const em={birthday:'🎂',anniversary:'💑',marriage:'💒',other:'🎉'};
-  list.innerHTML=all.map(ev=>`<div class="ecard ${ev.type}"><div class="eei">${em[ev.type]||'🎉'}</div><div class="einfo"><div class="en">${ev.name}</div><div class="ed">${fmtDate(ev.date)}${ev.sub?' • '+ev.sub:''}</div><div class="edl">${ev.dl===0?'🎊 Today!':ev.dl===1?'Tomorrow! ⚡':ev.dl<=7?`In ${ev.dl} days ⚡`:`In ${ev.dl} days`}</div></div></div>`).join('');
-}
-
-// FAMILY TREE
-function renderTree(){
-  const svg=document.getElementById('tsvg');
-  if(!members.length){svg.setAttribute('width','300');svg.setAttribute('height','100');svg.innerHTML='<text x="150" y="55" text-anchor="middle" fill="#7c6fa0" font-family="Plus Jakarta Sans" font-size="13">No members to display</text>';return;}
-  const NW=130,NH=74,HG=28,VG=65;const pos={};let maxX=0,maxY=0;
-  const roots=members.filter(m=>!m.parentKey||!members.find(x=>x.key===m.parentKey));
-  function calc(nodes,x,y){let cx=x;nodes.forEach(node=>{const ch=members.filter(m=>m.parentKey===node.key);const sw=Math.max(NW+HG,ch.length*(NW+HG));pos[node.key]={x:cx+sw/2-NW/2,y,pk:node.parentKey};maxX=Math.max(maxX,cx+sw+20);maxY=Math.max(maxY,y+NH);if(ch.length)calc(ch,cx,y+NH+VG);cx+=sw;});}
-  calc(roots,20,20);
-  const W=Math.max(maxX+30,320),H=maxY+60;
-  svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('width',W);svg.setAttribute('height',H);
-  let lines='',nodes='';
-  members.forEach(m=>{
-    const p=pos[m.key];if(!p)return;
-    if(p.pk&&pos[p.pk]){const pp=pos[p.pk];const x1=pp.x+NW/2,y1=pp.y+NH,x2=p.x+NW/2,y2=p.y;lines+=`<path d="M${x1},${y1} C${x1},${(y1+y2)/2} ${x2},${(y1+y2)/2} ${x2},${y2}" fill="none" stroke="rgba(245,197,24,0.25)" stroke-width="1.5" stroke-dasharray="5,3"/>`;}
-    const gc=m.gender==='👩'||m.gender==='👧'||m.gender==='👵'?'#ff4d6d':m.gender==='👨'||m.gender==='👦'||m.gender==='👴'?'#64b5f6':'#b388ff';
-    const ag=m.dob?getAge(m.dob).y+'y':'?';
-    const nm=m.name.length>12?m.name.slice(0,10)+'…':m.name;
-    const rl=relShort(m.relation);const rls=rl.length>12?rl.slice(0,10)+'…':rl;
-    nodes+=`<g style="cursor:pointer" onclick="openDetail('${m.key}')">
-      <rect x="${p.x}" y="${p.y}" width="${NW}" height="${NH}" rx="15" fill="rgba(255,255,255,0.03)" stroke="${gc}" stroke-width="1.5"/>
-      <rect x="${p.x}" y="${p.y}" width="${NW}" height="3" rx="2" fill="${gc}" opacity=".5"/>
-      <text x="${p.x+NW/2}" y="${p.y+24}" text-anchor="middle" font-size="18">${m.gender||'🧑'}</text>
-      <text x="${p.x+NW/2}" y="${p.y+42}" text-anchor="middle" fill="#f0eaff" font-size="10" font-weight="700" font-family="Plus Jakarta Sans,sans-serif">${nm}</text>
-      <text x="${p.x+NW/2}" y="${p.y+57}" text-anchor="middle" fill="#7c6fa0" font-size="8.5" font-family="Plus Jakarta Sans,sans-serif">${rls} • ${ag}</text>
-    </g>`;
-  });
-  svg.innerHTML=`<defs><style>g rect{transition:fill .2s}g:hover>rect:first-of-type{fill:rgba(255,255,255,0.08)}</style></defs>${lines}${nodes}`;
-}
-
-// SETTINGS
-function renderSettings(){
-  document.getElementById('scontent').innerHTML=`
-    <div class="sgrp"><div class="sgt">Security</div>
-      ${isAdmin?`<div class="sgi" onclick="changeFPin()"><div><div class="sgl">🔑 Change Family PIN</div><div class="sgs">Update the 6-digit PIN shared with all members</div></div><div class="sgar">›</div></div>`:''}
-      <div class="sgi" onclick="doLogout()"><div><div class="sgl" style="color:var(--danger)">🔒 Logout / Lock</div><div class="sgs">Require PIN to access again</div></div><div class="sgar">›</div></div>
-    </div>
-    <div class="sgrp"><div class="sgt">Account Info</div>
-      <div class="sgi"><div><div class="sgl">Current Role</div><div class="sgs">${isAdmin?'👑 Administrator — Full access to all features':'👨‍👩‍👧‍👦 Member — View & submit edit requests'}</div></div></div>
-      <div class="sgi"><div><div class="sgl">Total Members</div><div class="sgs">${members.length} family members in vault</div></div></div>
-      <div class="sgi"><div><div class="sgl">Custom Events</div><div class="sgs">${events.length} events tracked</div></div></div>
-      <div class="sgi"><div><div class="sgl">Pending Requests</div><div class="sgs">${requests.length} awaiting admin approval</div></div></div>
-    </div>
-    <div class="sgrp"><div class="sgt">About</div>
-      <div class="sgi"><div><div class="sgl">Family Vault v3.0</div><div class="sgs">కుటుంబ వివరాలు • Powered by Firebase 🔥 • Hyderabad 🌆</div></div></div>
-    </div>`;
-}
-window.changeFPin=()=>{const p=prompt('Enter new 6-digit Family PIN:');if(p&&/^\d{6}$/.test(p)){set(ref(db,'settings/familyPin'),p);toast('Family PIN updated! ✅','success');}else if(p)toast('Must be exactly 6 digits','error');};
-
-// MODAL CLOSE
+window.saveEvent=()=>{const n=document.getElementById('evn').value.trim(),d=document.getElementById('evd').value;if(!n||!d){toast('Name & Date required!','error');return;}push(ref(db,'events'),{name:n,date:d,type:document.getElementById('evt').value,members:document.getElementById('evm').value,notes:document.getElementById('evo').value,addedAt:Date.now()});cm('modal-ev');toast('Event added! ✅','success');};
+function renderEvents(){const list=document.getElementById('elist'),now=new Date();const all=[];members.forEach(m=>{if(m.dob){const nb=getNB(m.dob);all.push({name:`${m.name}'s Birthday`,date:m.dob,type:'birthday',dl:nb.dl,sub:vinodRel(m.relation)});}if(m.marriage){const md=new Date(m.marriage),nx=new Date(now.getFullYear(),md.getMonth(),md.getDate());if(nx<=now)nx.setFullYear(now.getFullYear()+1);all.push({name:`${m.name}'s Anniversary`,date:m.marriage,type:'anniversary',dl:Math.ceil((nx-now)/86400000),sub:vinodRel(m.relation)});}});events.forEach(ev=>{const ed=new Date(ev.date),nx=new Date(now.getFullYear(),ed.getMonth(),ed.getDate());if(nx<=now)nx.setFullYear(now.getFullYear()+1);all.push({...ev,dl:Math.ceil((nx-now)/86400000)});});all.sort((a,b)=>a.dl-b.dl);if(!all.length){list.innerHTML='<div class="empty"><span class="ei">🗓</span><p>No events yet</p></div>';return;}const em={birthday:'🎂',anniversary:'💑',marriage:'💒',other:'🎉'};list.innerHTML=all.map(ev=>`<div class="ecard ${ev.type}"><div class="eei">${em[ev.type]||'🎉'}</div><div class="einfo"><div class="en">${ev.name}</div><div class="ed">${fmtDate(ev.date)}${ev.sub?' • '+ev.sub:''}</div><div class="edl">${ev.dl===0?'🎊 Today!':ev.dl===1?'Tomorrow! ⚡':ev.dl<=7?`In ${ev.dl} days ⚡`:`In ${ev.dl} days`}</div></div></div>`).join('');}
+function renderAadhaar(){const list=document.getElementById('aadh-list');document.getElementById('acnt').textContent=members.length;if(!members.length){list.innerHTML='<div class="empty"><span class="ei">🪪</span><p>No members yet</p></div>';return;}const sorted=[...members].sort((a,b)=>a.name.localeCompare(b.name));list.innerHTML=sorted.map(m=>{const hasAadh=m.aadhaar&&m.aadhaar.length>0;return`<div class="aadh-card"><div class="aadh-av">${m.gender||'🧑'}</div><div class="aadh-info"><div class="aadh-name">${m.name}</div><div class="aadh-rel">${vinodRel(m.relation)}</div>${m.blood?`<div class="aadh-blood">🩸 ${m.blood}</div>`:''}${hasAadh?`<div class="aadh-num" onclick="toggleAadhTile(this,'${m.aadhaar}')" data-sh="${showAllAadhaar?'true':'false'}">${showAllAadhaar?m.aadhaar:maskA(m.aadhaar)}<span class="aadh-eye">${showAllAadhaar?'🙈':'👁 tap'}</span></div>`:`<div class="aadh-none">Aadhaar not added</div>`}</div></div>`;}).join('');}
+window.toggleAadhTile=(el,a)=>{const sh=el.dataset.sh==='true';el.innerHTML=(sh?maskA(a):a)+`<span class="aadh-eye">${sh?'👁 tap':'🙈'}</span>`;el.dataset.sh=sh?'false':'true';};
+window.toggleShowAll=()=>{showAllAadhaar=!showAllAadhaar;renderAadhaar();document.querySelector('#admin-showall button').textContent=showAllAadhaar?'🙈 Admin: Hide Aadhaar Numbers':'👁 Admin: Show All Aadhaar Numbers';};
+function renderTree(){const svg=document.getElementById('tsvg');if(!members.length){svg.setAttribute('width','300');svg.setAttribute('height','100');svg.innerHTML='<text x="150" y="55" text-anchor="middle" fill="#7c6fa0" font-family="Plus Jakarta Sans" font-size="13">No members</text>';return;}const NW=120,NH=70,HG=24,VG=60;function getGen(key,visited=new Set()){if(visited.has(key))return 0;visited.add(key);const m=members.find(x=>x.key===key);if(!m)return 0;const fp=m.fatherKey?members.find(x=>x.key===m.fatherKey):null;const mp=m.motherKey?members.find(x=>x.key===m.motherKey):null;return Math.max(fp?getGen(fp.key,new Set(visited)):0,mp?getGen(mp.key,new Set(visited)):0)+1;}const gens={};members.forEach(m=>{const g=getGen(m.key);if(!gens[g])gens[g]=[];gens[g].push(m.key);});const levels=Object.keys(gens).map(Number).sort((a,b)=>a-b);const pos={};let maxX=0,maxY=0;levels.forEach((lv,li)=>{const keys=gens[lv];const totalW=keys.length*(NW+HG)-HG;const startX=Math.max(20,(maxX/2)-(totalW/2));keys.forEach((key,ki)=>{const x=startX+ki*(NW+HG);const y=li*(NH+VG)+20;pos[key]={x,y};maxX=Math.max(maxX,x+NW+20);maxY=Math.max(maxY,y+NH);});});const W=Math.max(maxX+30,320),H=maxY+60;svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('width',W);svg.setAttribute('height',H);let lines='',nodes='',couples='';const drawnCouples=new Set();members.forEach(m=>{if(m.fatherKey&&m.motherKey&&pos[m.fatherKey]&&pos[m.motherKey]){const ck=[m.fatherKey,m.motherKey].sort().join('-');if(!drawnCouples.has(ck)){drawnCouples.add(ck);const fp=pos[m.fatherKey],mp=pos[m.motherKey];const fx=fp.x+NW,fy=fp.y+NH/2,mx=mp.x,my=mp.y+NH/2;couples+=`<line x1="${fx}" y1="${fy}" x2="${mx}" y2="${my}" stroke="rgba(245,197,24,0.35)" stroke-width="2" stroke-dasharray="6,3"/><circle cx="${(fx+mx)/2}" cy="${(fy+my)/2}" r="4" fill="rgba(245,197,24,0.4)"/>`;}}});members.forEach(m=>{const p=pos[m.key];if(!p)return;[m.fatherKey,m.motherKey].forEach(pk=>{if(pk&&pos[pk]){const pp=pos[pk];const x1=pp.x+NW/2,y1=pp.y+NH,x2=p.x+NW/2,y2=p.y;lines+=`<path d="M${x1},${y1} C${x1},${(y1+y2)/2} ${x2},${(y1+y2)/2} ${x2},${y2}" fill="none" stroke="rgba(179,136,255,0.25)" stroke-width="1.5" stroke-dasharray="4,3"/>"`;}});const gc=m.gender==='👩'||m.gender==='👧'||m.gender==='👵'?'#ff4d6d':m.gender==='👨'||m.gender==='👦'||m.gender==='👴'?'#64b5f6':'#b388ff';const ag=m.dob?getAge(m.dob).y+'y':'?';const nm=m.name.length>12?m.name.slice(0,10)+'…':m.name;const rl=relShort(m.relation);const rls=rl.length>11?rl.slice(0,9)+'…':rl;nodes+=`<g style="cursor:pointer" onclick="openDetail('${m.key}')"><rect x="${p.x}" y="${p.y}" width="${NW}" height="${NH}" rx="13" fill="rgba(255,255,255,0.03)" stroke="${gc}" stroke-width="1.5"/><rect x="${p.x}" y="${p.y}" width="${NW}" height="2.5" rx="2" fill="${gc}" opacity=".6"/><text x="${p.x+NW/2}" y="${p.y+22}" text-anchor="middle" font-size="16">${m.gender||'🧑'}</text><text x="${p.x+NW/2}" y="${p.y+39}" text-anchor="middle" fill="#f0eaff" font-size="9.5" font-weight="700" font-family="Plus Jakarta Sans,sans-serif">${nm}</text><text x="${p.x+NW/2}" y="${p.y+53}" text-anchor="middle" fill="#7c6fa0" font-size="8.5" font-family="Plus Jakarta Sans,sans-serif">${rls} • ${ag}</text></g>`;});svg.innerHTML=`<defs><style>g rect{transition:fill .2s}g:hover>rect:first-of-type{fill:rgba(255,255,255,0.08)}</style></defs>${lines}${couples}${nodes}`;}
+function renderSettings(){document.getElementById('scontent').innerHTML=`<div class="sgrp"><div class="sgt">Security</div>${isAdmin?`<div class="sgi" onclick="changeFPin()"><div><div class="sgl">🔑 Change Family PIN</div><div class="sgs">Update 6-digit PIN for all members</div></div><div style="color:var(--subtle)">›</div></div>`:''}<div class="sgi" onclick="doLogout()"><div><div class="sgl" style="color:var(--danger)">🔒 Logout</div><div class="sgs">Require PIN to access again</div></div><div style="color:var(--subtle)">›</div></div></div><div class="sgrp"><div class="sgt">Account</div><div class="sgi"><div><div class="sgl">Role</div><div class="sgs">${isAdmin?'👑 Administrator — Full access':'👨‍👩‍👧‍👦 Member — View & request edits'}</div></div></div><div class="sgi"><div><div class="sgl">Family Members</div><div class="sgs">${members.length} members in vault</div></div></div><div class="sgi"><div><div class="sgl">Custom Events</div><div class="sgs">${events.length} events tracked</div></div></div><div class="sgi"><div><div class="sgl">Location</div><div class="sgs">📍 ${locationName}</div></div></div></div><div class="sgrp"><div class="sgt">About</div><div class="sgi"><div><div class="sgl">Family Vault v3.1</div><div class="sgs">కుటుంబ వివరాలు • Firebase + Open-Meteo 🔥</div></div></div></div>`;}
+window.changeFPin=()=>{const p=prompt('New 6-digit Family PIN:');if(p&&/^\d{6}$/.test(p)){set(ref(db,'settings/familyPin'),p);toast('Family PIN updated! ✅','success');}else if(p)toast('Must be 6 digits','error');};
 window.cm=id=>{document.getElementById(id).classList.remove('show');};
-
-// UTILITIES
 window.fmtA=inp=>{let v=inp.value.replace(/\D/g,'').substring(0,12),f='';for(let i=0;i<v.length;i++){if(i>0&&i%4===0)f+=' ';f+=v[i];}inp.value=f;};
 function maskA(a){if(!a)return'—';const c=a.replace(/\s/g,'');return'XXXX XXXX '+c.slice(-4);}
-function fmtDate(d){if(!d)return'—';return new Date(d).toLocaleDateString('te-IN',{day:'numeric',month:'long',year:'numeric'});}
-
-function getAge(dob){
-  if(!dob)return{y:0,mo:0,d:0,td:0,th:0};
-  const now=new Date(),b=new Date(dob);
-  let y=now.getFullYear()-b.getFullYear(),mo=now.getMonth()-b.getMonth(),d=now.getDate()-b.getDate();
-  if(d<0){mo--;const lm=new Date(now.getFullYear(),now.getMonth(),0);d+=lm.getDate();}
-  if(mo<0){y--;mo+=12;}
-  return{y,mo,d,td:Math.floor((now-b)/86400000),th:Math.floor((now-b)/3600000)};
-}
-function getNB(dob){
-  if(!dob)return{dl:365};
-  const now=new Date(),b=new Date(dob);
-  let nx=new Date(now.getFullYear(),b.getMonth(),b.getDate());
-  if(nx<=now)nx.setFullYear(now.getFullYear()+1);
-  const dl=Math.ceil((nx-now)/86400000);
-  return{dl:dl>=365?365:dl};
-}
-
-function toast(msg,type='success'){const t=document.createElement('div');t.className=`toast ${type}`;t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),3200);}
+function fmtDate(d){if(!d)return'—';try{return new Date(d).toLocaleDateString('te-IN',{day:'numeric',month:'long',year:'numeric'});}catch{return d;}}
+function getAge(dob){if(!dob)return{y:0,mo:0,d:0,td:0,th:0};const now=new Date(),b=new Date(dob);let y=now.getFullYear()-b.getFullYear(),mo=now.getMonth()-b.getMonth(),d=now.getDate()-b.getDate();if(d<0){mo--;const lm=new Date(now.getFullYear(),now.getMonth(),0);d+=lm.getDate();}if(mo<0){y--;mo+=12;}return{y,mo,d,td:Math.floor((now-b)/86400000),th:Math.floor((now-b)/3600000)};}
+function getNB(dob){if(!dob)return{dl:365};const now=new Date(),b=new Date(dob);let nx=new Date(now.getFullYear(),b.getMonth(),b.getDate());if(nx<=now)nx.setFullYear(now.getFullYear()+1);const dl=Math.ceil((nx-now)/86400000);return{dl:dl>=365?365:dl};}
+function toast(msg,type='success'){const t=document.createElement('div');t.className=`toast ${type}`;t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),3000);}
 </script>
 </body>
 </html>
